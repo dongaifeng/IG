@@ -3,6 +3,7 @@
   <el-row>
     <el-col :span="24">
       <el-tabs v-model="tabIndex" tab-position="right" stretch type="card" @tab-click="tabClick">
+        <el-tab-pane label="医院介绍" disabled>医院介绍</el-tab-pane>
         <el-tab-pane
           v-for="(item, index) in tabs"
           :key="index"
@@ -24,11 +25,13 @@
 <script>
 import Detail from './components/detail'
 import Leader from './components/leader'
+import Floor from './components/floor'
 export default {
-  components: {Detail, Leader},
+  components: {Detail, Leader, Floor},
   data () {
     return {
       tabIndex: '1',
+      activeIndex: '0',
       img: require('../../../public/img/1565939115.png'),
       tabs: [{
           title: 'Tab454 1',
@@ -43,9 +46,9 @@ export default {
           name: '3',
           component: 'Leader'
         }, {
-          title: 'Tab546 2',
+          title: '楼层分布',
           name: '4',
-          component: 'Leader'
+          component: 'Floor'
         }, {
           title: '返回',
           name: '5',
@@ -56,6 +59,7 @@ export default {
   methods: {
     tabClick (tab, event) {
       console.log(tab, event)
+      this.activeIndex = tab.name
       if (tab.name === '5') this.$router.back()
     }
   }
@@ -76,6 +80,10 @@ export default {
       width: 85%;
       height: 100%;
       overflow: auto;
+    }
+    /deep/ .is-disabled{
+      color: #fff;
+      background: blue;
     }
   }
 </style>

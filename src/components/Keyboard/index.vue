@@ -20,7 +20,7 @@ export default {
 
     methods: {
         accept(text) {
-          alert("Input text: " + text);
+          console.log("Input text: " + text);
           this.hide();
         },
 
@@ -41,7 +41,9 @@ export default {
   .keyboardBox{
     position: fixed;
     bottom: 0px;
-    width: 100%;
-    padding: 10px;
+    width: calc(100% - 16px);
+    margin: 8px;
+    z-index: 9999999;
+    background: #fff;
   }
 </style>

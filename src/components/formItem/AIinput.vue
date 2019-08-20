@@ -1,6 +1,9 @@
 <template>
-  <div class="about">
-    <!-- <el-input v-model="input" placeholder="请输入内容" @focus="show"  style="width: 500px"></el-input> -->
+  <div class="box">
+
+    
+    
+      <span>{{lab}}</span>
      <el-autocomplete
       class="inline-input"
       v-model="input"
@@ -11,8 +14,11 @@
       value-key="address"
       @select="handleSelect"
       @focus="show"
-    ></el-autocomplete>
-    <keyboard ref="keyboard"></keyboard>
+      :style="styleObj"
+    >
+    </el-autocomplete>
+    <el-button style="width:100px; margin-left:20px;" @click="query">搜索</el-button>
+    <keyboard class="kb" ref="keyboard"></keyboard>
   </div>
 </template>
 
@@ -25,11 +31,23 @@ export default {
       restaurants: [],
     }
   },
+  props: {
+    styleObj: {
+      type: Object,
+      default: null
+    },
+    lab:{
+      type: String
+    }
+  },
   components: { Keyboard },
   mounted() {
     this.restaurants = this.loadAll();
   },
   methods: {
+    query () {
+      this.$emit('query', this.input)
+    },
     show(e) {
       // console.log(e)
       this.$refs.keyboard.show(e)
@@ -63,6 +81,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-
+  .box{
+    width: 100%;
+    .inline-input{
+      width: 100%;
+    }
+    .kb{
+      position: fixed;
+      bottom: 0px;
+    }
+  }
 </style>

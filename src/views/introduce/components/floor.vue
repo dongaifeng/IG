@@ -9,7 +9,7 @@
 
 <script>
 import AIinput from '@/components/formItem/AIinput'
-import { search } from '@/api'
+import { search, getList } from '@/api'
 export default {
   name: 'floor',
   components: { AIinput },
@@ -25,9 +25,15 @@ export default {
   methods: {
     query (p) {
       console.log(p)
-      search(p).then(res => {
+      getList({
+        key: p
+      }).then(res => {
         console.log(res)
+        search(p).then(res2 => {
+        console.log(res2)
       })
+      })
+      
     }
   }
 }

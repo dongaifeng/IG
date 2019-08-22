@@ -56,6 +56,7 @@ service.interceptors.response.use(
       })
       return Promise.reject('error')
     } else {
+      response.data.data = JSON.parse(response.data.data)
       return response.data
     }
       

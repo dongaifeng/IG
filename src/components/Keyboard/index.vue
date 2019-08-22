@@ -1,11 +1,13 @@
 <template>
    <div class="keyboardBox">
-      <vue-touch-keyboard :options="options" v-if="visible" :layout="layout" :cancel="hide" :accept="accept" :input="input" />
+      <key :options="options" v-if="visible" :layout="layout" :cancel="hide" :accept="accept" :input="input" />
     </div>
 </template>
 
 <script>
+import key from '@/components/key'
 export default {
+  components: { key },
    data () {
      return {
       visible: false,

@@ -15,7 +15,6 @@
          </keep-alive>
         </el-tab-pane>
       </el-tabs>
-      
     </el-col>
     <img width="11%" style="position: absolute; bottom:40px; right:30px;" :src="img" />
   </el-row>
@@ -32,7 +31,7 @@ export default {
     return {
       tabIndex: '1',
       activeIndex: '0',
-      img: require('../../../public/img/1565939115.png'),
+      img: require('@/assets/1565939115.png'),
       tabs: [{
           title: 'Tab454 1',
           name: '1',

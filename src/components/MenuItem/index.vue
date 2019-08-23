@@ -13,6 +13,9 @@
         </el-card>
         </router-link>
       </el-col>
+      <el-col :span="6" class="wx">
+        <img width="25%" :src="img" />
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -23,20 +26,8 @@ export default {
   components: {
   },
   data() {
-    const validate = (rule, value, callback) => {
-      if (value.length !== 6) {
-        callback(new Error('请输入六个字符'))
-      } else {
-        callback()
-      }
-    }
     return {
-      demo: {
-        title: ''
-      },
-      demoRules: {
-        title: [{ required: true, trigger: 'change', validator: validate }]
-      },
+      img: require('@/assets/1565939115.png'),
     }
   },
   props: {
@@ -48,11 +39,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.wx{
+  // border: 1px solid red;
+}
 .el-col {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
     border-radius: 4px;
     &:last-child {
-      margin-bottom: 0;
     }
   }
 

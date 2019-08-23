@@ -43,6 +43,7 @@ export default {
   components: { aiTable },
   data () {
     return {
+      listTypeInfo: {},
       tableInfo: {
         refresh: 1,
         initCurpage: 1,

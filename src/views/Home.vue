@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Carousel/>
-    <Item :menu="menu"></Item>
+      <Carousel/>
+      <Item :menu="menu"></Item>
   </div>
 </template>
 
@@ -19,24 +19,19 @@ export default {
     Item,
     Carousel
   },
-  mounted () {
-    this.$post('getList').then(res => {
-      this.menu = res.data
-   })
-
+  mounted () {   
+    this.getData()
   },
    methods: {
+     getData () {
+       this.$post('1003').then(res => {
+            this.menu = res.data
+        })
+     }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-  .home {
-    .box{
-      width: 100%;
-      height: 300px;
-      background: yellow;
-    }
-  }
 </style>
 

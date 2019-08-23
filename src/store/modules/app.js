@@ -1,6 +1,6 @@
 const app = {
   state: {
-    sidebar: {}
+    menu: []
   },
   mutations: {
     TOGGLE_DEVICE: (state, device) => {

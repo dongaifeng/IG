@@ -24,14 +24,14 @@
 
 <script>
 import Outpatient from './components/Outpatient'
-// import Emergency from './components/Emergency'
+import Emergency from './components/Emergency'
 export default {
-  components: { Outpatient },
+  components: { Outpatient, Emergency },
   data () {
     return {
       tabIndex: '1',
       activeIndex: '0',
-      img: require('../../../public/img/1565939115.png'),
+      img: require('@/assets/1565939115.png'),
       tabs: [{
           title: '门诊指南',
           name: '1',
@@ -39,7 +39,7 @@ export default {
         }, {
           title: '急诊指南',
           name: '2',
-          component: 'Outpatient'
+          component: 'Emergency'
         }]
     }
   },

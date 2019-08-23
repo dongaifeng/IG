@@ -38,16 +38,7 @@ export default {
         {name: 'aaa', img: '', job: 'dfjhdfuh', link: 'fdhdfhui'},
         {name: 'aaa', img: '', job: 'dfjhdfuh', link: 'fdhdfhui'},
         {name: 'aaa', img: '', job: 'dfjhdfuh', link: 'fdhdfhui'},
-        {name: 'aaa', img: '', job: 'dfjhdfuh', link: 'fdhdfhui'},
-        {name: 'aaa', img: '', job: 'dfjhdfuh', link: 'fdhdfhui'},
-        {name: 'aaa', img: '', job: 'dfjhdfuh', link: 'fdhdfhui'},
-        {name: 'aaa', img: '', job: 'dfjhdfuh', link: 'fdhdfhui'},
-        {name: 'aaa', img: '', job: 'dfjhdfuh', link: 'fdhdfhui'},
-        {name: 'aaa', img: '', job: 'dfjhdfuh', link: 'fdhdfhui'},
-        {name: 'aaa', img: '', job: 'dfjhdfuh', link: 'fdhdfhui'},
-        {name: 'aaa', img: '', job: 'dfjhdfuh', link: 'fdhdfhui'},
-        {name: 'aaa', img: '', job: 'dfjhdfuh', link: 'fdhdfhui'},
-        {name: 'aaa', img: '', job: 'dfjhdfuh', link: 'fdhdfhui'},
+    
       ]
     }
   }

@@ -1,9 +1,6 @@
 <template>
   <div class="box">
-
-    
-    
-      <span>{{lab}}</span>
+      <!-- <span></span> -->
      <el-autocomplete
       class="inline-input"
       v-model="input"
@@ -16,9 +13,11 @@
       @focus="show"
       :style="styleObj"
     >
+       <template slot="prepend">{{lab}}</template>
+       <el-button slot="append" icon="el-icon-search"></el-button>
     </el-autocomplete>
-    <el-button style="width:100px; margin-left:20px;" @click="query">搜索</el-button>
-    <keyboard class="kb" ref="keyboard"></keyboard>
+    <!-- <el-button style="width:100px; margin-left:20px;" @click="query">搜索</el-button> -->
+    <keyboard :layout="'normal'" class="kb" ref="keyboard"></keyboard>
   </div>
 </template>
 

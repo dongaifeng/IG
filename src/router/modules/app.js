@@ -5,10 +5,20 @@ const Introduce = () => import('@/views/introduce')
 const Intelligence = () => import('@/views/intelligence')
 const LeaderDetail = () => import('@/components/LeaderDetail')
 
+
+import Detail from '@/views/introduce/components/detail'
+import Leader from '@/views/introduce/components/leader'
+import Floor from '@/views/introduce/components/floor'
+
 const app = [{
   path: '/hospitalIntroduction',
   component: Introduce,
-  name: 'hospitalIntroduction'
+  name: 'hospitalIntroduction',
+  children: [
+      {name: 'detail', path: '/detail', components: Detail},
+      {name: 'leader', path: '/leader', components: Leader},
+      {name: 'floor', path: '/floor', components: Floor},
+  ]
 },{
   path: '/expert',
   component: Expert,

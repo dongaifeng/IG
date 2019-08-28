@@ -11,7 +11,7 @@ export default {
    data () {
      return {
       visible: false,
-      layout: "normal",
+      // layout: "normal",
       input: null,
       options: {
         useKbEvents: false,
@@ -19,23 +19,24 @@ export default {
       }
     }
    },
+   props: ['layout'],
 
-    methods: {
-        accept(text) {
-          console.log("Input text: " + text);
-          this.hide();
-        },
+  methods: {
+      accept(text) {
+        console.log("Input text: " + text);
+        this.hide();
+      },
 
-        show(e) {
-          this.input = e.target;
-          if (!this.visible)
-            this.visible = true
-        },
+      show(e) {
+        this.input = e.target || '';
+        if (!this.visible)
+          this.visible = true
+      },
 
-        hide() {
-          this.visible = false;
-        }
-    }
+      hide() {
+        this.visible = false;
+      }
+  }
 }
 </script>
 
@@ -43,6 +44,7 @@ export default {
   .keyboardBox{
     position: fixed;
     bottom: 0px;
+    left: 0;
     width: calc(100% - 16px);
     margin: 8px;
     z-index: 9999999;

@@ -7,13 +7,13 @@ import 'element-ui/lib/theme-chalk/index.css'
 import request from '@/utils/request'
 
 
-Vue.prototype.$post = (name, page, where = []) => {
+Vue.prototype.$post = (name, where = [], page) => {
   let data = {
     DataSourceCode: name,
     IsPaging: !!page,
     CurrentPage: page && page.current || 1,
     PageSize: page && page.size || 10,
-    QueryInfoArray: where
+    QueryInfoArray: JSON.stringify(where)
    }
   return request({
     url: '/Data/GetData',

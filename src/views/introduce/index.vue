@@ -1,88 +1,84 @@
 <template>
 <div>
   <el-row>
-    <el-col :span="24">
-      <el-tabs v-model="tabIndex" tab-position="right" stretch type="card" @tab-click="tabClick">
-        <el-tab-pane label="医院介绍" disabled>医院介绍</el-tab-pane>
-        <el-tab-pane
-          v-for="(item, index) in tabs"
-          :key="index"
-          :label="item.title"
-          :name="item.name"
-        >
-       <keep-alive include="leader">
-          <component :is="item.component"></component>
-         </keep-alive>
-        </el-tab-pane>
-      </el-tabs>
+    <el-col>
+       <AIheader :h1="'医院介绍'" :lab="'kesh'" search home></AIheader>
     </el-col>
-    <img width="11%" style="position: absolute; bottom:40px; right:30px;" :src="img" />
+  </el-row> 
+
+  <el-row class="menu-box" :gutter="30">
+    <el-col :span="8" align="center" v-for="item in subMenu" :key="item.SUB_MEMU_CODE">
+      <router-link :to="{name: item.JUMP_PATH}">
+      <div class="menu-item" :style="imgSrc(item.ICON)">
+        <div class="bottom clearfix">{{item.SUB_MEMU_NAME}}</div>
+      </div>
+      </router-link>
+    </el-col>
   </el-row>
+  <router-view></router-view>
 </div>
 </template>
 
 <script>
-import Detail from './components/detail'
-import Leader from './components/leader'
-import Floor from './components/floor'
+
+import AIheader from '@/components/AIheader'
+
 export default {
-  components: {Detail, Leader, Floor},
+  components: { AIheader },
   data () {
     return {
-      tabIndex: '1',
-      activeIndex: '0',
-      img: require('@/assets/1565939115.png'),
-      tabs: [{
-          title: 'Tab454 1',
-          name: '1',
-          component: 'Detail'
-        }, {
-          title: 'Tab 4542',
-          name: '2',
-          component: 'Leader'
-        }, {
-          title: 'Tab 5652',
-          name: '3',
-          component: 'Leader'
-        }, {
-          title: '楼层分布',
-          name: '4',
-          component: 'Floor'
-        }, {
-          title: '返回',
-          name: '5',
-          component: ''
-        }]
+     subMenu: []
     }
   },
+  mounted () {
+    this.initData()
+  },
   methods: {
-    tabClick (tab, event) {
-      console.log(tab, event)
-      this.activeIndex = tab.name
-      if (tab.name === '5') this.$router.back()
-    }
+    imgSrc (icon) {
+      return {
+         backgroundImage: "url(" + require(`@/assets/subIcon/${icon}.png`) + ")",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: 'contain',
+      }
+    },
+    initData () {
+       this.$post('1001', [{
+        LogicalOperatorsCode: "10",
+        key: "FIRST_PAGE_MEMU_CODE",
+        OperationalCharacterCode: "50",
+        value: "PFM_01"
+       }]).then(res => {
+            this.subMenu = res.data
+        })
+     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .el-tabs {
-   height: 98vh;
-    /deep/ .el-tabs__header{
-      width: calc(15% - 10px);
-      .el-tabs__item{
-        height: 50px;
-        line-height: 50px;
+  .menu-box{
+    padding-top: 30px;
+    .el-col{
+      margin-bottom: 30px;
+   
+    .menu-item{
+      width: 210px;
+      height: 215px;
+    }
+    .bottom {
+        padding-top: 70%;
+        font-size: 28px;
       }
-    }
-    /deep/ .el-tabs__content{
-      width: 85%;
-      height: 100%;
-      overflow: auto;
-    }
-    /deep/ .is-disabled{
-      color: #fff;
-      background: blue;
-    }
+     }
+  }
+  
+   
+  .clearfix:before,
+  .clearfix:after {
+      display: table;
+      content: "";
+  }
+  .clearfix:after {
+      clear: both
   }
 </style>

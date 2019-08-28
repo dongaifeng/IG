@@ -4,9 +4,7 @@
       <div class="line" v-for="(line, index) in keySet" :key="index">
         <span v-for="(key, index) in line" :key="index" :class="getClassesOfKey(key)" v-text="getCaptionOfKey(key)" @click="e => clickKey(e, key)" @mousedown="mousedown" :style="getKeyStyle(key)"></span>
       </div>
-
     </div>
-
   </div>
 
 </template>

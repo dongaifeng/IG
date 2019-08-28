@@ -1,10 +1,9 @@
 <template>
   <div class="mixin-components-container">
-    <el-row :gutter="40">
-      <el-col v-for="(item, index) in menu" :key="index" :span="6" >
+    <el-row >
+      <el-col v-for="(item, index) in menu" :key="index" :span="6">
         <router-link :to="{name: item.JUMP_PATH}">
-        <el-card class="box-card">
-         <i :class="item.ICON" class="image"></i>
+        <el-card class="box-card" :style="imgSrc(item.ICON)">
           <div style="padding: 10px;">
             <div class="bottom clearfix">
             {{item.FIRST_PAGE_MEMU_NAME}}
@@ -14,10 +13,16 @@
         </router-link>
       </el-col>
       <el-col :span="6" class="wx">
-        <img width="25%" :src="img" />
+        <el-card class="box-card" @click="imgClick">
+          <img width="36%" class="image" :src="img" />
+        </el-card>
       </el-col>
     </el-row>
+
+    
   </div>
+
+  
 </template>
 
 <script>
@@ -34,25 +39,40 @@ export default {
     menu: {
       type: Array,
     }
+  },
+  methods: {
+    imgSrc (icon) {
+      // console.log(icon, '<=====icon')
+      return {
+        backgroundImage: "url(" + require(`@/assets/icon/${icon}.png`) + ")",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: 'contain',
+      }
+    },
+    imgClick () {
+      this.dialogVisible = true
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.wx{
-  // border: 1px solid red;
-}
 .el-col {
-    margin-bottom: 10px;
-    margin-top: 10px;
-    border-radius: 4px;
+    margin: 0px auto;
     &:last-child {
     }
   }
-
+  .el-card{
+    border: 0px;
+  }
+.box-card{
+  //  height: calc(100vh - 715px);
+   width: 44%;
+   margin: 10px auto;
+   box-shadow: 0 0px 0px 0;
+}
 .mixin-components-container {
-  background-color: #f0f2f5;
-  padding: 30px;
+  padding: 10px;
   min-height: calc(100vh - 400px);
 }
 .component-item{
@@ -64,8 +84,9 @@ export default {
   }
   
   .bottom {
-    margin-top: 13px;
-    line-height: 12px;
+    margin-top: 60%;
+    // line-height: 12px;
+    font-size: 20px;
   }
 
   .button {

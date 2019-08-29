@@ -1,9 +1,17 @@
 <template>
   <div>
-    <AIheader :h1="'姓名'" :h3="'领导介绍职位'" home></AIheader>
-   <div style="padding:30px;">
-    <span v-for="index in 25" :key="index">{{index}}少量的邪恶足以抵消全部高贵的品质, 害得人声名狼藉</span>
-   </div>
+    <AIheader :h1="'医院领导'" home></AIheader>
+   <div class="box">
+     <div class="img">
+        <img :src="toSrc(info.ID)" class="image">
+        <p class="name">{{info.LEADER_NAME}}</p>
+        <p class="job">{{ info.LEADER_DUTY }}</p>
+     </div>
+      
+     <p class="text">{{info.LEADER_INTRODUCTION}}</p>
+    </div>
+
+
   </div>
 </template>
 
@@ -13,15 +21,47 @@ export default {
   components: { AIheader },
   data () {
     return {
-      
+    }
+  },
+  props: {
+    info: {
+      type: Object
     }
   },
   methods: {
-    
-    }
+    toSrc (id) {
+       return require('@/assets/leaderImage/'+ id +'.png')
+     }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
+.box{
+  margin: 30px;
+  .img{
+    width: 15%;
+    float: left;
+    text-align: center;
+    padding-right: 20px;
+    .image{
+      width: 100%;
+    }
+    .job {
+    font-size: 13px;
+  }
+  .name {
+    font-size: 18px;
+  }
+  }
+  .text{
+    font-size: 18px;
+    text-indent: 2em;
+  }
+}
+
+
+
  
+
 </style>

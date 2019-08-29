@@ -1,26 +1,21 @@
 <template>
 <div>
-  <el-row>
-    <el-col>
-       <AIheader :h1="'医院介绍'" :lab="'kesh'" search home></AIheader>
+  <el-row class="menu-box" :gutter="30">
+    <el-col :span="8" align="center" v-for="item in subMenu" :key="item.SUB_MEMU_CODE">
+      <!-- <router-link to="/hospitalIntroduction/detail"> -->
+      <router-link :to="{name: item.JUMP_PATH}">
+      <div class="menu-item" :style="imgSrc(item.ICON)">
+        <div class="bottom clearfix">{{item.SUB_MEMU_NAME}}</div>
+      </div>
+      </router-link>
     </el-col>
-  </el-row> 
-
-  <transition>
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
-  </transition>
+  </el-row>
   
 </div>
 </template>
 
 <script>
-
-import AIheader from '@/components/AIheader'
-
 export default {
-  components: { AIheader },
   data () {
     return {
      subMenu: []

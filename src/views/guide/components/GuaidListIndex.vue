@@ -1,6 +1,6 @@
 <template>
   <div class="box"> 
-      <el-row v-for="item in 10" :key="item">
+      <el-row class="list" v-for="item in 10" :key="item">
         <el-col :span="2">
          {{item}}
         </el-col>
@@ -16,14 +16,17 @@
 
 <script>
  export default {
-  components: {},
   data () {
    return {
+     title: ''
    }
+  },
+  mounted () {
+    this.title = this.$route.params.title
   },
   methods: {
     link () {
-      this.$router.push({name: 'leaderDetail'})
+      this.$router.push({name: 'guaidDetail', params: this.$route.params})
     }
   }
  }
@@ -31,7 +34,7 @@
 <style lang="scss" scoped>
   .box{
     
-  .el-row{
+  .list{
     height: 50px;
     &:nth-of-type(odd){ background:#eee;}
     .el-col{

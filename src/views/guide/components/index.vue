@@ -1,26 +1,20 @@
 <template>
 <div>
-  <el-row>
-    <el-col>
-       <AIheader :h1="'医院介绍'" :lab="'kesh'" search home></AIheader>
+  <el-row class="menu-box" :gutter="30">
+    <el-col :span="6" align="center" v-for="item in subMenu" :key="item.SUB_MEMU_CODE">
+      <router-link :to="{name: 'guaidList', params: {title: item.SUB_MEMU_NAME, id: item.SUB_MEMU_CODE}}">
+      <div class="menu-item" :style="imgSrc(item.ICON)">
+        <div class="bottom clearfix">{{item.SUB_MEMU_NAME}}</div>
+      </div>
+      </router-link>
     </el-col>
-  </el-row> 
-
-  <transition>
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
-  </transition>
+  </el-row>
   
 </div>
 </template>
 
 <script>
-
-import AIheader from '@/components/AIheader'
-
 export default {
-  components: { AIheader },
   data () {
     return {
      subMenu: []
@@ -32,7 +26,7 @@ export default {
   methods: {
     imgSrc (icon) {
       return {
-         backgroundImage: "url(" + require(`@/assets/subIcon/${icon}.png`) + ")",
+        backgroundImage: "url(" + require(`@/assets/subIcon/${icon}.png`) + ")",
         backgroundRepeat: "no-repeat",
         backgroundSize: 'contain',
       }
@@ -42,7 +36,7 @@ export default {
         LogicalOperatorsCode: "10",
         key: "FIRST_PAGE_MEMU_CODE",
         OperationalCharacterCode: "50",
-        value: "PFM_01"
+        value: "PFM_02"
        }]).then(res => {
             this.subMenu = res.data
         })
@@ -62,7 +56,7 @@ export default {
       height: 215px;
     }
     .bottom {
-        padding-top: 70%;
+        padding-top: 55%;
         font-size: 28px;
       }
      }

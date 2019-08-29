@@ -41,12 +41,17 @@ export default {
       type: Boolean
     }
   },
+  watch:{
+    $route(){
+      // console.log(to, '<======');
+    }
+  },
   methods: {
       goBack() {
-        this.$router.back()
+        this.$router.back({params: this.$route.params})
       },
       goHome() {
-        this.$router.push({path: '/'})
+        this.$router.push({path: '/', params: this.$route.params})
       },
         query (p) {
       console.log(p)

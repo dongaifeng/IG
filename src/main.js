@@ -4,23 +4,10 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 // import VueTouchKeyboard from "vue-touch-keyboard";
 // import "vue-touch-keyboard/dist/vue-touch-keyboard.css"; // load default style
-import request from '@/utils/request'
+import { post } from '@/api'
 
 
-Vue.prototype.$post = (name, where = [], page) => {
-  let data = {
-    DataSourceCode: name,
-    IsPaging: !!page,
-    CurrentPage: page && page.current || 1,
-    PageSize: page && page.size || 10,
-    QueryInfoArray: JSON.stringify(where)
-   }
-  return request({
-    url: '/Data/GetData',
-    method: 'post',
-    data
-  })
-}
+Vue.prototype.$post = post
 
 // Vue.use(VueTouchKeyboard);
 
@@ -30,6 +17,11 @@ import store from './store/index'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+
+router.beforeEach((to, from, next) => {
+  // console.log(to, from, '路由')
+  next()
+})
 
 new Vue({
   router,

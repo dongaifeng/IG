@@ -25,7 +25,7 @@ export default {
    data () {
      return {
       menu: [],
-      dialogVisible: true
+      dialogVisible: false
     }
    },
   components: {

@@ -40,6 +40,21 @@ export function GetData(data) {
   })
 }
 
+export let post = (name, where = [], page) => {
+  let data = {
+    DataSourceCode: name,
+    IsPaging: !!page,
+    CurrentPage: page && page.current || 1,
+    PageSize: page && page.size || 10,
+    QueryInfoArray: JSON.stringify(where)
+   }
+  return request({
+    url: '/Data/GetData',
+    method: 'post',
+    data
+  })
+}
+
 
 
 // IsPaging：是否分页 布尔类型

@@ -13,7 +13,8 @@ const routes = [
     name: 'home',
     component: Home
   },
-  ...app
+  ...app,
+  { path: '*', redirect: { name: 'home' }}
 ]
 
 export default new Router({

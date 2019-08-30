@@ -32,6 +32,7 @@ export default {
   },
   mounted() {
     this.initData()
+    this.tabClick('LX01')
   },
   methods: {
     tabClick(id) {

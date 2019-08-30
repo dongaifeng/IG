@@ -28,6 +28,12 @@ import GuaidDetail from '@/views/guide/components/GuaidDetail'
 
 import DepartmentDetail from '@/views/department/components/DepartmentDetail'
 
+
+import OutpatientCost from '@/views/outpatientCost'
+
+
+import Bed from '@/views/bed'
+
 const app = [{
   path: '/hospitalIntroduction',
   component: Introduce,
@@ -85,6 +91,14 @@ const app = [{
   path: '/intelligence',
   component: Intelligence,
   name: 'intelligence'
+}, {
+  path: '/outpatientCost',
+  component: OutpatientCost,
+  name: 'outpatientCost'
+}, {
+  path: '/bed',
+  name: 'bed',
+  component: Bed
 }, {
   path: '/leaderDetail',
   component: LeaderDetail,

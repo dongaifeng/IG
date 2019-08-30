@@ -1,0 +1,16 @@
+{
+  "include": [
+    "./src/**/*"
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+        "component/*": ["src/component/*"],
+        "config/*": ["src/config/*"],
+        "lib/*": ["src/lib/*"],
+        "i18n/*": ["src/i18n/*"],
+        "store/*": ["src/store/*"],
+        "@/*": [ "src/*" ]
+    }
+  }
+}

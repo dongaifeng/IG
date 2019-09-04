@@ -52,8 +52,6 @@ export default {
 <style lang="scss" scoped>
 .el-col {
   margin: 0px auto;
-  &:last-child {
-  }
 }
 .el-card {
   border: 0px;

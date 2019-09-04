@@ -6,30 +6,37 @@
 // const LeaderDetail = () => import('@/components/LeaderDetail')
 
 
-import Department from '@/views/department'
-import Expert from '@/views/expert'
-import Guide from '@/views/guide'
-import Introduce from '@/views/introduce'
+// 智能导诊
 import Intelligence from '@/views/intelligence'
-import LeaderDetail from '@/components/LeaderDetail'
 
-
+// 医院介绍
+import Introduce from '@/views/introduce'
 import Detail from '@/views/introduce/components/detail'
 import Leader from '@/views/introduce/components/leader'
 import Floor from '@/views/introduce/components/floor'
 import IntroduceIndex from '@/views/introduce/components'
+import LeaderDetail from '@/components/LeaderDetail'
 
+// 就医指南
+import Guide from '@/views/guide'
 import Emergency from '@/views/guide/components/Emergency'
 import GuideIndex from '@/views/guide/components'
+import GuaidDetail from '@/views/guide/components/GuaidDetail'
 import GuaidList from '@/views/guide/components/GuaidList'
 // import GuaidListIndex from '@/views/guide/components/GuaidListIndex'
-import GuaidDetail from '@/views/guide/components/GuaidDetail'
 
-
+// 科室指南
+import Department from '@/views/department'
 import DepartmentDetail from '@/views/department/components/DepartmentDetail'
+import DoctorDetail from '@/views/department/components/DoctorDetail'
 
-
+// 门诊费用
 import OutpatientCost from '@/views/outpatientCost'
+
+// 专家介绍
+import Expert from '@/views/expert'
+import ExpertList from '@/views/expert/components/expertList'
+
 
 
 import Bed from '@/views/bed'
@@ -105,6 +112,11 @@ const app = [{
   name: 'leaderDetail',
   props: true
 }, {
+  path: '/doctorDetail',
+  component: DoctorDetail,
+  name: 'doctorDetail',
+  props: true
+}, {
   path: '/guaidList',
   component: GuaidList,
   name: 'guaidList',
@@ -118,6 +130,10 @@ const app = [{
   path: '/departmentDetail',
   component: DepartmentDetail,
   props: true
+}, {
+  name: 'expertList',
+  path: '/expertList',
+  component: ExpertList,
 }]
 
 export default app

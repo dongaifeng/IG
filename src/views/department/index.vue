@@ -2,7 +2,7 @@
   <div>
     <el-row>
       <el-col>
-        <AIheader :h1="'科室介绍'" :lab="'查询科室信息'" search></AIheader>
+        <AIheader :h1="'科室介绍'" :lab="'查询科室信息'" search @query="query" :searchAsync="searchAsync"></AIheader>
       </el-col>
     </el-row>
 
@@ -35,9 +35,33 @@ export default {
     this.tabClick('LX01')
   },
   methods: {
+    searchAsync(id, cb) {
+      this.$post('1009', [
+        {
+          LogicalOperatorsCode: '10',
+          key: 'PY',
+          OperationalCharacterCode: '100',
+          value: id
+        },
+        {
+          LogicalOperatorsCode: '10',
+          key: 'DELETE_FLAG',
+          OperationalCharacterCode: '50',
+          value: '0'
+        }
+      ]).then(res => {
+        console.log(res.data)
+        cb(res.data || [])
+      })
+    },
+    query(obj) {
+      if (obj) {
+        this.depClick(obj)
+      } else {
+        this.$message('错误')
+      }
+    },
     tabClick(id) {
-      console.log(id)
-
       this.$post('1009', [
         {
           LogicalOperatorsCode: '10',

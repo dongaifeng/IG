@@ -9,7 +9,7 @@
         <DepLeader :list="list" />
       </el-tab-pane>
       <el-tab-pane label="专家出诊列表">
-        <dep-list />
+        <dep-list :tableData="expertList" />
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -25,17 +25,18 @@ export default {
   components: { DepInfo, DepList, DepLeader },
   data() {
     return {
-      list: []
+      list: [],
+      expertList: []
     }
   },
   props: ['DEPT_INTRODUCITON', 'SHOW_NAME', 'DEPT_CODE'],
   mounted() {
     this.getList()
+    this.getExpertList()
   },
   computed: {},
   methods: {
     getList() {
-      let data = '2323'
       this.$post('1010', [
         {
           LogicalOperatorsCode: '10',
@@ -46,6 +47,53 @@ export default {
       ]).then(res => {
         this.list = res.data
       })
+    },
+    getExpertList() {
+      this.$post('1011', [
+        {
+          LogicalOperatorsCode: '10',
+          key: 'DEPT_CODE',
+          OperationalCharacterCode: '50',
+          value: this.DEPT_CODE
+        }
+      ]).then(res => {
+        this.expertList = this.toList(res.data)
+      })
+    },
+    toList(list) {
+      let data = [
+        {
+          TIME_FRAME_CODE: '上午',
+          W01: []
+        },
+        {
+          TIME_FRAME_CODE: '下午',
+          W01: []
+        }
+      ]
+
+      list.forEach(ele => {
+        if (ele.TIME_FRAME_CODE === 'AM') {
+          if (!data[0][ele.WEEK_CODE]) data[0][ele.WEEK_CODE] = []
+          if (ele.SPECIALIST_DOCTOR_NAME && ele.SPECIALIST_DOCTOR_CODE) {
+            data[0][ele.WEEK_CODE].push({
+              name: ele.SPECIALIST_DOCTOR_NAME,
+              code: ele.SPECIALIST_DOCTOR_CODE,
+              color: ele.REGISTER_TYPE_CODE
+            })
+          }
+        } else if (ele.TIME_FRAME_CODE === 'PM') {
+          if (!data[1][ele.WEEK_CODE]) data[1][ele.WEEK_CODE] = []
+          if (ele.SPECIALIST_DOCTOR_NAME && ele.SPECIALIST_DOCTOR_CODE) {
+            data[1][ele.WEEK_CODE].push({
+              name: ele.SPECIALIST_DOCTOR_NAME,
+              code: ele.SPECIALIST_DOCTOR_CODE,
+              color: ele.REGISTER_TYPE_CODE
+            })
+          }
+        }
+      })
+
       return data
     }
   }

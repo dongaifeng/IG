@@ -6,8 +6,7 @@
 // const LeaderDetail = () => import('@/components/LeaderDetail')
 
 
-// 智能导诊
-import Intelligence from '@/views/intelligence'
+
 
 // 医院介绍
 import Introduce from '@/views/introduce'
@@ -30,18 +29,48 @@ import Department from '@/views/department'
 import DepartmentDetail from '@/views/department/components/DepartmentDetail'
 import DoctorDetail from '@/views/department/components/DoctorDetail'
 
-// 门诊费用
-import OutpatientCost from '@/views/outpatientCost'
-
 // 专家介绍
 import Expert from '@/views/expert'
 import ExpertList from '@/views/expert/components/expertList'
 
+// 智能导诊
+import Intelligence from '@/views/intelligence'
 
+// 门诊费用
+import OutpatientCost from '@/views/outpatientCost'
 
+// 住院费用
+import InHospital from '@/views/InHospital'
+
+// 挂号排版
+import Register from '@/views/Register'
+
+// 医院药品
+import Drug from '@/views/Drug'
+
+// 医疗项目
+import MedicalProject from '@/views/MedicalProject'
+
+// 床位浏览
 import Bed from '@/views/bed'
 
 const app = [{
+  path: '/register',
+  component: Register,
+  name: 'register'
+}, {
+  path: '/inHospital',
+  component: InHospital,
+  name: 'inHospital'
+}, {
+  path: '/drug',
+  component: Drug,
+  name: 'drug'
+}, {
+  path: '/medicalProject',
+  component: MedicalProject,
+  name: 'medicalProject'
+}, {
   path: '/hospitalIntroduction',
   component: Introduce,
   name: 'hospitalIntroduction',

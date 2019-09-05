@@ -1,7 +1,5 @@
 <template>
   <div>
-    <AIheader :h1="'门诊费用'"></AIheader>
-
     <el-row>
       <el-form :label-position="'right'" label-width="100px" :model="formLabelAlign">
         <el-col :span="8" v-for="(item, index) in itemList" :key="index">
@@ -54,9 +52,7 @@
 </template>
 
 <script>
-import { mixin } from '@/mixin'
 export default {
-  mixins: [mixin],
   data() {
     return {
       itemList: [

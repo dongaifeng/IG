@@ -13,22 +13,32 @@
     </el-row>
 
     <el-row class="depBox" :gutter="50">
-      <el-col :span="24" v-for="item in expertList" :key="item.DEPT_CODE">
+      <el-col :span="24" v-for="(item, ind) in expertList" :key="ind">
         <!-- <el-button @click="depClick(item)" class="dep" type="primary">{{item.SHOW_NAME}}</el-button> -->
         <div class="expertBox">
-          <div class="title">腹部肿瘤内科</div>
+          <div class="title">{{item.name}}</div>
           <ul class="nameBox clearfix">
             <li class="nameLi clearfix">
               <p class="type">主任医师</p>
               <div class="name">
-                <span class="nameItem" v-for="iten in 40" :key="iten">张平</span>
+                <span
+                  @click="detail(ele.SPECIALIST_DOCTOR_CODE)"
+                  class="nameItem"
+                  v-for="(ele, ind) in item.ZC01"
+                  :key="ind"
+                >{{ele.SPECIALIST_DOCTOR_NAME}}</span>
               </div>
             </li>
 
             <li class="nameLi clearfix">
-              <p class="type">主任医师</p>
+              <p class="type">副主任医师</p>
               <div class="name">
-                <span class="nameItem" v-for="iten in 10" :key="iten">张平</span>
+                <span
+                  @click="detail(ele.SPECIALIST_DOCTOR_CODE)"
+                  class="nameItem"
+                  v-for="(ele, ind) in item.ZC02"
+                  :key="ind"
+                >{{ele.SPECIALIST_DOCTOR_NAME}}</span>
               </div>
             </li>
           </ul>
@@ -57,22 +67,19 @@ export default {
       debugger
       this.$router.push({ name: 'expertList' })
     },
+    detail(id) {
+      this.$router.push({ name: 'doctorDetail', params: { id } })
+    },
     tabClick(id) {
-      this.$post('1009', [
+      this.$post('1013', [
         {
           LogicalOperatorsCode: '10',
           key: 'DEPT_TYPE_CODE',
           OperationalCharacterCode: '50',
           value: id
-        },
-        {
-          LogicalOperatorsCode: '10',
-          key: 'DELETE_FLAG',
-          OperationalCharacterCode: '50',
-          value: '0'
         }
       ]).then(res => {
-        this.expertList = res.data
+        this.expertList = !Array.isArray(res.data) ? [] : this.toData(res.data)
       })
     },
     depClick(obj) {
@@ -89,6 +96,39 @@ export default {
       ]).then(res => {
         this.tabList = res.data
       })
+    },
+    toData(data = []) {
+      let arr = this.unique(data)
+
+      data.forEach(ele => {
+        arr.forEach(b => {
+          if (ele.DEPT_CODE === b.code) {
+            b[ele.TITLE_CODE].push(ele)
+          }
+        })
+      })
+      return arr
+    },
+    unique(arr) {
+      if (!Array.isArray(arr)) {
+        console.log('type error!')
+        return
+      }
+      var hash = []
+      for (var i = 0; i < arr.length; i++) {
+        for (var j = i + 1; j < arr.length; j++) {
+          if (arr[i].DEPT_CODE === arr[j].DEPT_CODE) {
+            ++i
+          }
+        }
+        hash.push({
+          code: arr[i].DEPT_CODE,
+          name: arr[i].DEPT_NAME,
+          ZC01: [],
+          ZC02: []
+        })
+      }
+      return hash
     }
   }
 }
@@ -108,6 +148,9 @@ export default {
     height: 100%;
     .nameLi {
       border-bottom: 1px solid #ccc;
+      &:last-child {
+        border-bottom: 0px;
+      }
       .type {
         font-size: 18px;
         // border-right: 1px solid red;

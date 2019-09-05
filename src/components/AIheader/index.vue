@@ -2,7 +2,14 @@
   <el-row class="header">
     <el-col :span="4" class="header-h1">{{h1}}</el-col>
     <el-col :span="16" align="center">
-      <AIinput v-if="search" @query="query" :styleObj="style" :lab="lab" :searchAsync="searchAsync"></AIinput>
+      <AIinput
+        v-if="search"
+        @query="query"
+        :styleObj="style"
+        :lab="lab"
+        :searchAsync="searchAsync"
+        :selName="selName"
+      ></AIinput>
     </el-col>
     <el-col :span="4" class="header-btn" align="right">
       <el-button icon="el-icon-s-home" v-if="home" @click="goHome">首页</el-button>
@@ -31,6 +38,10 @@ export default {
       required: true
     },
     lab: {
+      type: String,
+      default: ' '
+    },
+    selName: {
       type: String,
       default: ' '
     },

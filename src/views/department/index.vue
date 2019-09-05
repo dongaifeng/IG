@@ -2,7 +2,14 @@
   <div>
     <el-row>
       <el-col>
-        <AIheader :h1="'科室介绍'" :lab="'查询科室信息'" search @query="query" :searchAsync="searchAsync"></AIheader>
+        <AIheader
+          :h1="'科室介绍'"
+          :lab="'查询科室信息'"
+          search
+          @query="query"
+          :searchAsync="searchAsync"
+          selName="SHOW_NAME"
+        ></AIheader>
       </el-col>
     </el-row>
 

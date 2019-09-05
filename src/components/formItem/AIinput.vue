@@ -8,7 +8,7 @@
       placeholder="请输入内容"
       :debounce="600"
       :trigger-on-focus="false"
-      value-key="SHOW_NAME"
+      :value-key="selName"
       @select="handleSelect"
       @focus="show"
       :style="styleObj"
@@ -22,6 +22,8 @@
 </template>
 
 <script>
+// searchAsync  作为props参数传入 第一个参数传id，第二个是回调函数
+// query 是点事查询函数
 import Keyboard from '@/components/Keyboard'
 export default {
   data() {
@@ -40,7 +42,14 @@ export default {
       type: String
     },
     searchAsync: {
-      type: Function
+      type: Function,
+      default: function() {
+        return function() {}
+      }
+    },
+    selName: {
+      type: String,
+      default: ''
     }
   },
   components: { Keyboard },

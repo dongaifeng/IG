@@ -41,6 +41,8 @@ import OutpatientCost from '@/views/outpatientCost'
 
 // 住院费用
 import InHospital from '@/views/InHospital'
+import InHospitalDetial from '@/views/InHospital/components/InHospitalDetial'
+import InHospitalSettlement from '@/views/InHospital/components/InHospitalSettlement'
 
 // 挂号排版
 import Register from '@/views/Register'
@@ -163,6 +165,16 @@ const app = [{
   name: 'expertList',
   path: '/expertList',
   component: ExpertList,
+}, {
+  name: 'inHospitalDetial',
+  path: '/inHospitalDetial',
+  component: InHospitalDetial,
+  props: true
+}, {
+  name: 'inHospitalSettlement',
+  path: '/inHospitalSettlement',
+  component: InHospitalSettlement,
+  props: true
 }]
 
 export default app

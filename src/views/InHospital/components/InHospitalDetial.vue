@@ -3,10 +3,10 @@
     <AIheader :h1="'住院费用'"></AIheader>
 
     <el-row>
-      <el-form :label-position="'right'" label-width="100px" :model="form">
+      <el-form :label-position="'right'" label-width="100px" :model="row">
         <el-col :span="8" v-for="(item, index) in itemList" :key="index">
           <el-form-item :label="item.lab">
-            <span>{{form[item.val]}}</span>
+            <span>{{row[item.val]}}</span>
           </el-form-item>
         </el-col>
       </el-form>
@@ -14,22 +14,14 @@
 
     <el-row>
       <el-table :data="tableData" border style="width: 100%" size="medium">
-        <el-table-column prop="PATIENT_ID" label="病案号" align="center"></el-table-column>
-        <el-table-column prop="VISIT_DATE_TIME" label="入院时间" align="center"></el-table-column>
-        <el-table-column prop="DISCHARGE_DATE_TIME" label="出院时间" align="center"></el-table-column>
-        <el-table-column prop="WARD_NAME" label="病区" align="center"></el-table-column>
-        <el-table-column prop="BED_NO" label="床位" align="center"></el-table-column>
-        <el-table-column prop="TOTAL_FEE" label="总费用" align="center"></el-table-column>
-        <el-table-column label="查看结算" align="center">
-          <template slot-scope="scope">
-            <el-button type="primary" @click="handleEdit(scope.row, 'inHospitalSettlement')">查看结算</el-button>
-          </template>
-        </el-table-column>
-        <el-table-column label="查看明细" align="center">
-          <template slot-scope="scope">
-            <el-button type="primary" @click="handleEdit(scope.row, 'inHospitalDetial')">查看明细</el-button>
-          </template>
-        </el-table-column>
+        <el-table-column prop="CLASS_NAME" label="收费类型" align="center"></el-table-column>
+        <el-table-column prop="CHARGE_ITEM_SPEC" label="单位" align="center"></el-table-column>
+        <el-table-column prop="CHARGE_ITEM_PRICE" label="单价" align="center"></el-table-column>
+        <el-table-column prop="QUANTITY" label="数量" align="center"></el-table-column>
+        <el-table-column prop="CHARGE_FEE" label="金额" align="center"></el-table-column>
+        <el-table-column prop="SETTLEMENT_DATE_TIME" label="结算日期" align="center"></el-table-column>
+        <el-table-column prop="CHARGE_DATE" label="发生日期" align="center"></el-table-column>
+        <el-table-column prop="CHARGE_STATUS" label="状态" align="center"></el-table-column>
       </el-table>
     </el-row>
 
@@ -71,19 +63,33 @@
 import { mixin } from '@/mixin'
 import { mapGetters } from 'vuex'
 export default {
-  name: 'nokeepAlive',
+  name: 'keepAlive',
   mixins: [mixin],
   data() {
     return {
-      itemList: [{ lab: '姓名', val: 'name' }],
+      itemList: [
+        { lab: '病案号', val: 'MED_RECORD_NO' },
+        { lab: '入住科室', val: 'DEPT_NAME' },
+        { lab: '床位', val: 'BED_NO' },
+        { lab: '预缴金额', val: 'PREPAY_FEE' },
+        { lab: '余额', val: 'BALANCE' },
+        { lab: '入院日期', val: 'VISIT_DATE_TIME' },
+        { lab: '出院日期', val: 'DISCHARGE_DATE_TIME' },
+        { lab: '住院天数', val: 'IN_DAYS' },
+        { lab: '总费用', val: 'TOTAL_FEE' },
+        { lab: '自付', val: 'TOTAL_SELF_PAYMENT_FEE' }
+      ],
       tableData: [],
-      form: {
-        name: ''
-      },
       formLabelWidth: '80px',
       dialog: false,
       total: 0,
       currentPage: 1
+    }
+  },
+  props: {
+    row: {
+      type: Object,
+      default: () => {}
     }
   },
   computed: {
@@ -93,20 +99,19 @@ export default {
     this.initData(this.currentPage)
   },
   methods: {
-    handleEdit(row, route) {
-      this.$router.push({ name: route, params: { row } })
+    handleEdit(id) {
+      this.$router.push({ name: 'inHospitalDetial' })
     },
     initData(page) {
-      console.log(this.userInfo, '<================info')
       if (!this.userInfo) return
       this.$post(
-        '1016',
+        '1017',
         [
           {
             LogicalOperatorsCode: '10',
-            key: 'PERSON_ID',
+            key: 'ENCOUNTER_ID',
             OperationalCharacterCode: '100',
-            value: (this.userInfo && this.userInfo.PERSON_ID) || ''
+            value: this.row.ENCOUNTER_ID
           }
         ],
         { size: 10, current: page }
@@ -121,13 +126,6 @@ export default {
       console.log(page)
       this.initData(page)
     }
-  },
-  beforeRouteEnter(to, from, next) {
-    next(vm => {
-      if (vm.userInfo === null || vm.userInfo === '') {
-        next({ name: 'home' })
-      }
-    })
   }
 }
 </script>

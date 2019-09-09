@@ -56,6 +56,7 @@ import MedicalProject from '@/views/MedicalProject'
 
 // 床位浏览
 import Bed from '@/views/bed'
+import BadList from '@/views/bed/components/BadList'
 
 const app = [{
   path: '/register',
@@ -143,6 +144,11 @@ const app = [{
   path: '/bed',
   name: 'bed',
   component: Bed
+}, {
+  component: BadList,
+  path: '/bedList',
+  name: 'badList',
+  props: true
 }, {
   path: '/leaderDetail',
   component: LeaderDetail,

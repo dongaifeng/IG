@@ -14,6 +14,7 @@
 
     <el-row>
       <el-table :data="tableData" border style="width: 100%" size="medium">
+        <el-table-column label="序号" type="index" width="50" align="center"></el-table-column>
         <el-table-column prop="PATIENT_ID" label="病案号" align="center"></el-table-column>
         <el-table-column prop="VISIT_DATE_TIME" label="入院时间" align="center"></el-table-column>
         <el-table-column prop="DISCHARGE_DATE_TIME" label="出院时间" align="center"></el-table-column>
@@ -97,7 +98,6 @@ export default {
       this.$router.push({ name: route, params: { row } })
     },
     initData(page) {
-      console.log(this.userInfo, '<================info')
       if (!this.userInfo) return
       this.$post(
         '1016',

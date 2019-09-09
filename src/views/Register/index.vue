@@ -1,25 +1,25 @@
 <template>
   <div>
-    <el-row>
-      <el-form :label-position="'right'" label-width="100px" :model="formLabelAlign">
-        <el-col :span="8" v-for="(item, index) in itemList" :key="index">
-          <el-form-item :label="item.lab">
-            <span>{{formLabelAlign[item.val]}}</span>
-          </el-form-item>
-        </el-col>
-      </el-form>
-    </el-row>
+    <AIheader
+      selName="SHOW_NAME"
+      :searchAsync="searchAsync"
+      @query="query"
+      :h1="'挂号排版'"
+      search
+      :lab="'科室名称'"
+    ></AIheader>
 
     <el-row>
       <el-table :data="tableData" border style="width: 100%" size="medium">
-        <el-table-column prop="date" label="收费类型" align="center"></el-table-column>
-        <el-table-column prop="date" label="收费项目" align="center"></el-table-column>
-        <el-table-column prop="date" label="单位" align="center"></el-table-column>
-        <el-table-column prop="date" label="单价" align="center"></el-table-column>
-        <el-table-column prop="date" label="数量" align="center"></el-table-column>
-        <el-table-column prop="date" label="结算日期" align="center"></el-table-column>
-        <el-table-column prop="date" label="发生日期" align="center"></el-table-column>
-        <el-table-column prop="date" label="状态" align="center"></el-table-column>
+        <el-table-column prop="WEEK_NAME" label="门诊时间" align="center"></el-table-column>
+        <el-table-column prop="DEPT_NAME" label="科室名称" align="center"></el-table-column>
+        <el-table-column prop="TIME_FRAME_NAME" label="时段" align="center"></el-table-column>
+        <el-table-column prop="REGISTER_TYPE_NAME" label="挂号类型" align="center"></el-table-column>
+        <el-table-column prop="SPECIALIST_DOCTOR_NAME" label="医师" align="center"></el-table-column>
+        <el-table-column prop="LIMIT_NOM" label="限号" align="center"></el-table-column>
+        <el-table-column prop="MAX_LIMIT_NOM" label="最高限号" align="center"></el-table-column>
+        <el-table-column prop="APPOINTMENT_LIMIT_NOM" label="预约限号" align="center"></el-table-column>
+        <el-table-column prop="MEDICAL_SERVICE_FEE" label="医事服务" align="center"></el-table-column>
       </el-table>
     </el-row>
 
@@ -27,11 +27,17 @@
       <el-col :span="8">
         <span>合计金额：</span>
       </el-col>
-      <el-col :span="8">
-        <el-button @click="dialog = true" type="primasy">高级筛查</el-button>
+      <el-col :span="8" align="center">
+        <el-button @click="dialog = true" type="primary">高级筛查</el-button>
       </el-col>
       <el-col :span="8">
-        <el-pagination background layout="->, total, prev, next" :total="50"></el-pagination>
+        <el-pagination
+          background
+          layout="->, total, prev, next"
+          :total="total"
+          :current-page="currentPage"
+          @current-change="pageClick"
+        ></el-pagination>
       </el-col>
     </el-row>
 
@@ -52,44 +58,68 @@
 </template>
 
 <script>
+import AIheader from '@/components/AIheader'
 export default {
+  components: { AIheader },
   data() {
     return {
-      itemList: [
-        { lab: '姓名', val: 'name' },
-        { lab: '病案号', val: 'name' },
-        { lab: '病案号', val: 'name' },
-        { lab: '住院时段', val: 'name' },
-        { lab: '预缴金额', val: 'name' },
-        { lab: '住院天数', val: 'name' },
-        { lab: '余额', val: 'name' },
-        { lab: '自付', val: 'name' },
-        { lab: '入住科室', val: 'name' }
-      ],
-      formLabelAlign: {
-        name: 'uyguyg',
-        region: '',
-        type: ''
-      },
-      tableData: [
+      tableData: [],
+      dialog: false,
+      total: 0,
+      currentPage: 1,
+      queryId: null
+    }
+  },
+  mounted() {
+    this.initData(this.currentPage)
+  },
+  methods: {
+    initData(page, id = null) {
+      let arr = id
+        ? [
+            {
+              LogicalOperatorsCode: '10',
+              key: 'DEPT_CODE',
+              OperationalCharacterCode: '100',
+              value: id
+            }
+          ]
+        : []
+      this.$post('1021', arr, { size: 10, current: page }).then(res => {
+        console.log(res)
+        this.tableData = res.data
+        this.total = res.Total
+      })
+    },
+    pageClick(page) {
+      console.log(page)
+      this.initData(page, this.queryId)
+    },
+    query(obj) {
+      console.log(obj, '-----obj')
+
+      this.queryId = obj ? obj.DEPT_CODE : null
+      this.initData(this.currentPage, this.queryId)
+    },
+    // 模糊查询回调 cb传入 list 需设置 selName 下拉显示值
+    searchAsync(id, cb) {
+      this.$post('1009', [
         {
-          date: '上午',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          LogicalOperatorsCode: '10',
+          key: 'PY',
+          OperationalCharacterCode: '100',
+          value: id
+        },
+        {
+          LogicalOperatorsCode: '10',
+          key: 'DELETE_FLAG',
+          OperationalCharacterCode: '50',
+          value: '0'
         }
-      ],
-      form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
-      },
-      formLabelWidth: '80px',
-      dialog: false
+      ]).then(res => {
+        console.log(res.data)
+        cb(res.data || [])
+      })
     }
   }
 }
@@ -97,5 +127,9 @@ export default {
 <style lang="scss" scoped>
 .el-form-item {
   margin-bottom: 0px;
+}
+.el-pagination {
+  margin: 0px 20px;
+  text-align: center;
 }
 </style>

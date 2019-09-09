@@ -11,6 +11,7 @@
       :value-key="selName"
       @select="handleSelect"
       @focus="show"
+      @change="handleSelect"
       :style="styleObj"
     >
       <template slot="prepend">{{lab}}</template>
@@ -68,6 +69,8 @@ export default {
       this.$refs.keyboard.hide()
     },
     querySearchAsync(queryString, cb) {
+      console.log(queryString, 'queryString===')
+      this.select = null
       this.searchAsync(queryString, function(list = []) {
         cb(list)
       })

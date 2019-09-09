@@ -14,14 +14,13 @@
 
     <el-row>
       <el-table :data="tableData" border style="width: 100%" size="medium">
-        <el-table-column prop="CLASS_NAME" label="收费类型" align="center"></el-table-column>
-        <el-table-column prop="CHARGE_ITEM_SPEC" label="单位" align="center"></el-table-column>
+        <el-table-column prop="CLASS_NAME" label="类型" align="center"></el-table-column>
+        <el-table-column prop="PRES_NO" label="处方号" align="center"></el-table-column>
+        <el-table-column prop="CHARGE_ITEM_NAME" label="名称" align="center"></el-table-column>
+        <el-table-column prop="DOSE_UNIT_NAME" label="单位" align="center"></el-table-column>
         <el-table-column prop="CHARGE_ITEM_PRICE" label="单价" align="center"></el-table-column>
         <el-table-column prop="QUANTITY" label="数量" align="center"></el-table-column>
-        <el-table-column prop="CHARGE_FEE" label="金额" align="center"></el-table-column>
-        <el-table-column prop="SETTLEMENT_DATE_TIME" label="结算日期" align="center"></el-table-column>
-        <el-table-column prop="CHARGE_DATE" label="发生日期" align="center"></el-table-column>
-        <el-table-column prop="CHARGE_STATUS" label="状态" align="center"></el-table-column>
+        <el-table-column prop="HERBAL_QUANTITY" label="金额" align="center"></el-table-column>
       </el-table>
     </el-row>
 
@@ -68,16 +67,12 @@ export default {
   data() {
     return {
       itemList: [
-        { lab: '病案号', val: 'MED_RECORD_NO' },
-        { lab: '入住科室', val: 'DEPT_NAME' },
-        { lab: '床位', val: 'BED_NO' },
-        { lab: '预缴金额', val: 'PREPAY_FEE' },
-        { lab: '余额', val: 'BALANCE' },
-        { lab: '入院日期', val: 'VISIT_DATE_TIME' },
-        { lab: '出院日期', val: 'DISCHARGE_DATE_TIME' },
-        { lab: '住院天数', val: 'IN_DAYS' },
-        { lab: '总费用', val: 'TOTAL_FEE' },
-        { lab: '自付', val: 'TOTAL_SELF_PAYMENT_FEE' }
+        { lab: '发票号码', val: 'RECEIPT_NO' },
+        { lab: '就诊卡号', val: 'CARD_NO' },
+        { lab: '收费日期', val: 'SETTLEMENT_DATE_TIME' },
+        { lab: '费用性质', val: 'FEE_CLASS' },
+        { lab: '费用类型', val: 'FEE_TYPE' },
+        { lab: '发票金额', val: 'TOTAL_FEE' }
       ],
       tableData: [],
       formLabelWidth: '80px',
@@ -105,13 +100,13 @@ export default {
     initData(page) {
       if (!this.userInfo) return
       this.$post(
-        '1017',
+        '1020',
         [
           {
             LogicalOperatorsCode: '10',
-            key: 'ENCOUNTER_ID',
+            key: 'SETTLEMENT_NO',
             OperationalCharacterCode: '100',
-            value: this.row.ENCOUNTER_ID
+            value: this.row.SETTLEMENT_NO
           }
         ],
         { size: 10, current: page }

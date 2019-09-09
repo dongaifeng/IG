@@ -1,5 +1,3 @@
 <template>
-<div>
-  智能导诊
-</div>
+  <div>智能导诊</div>
 </template>

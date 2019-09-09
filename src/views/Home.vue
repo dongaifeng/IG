@@ -35,6 +35,9 @@ export default {
   mounted() {
     this.getData()
   },
+  activated() {
+    this.$store.dispatch('app/setUserInfo', null)
+  },
   computed: {
     ...mapGetters(['userInfo']),
     IDVisiable: {

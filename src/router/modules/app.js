@@ -38,6 +38,7 @@ import Intelligence from '@/views/intelligence'
 
 // 门诊费用
 import OutpatientCost from '@/views/outpatientCost'
+import OutpatientCostDetial from '@/views/outpatientCost/components/OutpatientCostDetial'
 
 // 住院费用
 import InHospital from '@/views/InHospital'
@@ -133,6 +134,11 @@ const app = [{
   path: '/outpatientCost',
   component: OutpatientCost,
   name: 'outpatientCost'
+}, {
+  path: '/outpatientCostDetial',
+  component: OutpatientCostDetial,
+  name: 'outpatientCostDetial',
+  props: true
 }, {
   path: '/bed',
   name: 'bed',

@@ -20,11 +20,11 @@
         <el-table-column prop="SELF_PAYMENT_FEE" label="自费费用" align="center"></el-table-column>
         <el-table-column prop="MI_SELF_FEE" label="其中自理" align="center"></el-table-column>
         <el-table-column prop="SETTLEMENT_DATE_TIME" label="结算日期" align="center"></el-table-column>
-        <el-table-column label="查看明细" align="center">
+        <!-- <el-table-column label="查看明细" align="center">
           <template slot-scope="scope">
             <el-button type="primary" @click="handleEdit(scope.row)">查看明细</el-button>
           </template>
-        </el-table-column>
+        </el-table-column>-->
       </el-table>
     </el-row>
 
@@ -66,7 +66,7 @@
 import { mixin } from '@/mixin'
 import { mapGetters } from 'vuex'
 export default {
-  name: 'keepAlive',
+  name: 'nokeepAlive',
   mixins: [mixin],
   data() {
     return {

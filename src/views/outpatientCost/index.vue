@@ -3,10 +3,10 @@
     <AIheader :h1="'门诊费用'"></AIheader>
 
     <el-row>
-      <el-form :label-position="'right'" label-width="100px" :model="formLabelAlign">
+      <el-form :label-position="'right'" label-width="100px" :model="form">
         <el-col :span="8" v-for="(item, index) in itemList" :key="index">
           <el-form-item :label="item.lab">
-            <span>{{formLabelAlign[item.val]}}</span>
+            <span>{{form[item.val]}}</span>
           </el-form-item>
         </el-col>
       </el-form>
@@ -14,14 +14,16 @@
 
     <el-row>
       <el-table :data="tableData" border style="width: 100%" size="medium">
-        <el-table-column prop="date" label="收费类型" align="center"></el-table-column>
-        <el-table-column prop="date" label="收费项目" align="center"></el-table-column>
-        <el-table-column prop="date" label="单位" align="center"></el-table-column>
-        <el-table-column prop="date" label="单价" align="center"></el-table-column>
-        <el-table-column prop="date" label="数量" align="center"></el-table-column>
-        <el-table-column prop="date" label="结算日期" align="center"></el-table-column>
-        <el-table-column prop="date" label="发生日期" align="center"></el-table-column>
-        <el-table-column prop="date" label="状态" align="center"></el-table-column>
+        <el-table-column label="序号" type="index" width="50" align="center"></el-table-column>
+        <el-table-column prop="SETTLEMENT_DATE_TIME" label="收费日期" align="center"></el-table-column>
+        <el-table-column prop="PATIENT_NAME" label="病人姓名" align="center"></el-table-column>
+        <el-table-column prop="CARD_NO" label="就诊卡号" align="center"></el-table-column>
+        <el-table-column prop="TOTAL_FEE" label="费用总额" align="center"></el-table-column>
+        <el-table-column label="费用明细查看" align="center">
+          <template slot-scope="scope">
+            <el-button type="primary" @click="handleEdit(scope.row, 'outpatientCostDetial')">查看明细</el-button>
+          </template>
+        </el-table-column>
       </el-table>
     </el-row>
 
@@ -29,11 +31,17 @@
       <el-col :span="8">
         <span>合计金额：</span>
       </el-col>
-      <el-col :span="8">
-        <el-button @click="dialog = true" type="primasy">高级筛查</el-button>
+      <el-col :span="8" align="center">
+        <el-button @click="dialog = true" type="primary">高级筛查</el-button>
       </el-col>
       <el-col :span="8">
-        <el-pagination background layout="->, total, prev, next" :total="50"></el-pagination>
+        <el-pagination
+          background
+          layout="->, total, prev, next"
+          :total="total"
+          :current-page="currentPage"
+          @current-change="pageClick"
+        ></el-pagination>
       </el-col>
     </el-row>
 
@@ -55,51 +63,72 @@
 
 <script>
 import { mixin } from '@/mixin'
+import { mapGetters } from 'vuex'
 export default {
+  name: 'nokeepAlive',
   mixins: [mixin],
   data() {
     return {
-      itemList: [
-        { lab: '姓名', val: 'name' },
-        { lab: '病案号', val: 'name' },
-        { lab: '病案号', val: 'name' },
-        { lab: '住院时段', val: 'name' },
-        { lab: '预缴金额', val: 'name' },
-        { lab: '住院天数', val: 'name' },
-        { lab: '余额', val: 'name' },
-        { lab: '自付', val: 'name' },
-        { lab: '入住科室', val: 'name' }
-      ],
-      formLabelAlign: {
-        name: 'uyguyg',
-        region: '',
-        type: ''
-      },
-      tableData: [
-        {
-          date: '上午',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }
-      ],
+      itemList: [{ lab: '姓名', val: 'name' }],
+      tableData: [],
       form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+        name: ''
       },
       formLabelWidth: '80px',
-      dialog: false
+      dialog: false,
+      total: 0,
+      currentPage: 1
     }
+  },
+  computed: {
+    ...mapGetters(['userInfo'])
+  },
+  mounted() {
+    this.initData(this.currentPage)
+  },
+  methods: {
+    handleEdit(row, route) {
+      this.$router.push({ name: route, params: { row } })
+    },
+    initData(page) {
+      if (!this.userInfo) return
+      this.$post(
+        '1019',
+        [
+          {
+            LogicalOperatorsCode: '10',
+            key: 'PERSON_ID',
+            OperationalCharacterCode: '100',
+            value: (this.userInfo && this.userInfo.PERSON_ID) || ''
+          }
+        ],
+        { size: 10, current: page }
+      ).then(res => {
+        console.log(res)
+        this.form.name = `${this.userInfo.PATIENT_NAME} (${res.data[0].GENDER_NAME})`
+        this.tableData = res.data || []
+        this.total = res.Total
+      })
+    },
+    pageClick(page) {
+      this.initData(page)
+    }
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      if (vm.userInfo === null || vm.userInfo === '') {
+        next({ name: 'home' })
+      }
+    })
   }
 }
 </script>
 <style lang="scss" scoped>
 .el-form-item {
   margin-bottom: 0px;
+}
+.el-pagination {
+  margin: 0px 20px;
+  text-align: center;
 }
 </style>

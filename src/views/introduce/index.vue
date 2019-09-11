@@ -1,80 +1,34 @@
 <template>
-<div>
-  <el-row>
-    <el-col>
-       <AIheader :h1="'医院介绍'" :lab="'kesh'" search home></AIheader>
-    </el-col>
-  </el-row> 
+  <div>
+    <AIheader :h1="'医院介绍'" home></AIheader>
 
-  <transition>
     <keep-alive>
-      <router-view></router-view>
+      <transition name="fade" mode="out-in">
+        <router-view></router-view>
+      </transition>
     </keep-alive>
-  </transition>
-  
-</div>
+  </div>
 </template>
 
 <script>
-
 import AIheader from '@/components/AIheader'
 
 export default {
   components: { AIheader },
-  data () {
-    return {
-     subMenu: []
-    }
+  data() {
+    return {}
   },
-  mounted () {
-    this.initData()
-  },
-  methods: {
-    imgSrc (icon) {
-      return {
-         backgroundImage: "url(" + require(`@/assets/subIcon/${icon}.png`) + ")",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: 'contain',
-      }
-    },
-    initData () {
-       this.$post('1001', [{
-        LogicalOperatorsCode: "10",
-        key: "FIRST_PAGE_MEMU_CODE",
-        OperationalCharacterCode: "50",
-        value: "PFM_01"
-       }]).then(res => {
-            this.subMenu = res.data
-        })
-     }
-  }
+  mounted() {},
+  methods: {}
 }
 </script>
 
 <style lang="scss" scoped>
-  .menu-box{
-    padding-top: 30px;
-    .el-col{
-      margin-bottom: 30px;
-   
-    .menu-item{
-      width: 210px;
-      height: 215px;
-    }
-    .bottom {
-        padding-top: 70%;
-        font-size: 28px;
-      }
-     }
-  }
-  
-   
-  .clearfix:before,
-  .clearfix:after {
-      display: table;
-      content: "";
-  }
-  .clearfix:after {
-      clear: both
-  }
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
 </style>

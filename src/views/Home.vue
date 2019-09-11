@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bgColor">
     <Carousel @click="dialogVisible = true" />
     <Item :menu="menu"></Item>
 
@@ -34,6 +34,7 @@ export default {
   },
   mounted() {
     this.getData()
+    // this.get_bodyHeight()
   },
   activated() {
     this.$store.dispatch('app/setUserInfo', null)
@@ -55,6 +56,7 @@ export default {
         this.menu = res.data
       })
     },
+
     submitID() {
       this.$post(
         '1015',
@@ -82,6 +84,20 @@ export default {
           alert('没有用户信息')
         }
       })
+    },
+    get_bodyHeight() {
+      //动态获取浏览器高度
+      const that = this
+      window.onresize = () => {
+        return (() => {
+          window.fullHeight = document.documentElement.clientHeight
+          that.fullHeight = window.fullHeight
+          let docEl = document.documentElement
+          let clientWidth = docEl.clientWidth
+          if (!clientWidth) return
+          docEl.style.fontSize = clientWidth / 119 + 'px'
+        })()
+      }
     }
   },
   beforeRouteLeave(to, from, next) {
@@ -101,5 +117,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.bgColor {
+  // overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
 </style>
 

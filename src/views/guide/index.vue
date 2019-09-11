@@ -1,10 +1,6 @@
 <template>
   <div>
-    <el-row>
-      <el-col>
-        <AIheader :h1="'就医指南'" home></AIheader>
-      </el-col>
-    </el-row> 
+    <AIheader :h1="'就医指南'" home></AIheader>
 
     <transition>
       <keep-alive>
@@ -18,15 +14,12 @@
 import AIheader from '@/components/AIheader'
 export default {
   components: { AIheader },
-  data () {
-    return {
-    }
+  data() {
+    return {}
   },
-  methods: {
-  }
+  methods: {}
 }
 </script>
 
 <style lang="scss" scoped>
- 
 </style>

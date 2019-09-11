@@ -1,7 +1,7 @@
 <template>
   <el-row class="header">
-    <el-col :span="4" class="header-h1">{{h1}}</el-col>
-    <el-col :span="16" align="center">
+    <el-col :span="6" class="header-h1">{{h1}}</el-col>
+    <el-col :span="12" align="center">
       <AIinput
         v-if="search"
         @query="query"
@@ -11,9 +11,9 @@
         :selName="selName"
       ></AIinput>
     </el-col>
-    <el-col :span="4" class="header-btn" align="right">
-      <el-button icon="el-icon-s-home" v-if="home" @click="goHome">首页</el-button>
-      <el-button icon="el-icon-arrow-left" @click="goBack">返回</el-button>
+    <el-col :span="6" class="header-btn" align="right">
+      <el-button class="my-btn" icon="el-icon-s-home" v-if="home" @click="goHome">首页</el-button>
+      <el-button class="my-btn" icon="el-icon-arrow-left" @click="goBack">返回</el-button>
     </el-col>
   </el-row>
 </template>
@@ -76,7 +76,6 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-  border: 1px solid red;
   background: #2461b3;
   padding: 15px;
   .header-h1 {
@@ -85,6 +84,14 @@ export default {
   }
   .header-btn {
     float: right;
+  }
+  .my-btn {
+    font-size: 20px;
+    font-weight: bold;
+    background: transparent;
+    color: #fff;
+    border: none;
+    padding: 12px 15px;
   }
 }
 </style>

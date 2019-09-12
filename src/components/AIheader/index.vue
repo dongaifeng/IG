@@ -26,7 +26,7 @@ export default {
     return {
       src: require('@/assets/1566183199(1).jpg'),
       style: {
-        width: '60%'
+        width: '90%'
         // paddingLeft: '100px',
       }
     }

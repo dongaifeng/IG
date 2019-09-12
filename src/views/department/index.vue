@@ -13,13 +13,18 @@
       </el-col>
     </el-row>
 
-    <el-row class="tabBox" :gutter="50">
+    <el-row class="tabBox">
       <el-col :span="3" v-for="item in tabList" :key="item.ID">
-        <el-button @click="tabClick(item.CLASS_CODE)" class="tab" plain>{{item.CLASS_NAME}}</el-button>
+        <el-button
+          :autofocus="item.SORT == '1'"
+          @click="tabClick(item.CLASS_CODE)"
+          class="tab"
+          plain
+        >{{item.CLASS_NAME}}</el-button>
       </el-col>
     </el-row>
 
-    <el-row class="depBox" :gutter="50">
+    <el-row class="depBox">
       <el-col :span="6" v-for="item in depList" :key="item.DEPT_CODE">
         <el-button @click="depClick(item)" class="dep" type="primary">{{item.SHOW_NAME}}</el-button>
       </el-col>
@@ -111,7 +116,17 @@ export default {
   .tab {
     font-size: 22px;
     padding: 20px 40px;
-    border: 2px solid blue;
+    border: 2px solid #184b8f;
+    color: #184b8f;
+    &:focus {
+      background: #184b8f;
+      color: #fff;
+      &:before,
+      &:after {
+        background: #184b8f;
+        color: #fff;
+      }
+    }
   }
 }
 

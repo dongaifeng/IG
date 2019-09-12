@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <keep-alive exclude="nokeepAlive">
-      <transition name="fade" mode="out-in">
+    <transition name="fade" mode="out-in">
+      <keep-alive exclude="nokeepAlive">
         <router-view />
-      </transition>
-    </keep-alive>
+      </keep-alive>
+    </transition>
   </div>
 </template>
 

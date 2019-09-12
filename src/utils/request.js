@@ -1,5 +1,7 @@
 import axios from 'axios'
-import { Message } from 'element-ui'
+import {
+  Message
+} from 'element-ui'
 // import store from '../store'
 // import { getToken } from '@/utils/auth'
 
@@ -26,7 +28,7 @@ console.log(process.env.VUE_APP_BASE_API, '<======request')
 
 // 创建axios实例 
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API, 
+  baseURL: process.env.VUE_APP_BASE_API,
   withCredentials: true,
   timeout: 15000
 })
@@ -56,17 +58,17 @@ service.interceptors.response.use(
       })
       return Promise.reject('error')
     } else {
-      if(response.data.data){
-        response.data.data = JSON.parse(response.data.data.replace(/\n/g,"\\n").replace(/\r/g,"\\r"))
-      // response.data.data = JSON.parse(json.replace(/\n/g,"\\n").replace(/\r/g,"\\r"))
-      return response.data
+      if (response.data.data) {
+        response.data.data = JSON.parse(response.data.data.replace(/\n/g, "\\n").replace(/\r/g, "\\r"))
+        // response.data.data = JSON.parse(json.replace(/\n/g,"\\n").replace(/\r/g,"\\r"))
+        return response.data
       } else {
         return response.data
       }
-      
+
     }
-      
-    
+
+
   },
   error => {
     const errMsg = error.toString()

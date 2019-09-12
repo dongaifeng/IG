@@ -2,7 +2,7 @@
 <template>
   <keep-alive>
     <div class="mixin-components-container">
-      <el-row :gutter="100">
+      <el-row :gutter="20">
         <el-col v-for="(item, index) in list" :key="index" :span="4">
           <router-link :to="{name: 'leaderDetail', params: {info: item}}">
             <el-card class="box-card" shadow="always">
@@ -50,10 +50,10 @@ export default {
 }
 
 .mixin-components-container {
-  background-color: #f0f2f5;
-  padding: 30px;
   text-align: center;
-  min-height: calc(100vh - 84px);
+  .box-card {
+    box-shadow: 0 0px 0px 0;
+  }
 }
 .job {
   font-size: 13px;

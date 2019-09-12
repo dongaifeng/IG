@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AIheader :h1="SHOW_NAME" :lab="'查询科室信息'" search home></AIheader>
+    <AIheader :h1="lab" :lab="'查询科室信息'" search home></AIheader>
     <el-tabs type="border-card">
       <el-tab-pane label="科室简介">
         <DepInfo :text="DEPT_INTRODUCITON" />
@@ -21,18 +21,21 @@ import DepLeader from './DepLeader'
 import DepList from './DepList'
 import DepInfo from './DepInfo'
 export default {
+  // name: 'nokeepAlive',
   mixins: [mixin],
   components: { DepInfo, DepList, DepLeader },
   data() {
     return {
       list: [],
-      expertList: []
+      expertList: [],
+      lab: null
     }
   },
   props: ['DEPT_INTRODUCITON', 'SHOW_NAME', 'DEPT_CODE'],
   mounted() {
     this.getList()
     this.getExpertList()
+    this.lab = this.SHOW_NAME || '科室介绍'
   },
   computed: {},
   methods: {
@@ -60,7 +63,7 @@ export default {
         this.expertList = this.toList(res.data)
       })
     },
-    toList(list) {
+    toList(list = []) {
       let data = [
         {
           TIME_FRAME_CODE: '上午',
@@ -99,3 +102,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.el-tabs {
+  box-shadow: none;
+  border-bottom: none;
+  /deep/ .el-tabs__item {
+    font-size: 20px;
+    height: 60px;
+    line-height: 60px;
+  }
+}
+</style>

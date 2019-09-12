@@ -5,7 +5,7 @@
       class="inline-input"
       v-model="input"
       :fetch-suggestions="querySearchAsync"
-      placeholder="请输入内容"
+      placeholder="请首查询字母"
       :debounce="600"
       :trigger-on-focus="false"
       :value-key="selName"
@@ -14,8 +14,8 @@
       @change="handleSelect"
       :style="styleObj"
     >
-      <template slot="prepend">{{lab}}</template>
-      <el-button slot="append" icon="el-icon-search" @click="query"></el-button>
+      <template class="my-tab" slot="prepend">{{lab}}</template>
+      <el-button slot="append" @click="query">查询</el-button>
     </el-autocomplete>
     <!-- <el-button style="width:100px; margin-left:20px;" @click="query">搜索</el-button> -->
     <keyboard :layout="'normal'" class="kb" ref="keyboard"></keyboard>
@@ -83,11 +83,7 @@ export default {
       }
     },
     loadAll() {
-      return [
-        { value: '1', address: '长宁区新渔路144号' },
-        { value: '12', address: '上海市长宁区淞虹路661号' },
-        { value: '123', address: '普陀区金沙江路1699号鑫乐惠美食广场A13' }
-      ]
+      return []
     },
     handleSelect(item) {
       this.select = item
@@ -105,6 +101,19 @@ export default {
   .kb {
     position: fixed;
     bottom: 0px;
+  }
+  .el-autocomplete {
+    /deep/ .el-input {
+      font-size: 18px !important;
+    }
+    /deep/ .el-input-group__prepend {
+      color: #000 !important;
+      font-size: 18px !important;
+    }
+    /deep/ .el-input-group__append {
+      color: #5590df !important;
+      font-size: 18px !important;
+    }
   }
 }
 </style>

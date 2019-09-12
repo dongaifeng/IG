@@ -1,6 +1,13 @@
 <template>
   <div>
-    <el-table :data="tableData" border style="width: 100%" size="medium">
+    <el-table
+      cell-class-name="cell-class"
+      header-cell-class-name="header-myclass"
+      :data="tableData"
+      border
+      style="width: 100%"
+      size="medium"
+    >
       <el-table-column prop="TIME_FRAME_CODE" label="时段" align="center"></el-table-column>
       <el-table-column
         v-for="(item, ind) in col"
@@ -86,5 +93,11 @@ export default {
 <style lang="scss" scoped>
 .el-tag {
   color: #fff;
+  font-size: 18px;
+  line-height: 40px;
+  height: 40px;
+}
+.el-table {
+  font-size: 20px;
 }
 </style>

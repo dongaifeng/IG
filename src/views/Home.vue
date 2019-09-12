@@ -37,7 +37,7 @@ export default {
     // this.get_bodyHeight()
   },
   activated() {
-    this.$store.dispatch('app/setUserInfo', null)
+    if (this.userInfo != null) this.$store.dispatch('app/setUserInfo', null)
   },
   computed: {
     ...mapGetters(['userInfo']),

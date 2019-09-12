@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AIheader :h1="'就医指南'" home></AIheader>
+    <AIheader :h1="'就医指南'" :home="$route.name != 'guideIndex'"></AIheader>
 
     <transition>
       <keep-alive>

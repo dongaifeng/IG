@@ -3,11 +3,16 @@
     <AIheader :h1="info.DOCTOR_NAME" home></AIheader>
     <div class="box">
       <div class="img">
-        <img :src="toSrc(info.PICTURE)" class="image" />
+        <el-image :src="toSrc(info.PICTURE)" class="image">
+          <div slot="error" class="image-slot">
+            <i class="el-icon-picture-outline"></i>
+          </div>
+        </el-image>
         <p class="name">{{info.DOCTOR_NAME}}</p>
-        <p class="job">{{ info.SKILLED }}</p>
       </div>
-
+      <span class="title">专长：</span>
+      <p class="text">{{ info.SKILLED }}</p>
+      <span class="title">阅历：</span>
       <p class="text">{{info.INTRODUCITON}}</p>
     </div>
   </div>
@@ -16,6 +21,7 @@
 <script>
 import AIheader from '@/components/AIheader'
 export default {
+  name: 'nokeepAlive',
   components: { AIheader },
   data() {
     return {
@@ -60,17 +66,31 @@ export default {
     padding-right: 20px;
     .image {
       width: 100%;
+      /deep/ .image-slot {
+        width: 100%;
+        height: 228px;
+        font-size: 30px;
+        line-height: 228px;
+        background: #ccc;
+      }
     }
+
     .job {
-      font-size: 13px;
+      font-size: 16px;
     }
     .name {
-      font-size: 18px;
+      font-size: 20px;
     }
   }
   .text {
-    font-size: 18px;
+    font-size: 20px;
     text-indent: 2em;
+  }
+  .title {
+    font-size: 25px;
+    display: block;
+    color: blueviolet;
+    margin: 20px;
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AIheader :h1="'医院介绍'" home></AIheader>
+    <AIheader :h1="'医院介绍'" :home="$route.name != 'index'"></AIheader>
 
     <keep-alive>
       <transition name="fade" mode="out-in">

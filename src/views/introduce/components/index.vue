@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-row class="menu-box" :gutter="30">
+    <el-row class="menu-box">
       <el-col :span="8" align="center" v-for="item in subMenu" :key="item.SUB_MEMU_CODE">
         <!-- <router-link to="/hospitalIntroduction/detail"> -->
         <router-link :to="{name: item.JUMP_PATH}">
@@ -54,12 +54,13 @@ export default {
     margin-bottom: 30px;
 
     .menu-item {
-      width: 210px;
-      height: 215px;
+      width: 300px;
+      height: 300px;
     }
     .bottom {
       padding-top: 70%;
-      font-size: 28px;
+      font-size: 34px;
+      color: #fff;
     }
   }
 }

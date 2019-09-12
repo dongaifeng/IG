@@ -11,7 +11,8 @@
     <el-carousel-item v-for="item in news" :key="item.NEW_STYLE">
       <img width="100%" :src="toSrc(item.IMPAGE)" alt />
       <!-- <img width="100%" :src="'data:image/png;base64,'+item.IMPAGE" alt /> -->
-      <span class="textBox" v-html="item.TXT_CONTENT"></span>
+      <!-- <span class="textBox" v-html="item.TXT_CONTENT"></span> -->
+      <span class="textBox" v-html="item.TXT_CONTENT.replace(/\n/g, '<br>')"></span>
     </el-carousel-item>
   </el-carousel>
 </template>
@@ -38,7 +39,6 @@ export default {
         value: '0'
       }
     ]).then(res => {
-      console.log(res.data)
       this.news = res.data
     })
   },

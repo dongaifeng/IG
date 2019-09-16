@@ -8,7 +8,8 @@ const app = {
     menu: [],
     leaderList: [],
     IDVisiable: false,
-    userInfo: null
+    userInfo: null,
+    departmentDetail: null
   },
   mutations: {
     TOGGLE_DEVICE: (state, device) => {
@@ -22,9 +23,17 @@ const app = {
     },
     SET_USERINFO: (state, data) => {
       state.userInfo = data
+    },
+    SET_DEPT_DEL: (state, data) => {
+      state.departmentDetail = data
     }
   },
   actions: {
+    departmentDetail({
+      commit
+    }, data) {
+      commit('SET_DEPT_DEL', data)
+    },
     setUserInfo({
       commit
     }, data) {

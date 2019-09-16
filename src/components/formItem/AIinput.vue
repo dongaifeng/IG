@@ -103,8 +103,9 @@ export default {
     bottom: 0px;
   }
   .el-autocomplete {
-    /deep/ .el-input {
+    /deep/ .el-input__inner {
       font-size: 18px !important;
+      height: 45px;
     }
     /deep/ .el-input-group__prepend {
       color: #000 !important;

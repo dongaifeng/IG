@@ -58,14 +58,24 @@ service.interceptors.response.use(
       })
       return Promise.reject('error')
     } else {
-      if (response.data.data) {
-        response.data.data = JSON.parse(response.data.data.replace(/\n/g, "\\n").replace(/\r/g, "\\r"))
-        // response.data.data = JSON.parse(json.replace(/\n/g,"\\n").replace(/\r/g,"\\r"))
-        return response.data
-      } else {
-        return response.data
-      }
+      if (response.data.result === 'success') { // 判断请求是否成功
 
+        if (response.data.data != null && response.data.data != '') { // 判断数据是否存在
+          response.data.data = JSON.parse(response.data.data.replace(/\n/g, "\\n").replace(/\r/g, "\\r"))
+          // response.data.data = JSON.parse(json.replace(/\n/g,"\\n").replace(/\r/g,"\\r"))
+          return response.data
+        } else {
+          return response.data
+        }
+
+      } else {
+        Message({
+          message: response.data.data,
+          type: 'error',
+          duration: 5 * 1000
+        })
+        return Promise.reject(response.data.data)
+      }
     }
 
 

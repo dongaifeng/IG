@@ -8,7 +8,12 @@
 
     <el-row class="tabBox" :gutter="50">
       <el-col :span="3" v-for="item in tabList" :key="item.ID">
-        <el-button @click="tabClick(item.CLASS_CODE)" class="tab" plain>{{item.CLASS_NAME}}</el-button>
+        <el-button
+          :autofocus="item.CLASS_CODE == active"
+          @click="tabClick(item.CLASS_CODE)"
+          class="tab"
+          plain
+        >{{item.CLASS_NAME}}</el-button>
       </el-col>
     </el-row>
 
@@ -55,11 +60,13 @@ export default {
   data() {
     return {
       tabList: [],
-      expertList: []
+      expertList: [],
+      active: 'LX01'
     }
   },
   mounted() {
     this.initData()
+    this.tabClick(this.active)
   },
   methods: {
     query(id) {
@@ -155,7 +162,7 @@ export default {
         font-size: 18px;
         // border-right: 1px solid red;
         float: left;
-        width: 7%;
+        width: 10%;
         margin: 10px 10px;
         padding-right: 0px;
         box-sizing: border-box;
@@ -168,7 +175,8 @@ export default {
         // border: 1px solid #000;
         .nameItem {
           float: left;
-          padding: 10px;
+          padding: 16px;
+          font-size: 23px;
         }
       }
     }
@@ -180,7 +188,17 @@ export default {
   .tab {
     font-size: 22px;
     padding: 20px 40px;
-    border: 2px solid blue;
+    border: 2px solid #184b8f;
+    color: #184b8f;
+    &:focus {
+      background: #184b8f;
+      color: #fff;
+      &:before,
+      &:after {
+        background: #184b8f;
+        color: #fff;
+      }
+    }
   }
 }
 

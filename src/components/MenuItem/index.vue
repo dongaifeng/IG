@@ -83,7 +83,8 @@ export default {
   margin-top: 60%;
   // line-height: 12px;
   text-align: center;
-  font-size: 20px;
+  font-size: 23px;
+  color: #fff;
 }
 
 .button {

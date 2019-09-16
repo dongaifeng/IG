@@ -92,6 +92,7 @@ export default {
       })
     },
     depClick(obj) {
+      this.$store.dispatch('app/departmentDetail', obj)
       this.$router.push({ name: 'departmentDetail', params: obj })
     },
     initData() {

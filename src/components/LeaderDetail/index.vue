@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     toSrc(id) {
-      return require('@/assets/leaderImage/' + id + '.png')
+      if (id) return require('@/assets/leaderImage/' + id + '.png')
     }
   }
 }

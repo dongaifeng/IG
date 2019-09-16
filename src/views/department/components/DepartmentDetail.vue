@@ -20,25 +20,50 @@ import { mixin } from '@/mixin'
 import DepLeader from './DepLeader'
 import DepList from './DepList'
 import DepInfo from './DepInfo'
+import { mapState } from 'vuex'
 export default {
-  // name: 'nokeepAlive',
+  name: 'nokeepAlive',
   mixins: [mixin],
   components: { DepInfo, DepList, DepLeader },
   data() {
     return {
       list: [],
       expertList: [],
-      lab: null
+      lab: ''
     }
   },
-  props: ['DEPT_INTRODUCITON', 'SHOW_NAME', 'DEPT_CODE'],
+  computed: {
+    ...mapState({
+      DEPT_INTRODUCITON: state => state.app.departmentDetail.DEPT_INTRODUCITON,
+      SHOW_NAME: state => state.app.departmentDetail.SHOW_NAME,
+      DEPT_CODE: state => state.app.departmentDetail.DEPT_CODE
+    })
+  },
+  // props: ['DEPT_INTRODUCITON', 'SHOW_NAME', 'DEPT_CODE'],
+  // beforeRouteEnter(to, from, next) {
+  //   console.log(from)
+  //   if (from.name === 'department') {
+  //     next(vm => {
+  //       debugger
+  //       vm.$nextTick(function() {
+  //         vm.getList()
+  //         vm.getExpertList()
+  //         vm.lab = vm.SHOW_NAME || '科室介绍'
+  //       })
+  //     })
+  //   } else {
+  //     next()
+  //   }
+  // },
   mounted() {
     this.getList()
     this.getExpertList()
     this.lab = this.SHOW_NAME || '科室介绍'
   },
-  computed: {},
+  watch: {},
+
   methods: {
+    // 获取主要领导数据
     getList() {
       this.$post('1010', [
         {
@@ -48,9 +73,10 @@ export default {
           value: this.DEPT_CODE
         }
       ]).then(res => {
-        this.list = res.data
+        this.list = res.data || []
       })
     },
+    // 获取专家出诊列表
     getExpertList() {
       this.$post('1011', [
         {
@@ -60,10 +86,12 @@ export default {
           value: this.DEPT_CODE
         }
       ]).then(res => {
-        this.expertList = this.toList(res.data)
+        this.expertList = res.data ? this.toList(res.data) : []
       })
     },
+    // 专家出诊列表 数据转换
     toList(list = []) {
+      if (list.length === 0) return
       let data = [
         {
           TIME_FRAME_CODE: '上午',

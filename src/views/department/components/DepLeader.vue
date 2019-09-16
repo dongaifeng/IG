@@ -4,7 +4,7 @@
     <div class="mixin-components-container">
       <el-row :gutter="20">
         <el-col v-for="(item, index) in list" :key="index" :span="4">
-          <router-link :to="{name: 'leaderDetail', params: {info: item}}">
+          <router-link :to="{name: 'doctorDetail', params: {id: item.DOCTOR_CODE}}">
             <el-card class="box-card" shadow="always">
               <img :src="toSrc(item.PICTURE)" class="image" />
               <div>
@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     toSrc(id) {
-      return require('@/assets/leaderImage/' + id + '.png')
+      if (id) return require('@/assets/leaderImage/' + id + '.png')
     }
   }
 }

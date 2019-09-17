@@ -1,9 +1,9 @@
 <template>
   <div class="box">
     <el-row :gutter="20">
-      <el-col :span="14">
+      <el-col :span="12">
         <el-form ref="form" :model="form">
-          <el-form-item label="患者病案号">
+          <el-form-item v-if="patientV" label="患者病案号">
             <el-input @focus="show" v-model="form.patientID"></el-input>
           </el-form-item>
 
@@ -12,7 +12,7 @@
           </el-form-item>
         </el-form>
       </el-col>
-      <el-col :span="10">
+      <el-col :span="12">
         <key
           :options="options"
           v-if="visible"
@@ -45,7 +45,11 @@ export default {
       }
     }
   },
-
+  props: {
+    patientV: {
+      type: Boolean
+    }
+  },
   methods: {
     accept(text) {
       // console.log('Input text: ' + text)
@@ -67,5 +71,13 @@ export default {
 <style lang="scss" scoped>
 .box {
   margin: 20px;
+  .el-form {
+    /deep/ .el-form-item__label {
+      font-size: 20px;
+    }
+    .el-input {
+      font-size: 20px;
+    }
+  }
 }
 </style>

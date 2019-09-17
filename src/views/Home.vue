@@ -3,8 +3,8 @@
     <Carousel @click="dialogVisible = true" />
     <Item :menu="menu"></Item>
 
-    <el-dialog title="提示" :visible.sync="IDVisiable" width="60%">
-      <Identity ref="IDForm"></Identity>
+    <el-dialog title="请输入验证信息" :visible.sync="IDVisiable" width="60%">
+      <Identity ref="IDForm" :patientV="patientV"></Identity>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitID">确 定</el-button>
       </span>
@@ -24,7 +24,8 @@ export default {
       menu: [],
       dialogVisible: false,
       info: null,
-      toPage: 'home'
+      toPage: 'home',
+      patientV: true
     }
   },
   components: {
@@ -103,6 +104,7 @@ export default {
   beforeRouteLeave(to, from, next) {
     if (to.name === 'inHospital' || to.name === 'outpatientCost') {
       if (this.userInfo === null || this.userInfo === '') {
+        this.patientV = to.name === 'inHospital'
         this.toPage = to.name
         this.IDVisiable = true
         next(false)

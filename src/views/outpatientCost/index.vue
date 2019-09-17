@@ -35,13 +35,12 @@
         <el-button @click="dialog = true" type="primary">高级筛查</el-button>
       </el-col>
       <el-col :span="8">
-        <el-pagination
-          background
-          layout="->, total, prev, next"
-          :total="total"
-          :current-page="currentPage"
+        <page
+          style="float: right"
           @current-change="pageClick"
-        ></el-pagination>
+          :total="total"
+          :currentPage="currentPage"
+        ></page>
       </el-col>
     </el-row>
 
@@ -62,11 +61,11 @@
 </template>
 
 <script>
-import { mixin } from '@/mixin'
+import { mixin, page } from '@/mixin'
 import { mapGetters } from 'vuex'
 export default {
   name: 'nokeepAlive',
-  mixins: [mixin],
+  mixins: [mixin, page],
   data() {
     return {
       itemList: [{ lab: '姓名', val: 'name' }],
@@ -75,9 +74,7 @@ export default {
         name: ''
       },
       formLabelWidth: '80px',
-      dialog: false,
-      total: 0,
-      currentPage: 1
+      dialog: false
     }
   },
   computed: {
@@ -109,9 +106,6 @@ export default {
         this.tableData = res.data || []
         this.total = res.Total
       })
-    },
-    pageClick(page) {
-      this.initData(page)
     }
   },
   beforeRouteEnter(to, from, next) {

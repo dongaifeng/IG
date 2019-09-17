@@ -4,7 +4,7 @@
 
     <el-row>
       <el-form :label-position="'right'" label-width="100px" :model="row">
-        <el-col :span="8" v-for="(item, index) in itemList" :key="index">
+        <el-col :span="6" v-for="(item, index) in itemList" :key="index">
           <el-form-item :label="item.lab">
             <span>{{row[item.val]}}</span>
           </el-form-item>

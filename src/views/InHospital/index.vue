@@ -14,7 +14,7 @@
 
     <el-row>
       <el-table :data="tableData" border style="width: 100%" size="medium">
-        <el-table-column label="序号" type="index" width="50" align="center"></el-table-column>
+        <el-table-column label="序号" type="index" width="60" align="center"></el-table-column>
         <el-table-column prop="PATIENT_ID" label="病案号" align="center"></el-table-column>
         <el-table-column prop="VISIT_DATE_TIME" label="入院时间" align="center"></el-table-column>
         <el-table-column prop="DISCHARGE_DATE_TIME" label="出院时间" align="center"></el-table-column>
@@ -42,13 +42,12 @@
         <el-button @click="dialog = true" type="primary">高级筛查</el-button>
       </el-col>
       <el-col :span="8">
-        <el-pagination
-          background
-          layout="->, total, prev, next"
-          :total="total"
-          :current-page="currentPage"
+        <page
+          style="float: right"
           @current-change="pageClick"
-        ></el-pagination>
+          :total="total"
+          :currentPage="currentPage"
+        ></page>
       </el-col>
     </el-row>
 
@@ -69,11 +68,11 @@
 </template>
 
 <script>
-import { mixin } from '@/mixin'
+import { mixin, page } from '@/mixin'
 import { mapGetters } from 'vuex'
 export default {
   name: 'nokeepAlive',
-  mixins: [mixin],
+  mixins: [mixin, page],
   data() {
     return {
       itemList: [{ lab: '姓名', val: 'name' }],
@@ -82,9 +81,7 @@ export default {
         name: ''
       },
       formLabelWidth: '80px',
-      dialog: false,
-      total: 0,
-      currentPage: 1
+      dialog: false
     }
   },
   computed: {
@@ -112,14 +109,10 @@ export default {
         { size: 10, current: page }
       ).then(res => {
         console.log(res)
-        // this.form.name = `${this.userInfo.PATIENT_NAME} (${res.data[0].GENDER_NAME})`
+        this.form.name = `${this.userInfo.PATIENT_NAME} (${res.data[0].GENDER_NAME})`
         this.tableData = res.data || []
         this.total = res.Total
       })
-    },
-    pageClick(page) {
-      console.log(page)
-      this.initData(page)
     }
   },
   beforeRouteEnter(to, from, next) {

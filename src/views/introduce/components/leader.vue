@@ -17,27 +17,16 @@
         </el-col>
       </el-row>
 
-      <div class="page-box">
-        <el-pagination
-          background
-          layout="->,slot, prev, next"
-          :total="total"
-          prev-text="上一页"
-          next-text="下一页"
-          :current-page="currentPage"
-          @current-change="pageClick"
-        >
-          <span class="my-total">{{currentPage}} / {{Math.ceil(total / 8)}} 页</span>
-        </el-pagination>
-      </div>
+      <page @current-change="pageClick" :total="total" :currentPage="currentPage"></page>
     </div>
   </keep-alive>
 </template>
 
 <script>
+import Page from '@/components/Page'
 export default {
   name: 'leader',
-  components: {},
+  components: { Page },
   data() {
     return {
       src: require('@/assets/leaderImage/1.png'),
@@ -71,7 +60,6 @@ export default {
       return require('@/assets/leaderImage/' + id + '.png')
     },
     pageClick(page) {
-      console.log(page)
       this.currentPage = page
       this.initData(page)
     }
@@ -80,24 +68,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.page-box {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  .el-pagination {
-    /deep/ .btn-prev,
-    /deep/ .btn-next {
-      background: #4f90e6;
-      color: #fff;
-      padding: 10px 30px;
-      height: auto;
-    }
-    /deep/ .my-total {
-      vertical-align: bottom !important;
-    }
-  }
-}
-
 .el-col {
   margin-bottom: 20px;
   border-radius: 4px;

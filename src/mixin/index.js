@@ -6,6 +6,9 @@ const mixin = {
 
 
 const bad = {
+  components: {
+    Page: () => import('@/components/Page')
+  },
   data() {
     return {
       list: [],
@@ -19,7 +22,7 @@ const bad = {
   methods: {
     init(page) {
       this.$post(this.queryId, this.queryArr = [], {
-        size: 10,
+        size: this.size,
         current: page
       }).then(res => {
         console.log(res)
@@ -28,12 +31,33 @@ const bad = {
       })
     },
     pageClick(page) {
+      this.currentPage = page
       this.init(page)
+    }
+  }
+}
+
+
+const page = {
+  data() {
+    return {
+      total: 0,
+      currentPage: 1
+    }
+  },
+  components: {
+    Page: () => import('@/components/Page')
+  },
+  methods: {
+    pageClick(page) {
+      this.currentPage = page
+      this.initData(page)
     }
   }
 }
 
 export {
   mixin,
-  bad
+  bad,
+  page
 }

@@ -4,7 +4,7 @@
 
     <el-row>
       <el-form :label-position="'right'" label-width="100px" :model="row">
-        <el-col :span="8" v-for="(item, index) in itemList" :key="index">
+        <el-col :span="6" v-for="(item, index) in itemList" :key="index">
           <el-form-item :label="item.lab">
             <span>{{row[item.val]}}</span>
           </el-form-item>
@@ -14,6 +14,7 @@
 
     <el-row>
       <el-table :data="tableData" border style="width: 100%" size="medium">
+        <el-table-column label="序号" type="index" width="60" align="center"></el-table-column>
         <el-table-column prop="CLASS_NAME" label="收费类型" align="center"></el-table-column>
         <el-table-column prop="CHARGE_ITEM_SPEC" label="单位" align="center"></el-table-column>
         <el-table-column prop="CHARGE_ITEM_PRICE" label="单价" align="center"></el-table-column>
@@ -33,13 +34,12 @@
         <el-button @click="dialog = true" type="primary">高级筛查</el-button>
       </el-col>
       <el-col :span="8">
-        <el-pagination
-          background
-          layout="->, total, prev, next"
-          :total="total"
-          :current-page="currentPage"
+        <page
+          style="float: right"
           @current-change="pageClick"
-        ></el-pagination>
+          :total="total"
+          :currentPage="currentPage"
+        ></page>
       </el-col>
     </el-row>
 
@@ -60,11 +60,11 @@
 </template>
 
 <script>
-import { mixin } from '@/mixin'
+import { mixin, page } from '@/mixin'
 import { mapGetters } from 'vuex'
 export default {
   name: 'nokeepAlive',
-  mixins: [mixin],
+  mixins: [mixin, page],
   data() {
     return {
       itemList: [
@@ -81,9 +81,7 @@ export default {
       ],
       tableData: [],
       formLabelWidth: '80px',
-      dialog: false,
-      total: 0,
-      currentPage: 1
+      dialog: false
     }
   },
   props: {
@@ -121,10 +119,6 @@ export default {
         this.tableData = res.data || []
         this.total = res.Total
       })
-    },
-    pageClick(page) {
-      console.log(page)
-      this.initData(page)
     }
   }
 }

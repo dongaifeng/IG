@@ -3,5 +3,39 @@
 // 修改分页器样式
 .el-pagination {
   margin: 20px;
- text-align: center;
+  text-align: center;
+}
+
+.el-dialog {
+
+  .el-dialog__header {
+
+    .el-dialog__title,
+    .el-dialog__headerbtn .el-icon-close {
+      font-size: 20px;
+    }
+  }
+
+  .el-dialog__body {
+    padding: 10px 15px;
+  }
+
+}
+
+.el-button {
+  font-size: 19px;
+}
+
+.el-table {
+  font-size: 18px;
+}
+
+.el-form {
+  /deep/ .el-form-item__label {
+    font-size: 20px;
+  }
+
+  .el-form-item__content {
+    font-size: 18px;
+  }
 }

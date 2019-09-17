@@ -11,13 +11,12 @@
 
     <el-row style="margin-top: 20px;">
       <el-col :span="24">
-        <el-pagination
-          background
-          layout="->, total, prev, next"
-          :total="total"
-          :current-page="currentPage"
+        <page
+          style="float: right"
           @current-change="pageClick"
-        ></el-pagination>
+          :total="total"
+          :currentPage="currentPage"
+        ></page>
       </el-col>
     </el-row>
   </div>
@@ -29,7 +28,8 @@ export default {
   mixins: [mixin, bad],
   data() {
     return {
-      queryId: '1022'
+      queryId: '1022',
+      size: 20
     }
   },
   methods: {
@@ -42,11 +42,11 @@ export default {
 
 <style lang="scss" scoped>
 .colClass {
-  margin-top: 25px;
+  margin-top: 35px;
   .wardBox {
     cursor: pointer;
-    width: 45%;
-    height: 60px;
+    width: 80%;
+    height: 80px;
     background: #4f8fe6;
     padding: 10px 10px;
     color: #fff;
@@ -54,9 +54,8 @@ export default {
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     line-height: 60px;
     .ward {
-      font-weight: 600;
       font-size: 20px;
     }
   }
 }
-</style>>
+</style>

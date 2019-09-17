@@ -55,6 +55,7 @@ export default {
       man: require('@/assets/man.png'),
       woman: require('@/assets/woman.png'),
       queryId: '1023',
+      size: 18,
       recordId: '',
       IDVisiable: false
     }
@@ -154,12 +155,12 @@ export default {
   margin-top: 20px;
   .bedBox {
     cursor: pointer;
-    width: 45%;
+    width: 60%;
     height: 160px;
     background: blueviolet;
     padding: 15px 10px;
     color: #fff;
-    border-radius: 15px;
+    border-radius: 12px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     .bedTop {
       .num {
@@ -172,7 +173,7 @@ export default {
     }
 
     .bedBody {
-      margin-top: 80%;
+      margin-top: 70%;
       .name {
         font-weight: 600;
         font-size: 20px;

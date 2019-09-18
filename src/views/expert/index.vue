@@ -70,8 +70,7 @@ export default {
   },
   methods: {
     query(id) {
-      console.log(id, '<-------------')
-      debugger
+    
       this.$router.push({ name: 'expertList' })
     },
     detail(id) {
@@ -118,7 +117,7 @@ export default {
     },
     unique(arr) {
       if (!Array.isArray(arr)) {
-        console.log('type error!')
+        // console.log('type error!')
         return
       }
       var hash = []

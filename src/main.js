@@ -10,6 +10,7 @@ import {
 import './icons'
 
 Vue.prototype.$post = post
+Vue.prototype.$alert = null
 
 // Vue.use(VueTouchKeyboard);
 
@@ -22,6 +23,7 @@ Vue.use(ElementUI)
 
 router.beforeEach((to, from, next) => {
   // console.log(to, from, '路由')
+  store.dispatch('app/timeHandle', 30)
   next()
 })
 

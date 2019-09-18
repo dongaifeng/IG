@@ -52,7 +52,7 @@ service.interceptors.response.use(
     const status = response.status
     if (status !== 200) {
       Message({
-        message: '请求错误',
+        message: '系统错误，请联系管理员',
         type: 'error',
         duration: 5 * 1000
       })

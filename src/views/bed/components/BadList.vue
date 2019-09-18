@@ -68,7 +68,7 @@ export default {
   },
   watch: {
     id(newVal, oldval) {
-      console.log(newVal, oldval)
+      // console.log(newVal, oldval)
       if (newVal && newVal != oldval) {
         this.init(this.currentPage)
       }
@@ -105,13 +105,13 @@ export default {
           current: page
         }
       ).then(res => {
-        console.log(res)
+        // console.log(res)
         this.list = res.data || []
         this.total = res.Total
       })
     },
     toBadList(id) {
-      console.log(id)
+      // console.log(id)
       this.recordId = id
       if (this.userInfo === null || this.userInfo === '') {
         // this.$store.dispatch('app/changeIDVisiable', true)

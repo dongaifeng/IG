@@ -1,7 +1,14 @@
 <template>
-  <div style="margin-top:20px;">
-    <el-row style="margin:30px;">
-      <img width="70%" :src="src" class="image" />
+  <div style="margin:30px;">
+    <el-row style="margin-bottom:20px;">
+      <el-button @click="detail('0')">平面图</el-button>
+      <el-button @click="detail(item)" v-for="item in 12" :key="item">{{item}}#</el-button>
+    </el-row>
+    <el-row>
+      <el-col :span="18">
+        <img width="100%" :src="src" class="image" />
+      </el-col>
+      <el-col :span="6">{{txt}}</el-col>
     </el-row>
   </div>
 </template>
@@ -12,10 +19,25 @@ export default {
   components: {},
   data() {
     return {
-      src: require('@/assets/1566183199(1).jpg')
+      src: require('@/assets/floor/0.jpg'),
+      list: [],
+      txt: null
     }
   },
-  methods: {}
+  mounted() {
+    this.initData()
+  },
+  methods: {
+    initData(page) {
+      this.$post('1025').then(res => {
+        this.list = res.data || []
+      })
+    },
+    detail(id) {
+      if (id > 2) return
+      this.src = require('@/assets/floor/' + id + '.jpg')
+    }
+  }
 }
 </script>
 

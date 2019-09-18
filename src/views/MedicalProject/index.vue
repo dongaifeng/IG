@@ -85,13 +85,11 @@ export default {
           ]
         : []
       this.$post('1014', arr, { size: 10, current: page }).then(res => {
-        console.log(res)
         this.tableData = res.data
         this.total = res.Total
       })
     },
     pageClick(page) {
-      console.log(page)
       this.initData(page)
     },
     query(obj) {
@@ -100,7 +98,6 @@ export default {
     },
     // 模糊查询回调 cb传入 list 需设置 selName 下拉显示值
     searchAsync(id, cb) {
-      console.log(id)
       this.$post(
         '1014',
         [
@@ -113,7 +110,6 @@ export default {
         ],
         { size: 10, current: 1 }
       ).then(res => {
-        console.log(res.data)
         cb(res.data || [])
       })
     }

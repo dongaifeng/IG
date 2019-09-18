@@ -25,7 +25,7 @@ const bad = {
         size: this.size,
         current: page
       }).then(res => {
-        console.log(res)
+        // console.log(res)
         this.list = res.data || []
         this.total = res.Total
       })

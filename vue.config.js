@@ -7,10 +7,9 @@ function resolve(dir) {
 console.log(process.env.NODE_ENV, '<======环境变量')
 
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ?
-    '/' : '/', //  部署应用包时的基本 URL
+  publicPath: process.env.NODE_ENV === 'production' ? './' : '/', //  部署应用包时的基本 URL
   outputDir: 'dist', // 运行 vue-cli-service build 时生成的生产环境构建文件的目录
-  assetsDir: '', //  放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录。
+  // assetsDir: '', //  放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录。
   lintOnSave: process.env.NODE_ENV !== 'production', //  是否在开发环境下通过 eslint-loader 在每次保存时 lint 代码
 
   devServer: {

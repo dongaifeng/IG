@@ -85,24 +85,24 @@ export default {
           ]
         : []
       this.$post('1024', arr, { size: 10, current: page }).then(res => {
-        console.log(res)
+        // console.log(res)
         this.tableData = res.data
         this.total = res.Total
       })
     },
     pageClick(page) {
-      console.log(page)
+      // console.log(page)
       this.initData(page, this.queryId)
     },
     query(obj) {
-      console.log(obj, '-----obj')
+      // console.log(obj, '-----obj')
 
       this.queryId = obj ? obj.DRUG_NAME : null
       this.initData(this.currentPage, this.queryId)
     },
     // 模糊查询回调 cb传入 list 需设置 selName 下拉显示值
     searchAsync(id, cb) {
-      console.log(id, 'searchasync=====')
+      // console.log(id, 'searchasync=====')
       this.$post('1024', [
         {
           LogicalOperatorsCode: '10',
@@ -111,7 +111,7 @@ export default {
           value: id
         }
       ]).then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         cb(res.data || [])
       })
     }

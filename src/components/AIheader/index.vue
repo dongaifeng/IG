@@ -1,6 +1,9 @@
 <template>
   <el-row class="header">
-    <el-col :span="6" class="header-h1">{{h1}}</el-col>
+    <el-col :span="6" class="header-h1">
+      {{h1}}
+      <span>{{$store.getters.time}}</span>
+    </el-col>
     <el-col :span="12" align="center">
       <AIinput
         v-if="search"
@@ -25,6 +28,7 @@ export default {
   data() {
     return {
       src: require('@/assets/1566183199(1).jpg'),
+      time: 5,
       style: {
         width: '90%'
         // paddingLeft: '100px',
@@ -55,6 +59,7 @@ export default {
       type: Function
     }
   },
+  mounted() {},
   watch: {
     $route() {
       // console.log(to, '<======');
@@ -69,7 +74,8 @@ export default {
     },
     query(p) {
       this.$emit('query', p)
-    }
+    },
+    sub() {}
   }
 }
 </script>

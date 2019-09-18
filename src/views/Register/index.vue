@@ -86,17 +86,14 @@ export default {
           ]
         : []
       this.$post('1021', arr, { size: 10, current: page }).then(res => {
-        console.log(res)
         this.tableData = res.data
         this.total = res.Total
       })
     },
     pageClick(page) {
-      console.log(page)
       this.initData(page, this.queryId)
     },
     query(obj) {
-      console.log(obj, '-----obj')
 
       this.queryId = obj ? obj.DEPT_CODE : null
       this.initData(this.currentPage, this.queryId)
@@ -117,7 +114,7 @@ export default {
           value: '0'
         }
       ]).then(res => {
-        console.log(res.data)
+         (res.data)
         cb(res.data || [])
       })
     }

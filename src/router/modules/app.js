@@ -13,6 +13,8 @@ import Introduce from '@/views/introduce'
 import Detail from '@/views/introduce/components/detail'
 import Leader from '@/views/introduce/components/leader'
 import Floor from '@/views/introduce/components/floor'
+import Structure from '@/views/introduce/components/structure'
+import Traffic from '@/views/introduce/components/traffic'
 import IntroduceIndex from '@/views/introduce/components'
 import LeaderDetail from '@/components/LeaderDetail'
 
@@ -101,6 +103,16 @@ const app = [{
       name: 'floor',
       path: 'floor',
       component: Floor
+    },
+    {
+      name: 'traffic',
+      path: 'traffic',
+      component: Traffic
+    },
+    {
+      name: 'structure',
+      path: 'structure',
+      component: Structure
     }
   ]
 }, {

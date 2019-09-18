@@ -82,12 +82,10 @@ import aiTable from '@/components/formItem/AItable'
   methods: {
    // 选中行
    handleSelectionChange (val) {
-    console.log('val:', val)
    },
    // 编辑
    handleEdit (index, row) {
-    console.log(' index:', index)
-    console.log(' row:', row)
+   
    },
   }
  }

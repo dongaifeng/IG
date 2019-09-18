@@ -25,7 +25,8 @@ export default {
       dialogVisible: false,
       info: null,
       toPage: 'home',
-      patientV: true
+      patientV: true,
+      timer: null
     }
   },
   components: {
@@ -35,10 +36,12 @@ export default {
   },
   mounted() {
     this.getData()
+    window.clearInterval(this.timer)
     // this.get_bodyHeight()
   },
   activated() {
     if (this.userInfo != null) this.$store.dispatch('app/setUserInfo', null)
+    window.clearInterval(this.timer)
   },
   computed: {
     ...mapGetters(['userInfo']),
@@ -99,6 +102,18 @@ export default {
           docEl.style.fontSize = clientWidth / 119 + 'px'
         })()
       }
+    },
+    sub() {
+      let vue = this
+      return function() {
+        vue.timer = setInterval(function() {
+          vue.$store.dispatch('app/timeHandle')
+          if (vue.$store.getters.time <= 1) {
+            window.clearInterval(vue.timer)
+            window.location.href = ''
+          }
+        }, 1000)
+      }
     }
   },
   beforeRouteLeave(to, from, next) {
@@ -109,11 +124,16 @@ export default {
         this.IDVisiable = true
         next(false)
       } else {
+        this.sub()()
         next()
       }
     } else {
+      this.sub()()
       next()
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    next()
   }
 }
 </script>

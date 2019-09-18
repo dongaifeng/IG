@@ -51,7 +51,7 @@
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
-      console.log(to, from)
+      // console.log(to, from)
       if (to.params.title) vm.title = to.params.title
       if (to.params.id) vm.getData(to.params.id)
   })

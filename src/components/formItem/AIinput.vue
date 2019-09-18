@@ -59,6 +59,9 @@ export default {
   },
   methods: {
     query() {
+      if (this.select) {
+        this.hide()
+      }
       this.$emit('query', this.select)
     },
     show(e) {

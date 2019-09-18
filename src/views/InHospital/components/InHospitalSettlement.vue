@@ -119,14 +119,12 @@ export default {
         ],
         { size: 10, current: page }
       ).then(res => {
-        console.log(res)
         // this.form.name = `${this.userInfo.PATIENT_NAME} (${res.data[0].GENDER_NAME})`
         this.tableData = res.data || []
         this.total = res.Total
       })
     },
     pageClick(page) {
-      console.log(page)
       this.initData(page)
     }
   }

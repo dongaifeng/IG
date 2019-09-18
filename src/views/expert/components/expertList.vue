@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     toSrc(id) {
-      console.log(id)
+      // console.log(id)
       return require('@/assets/leaderImage/1.png')
     }
   }

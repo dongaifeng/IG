@@ -9,7 +9,8 @@ const app = {
     leaderList: [],
     IDVisiable: false,
     userInfo: null,
-    departmentDetail: null
+    departmentDetail: null,
+    time: 8
   },
   mutations: {
     TOGGLE_DEVICE: (state, device) => {
@@ -26,9 +27,22 @@ const app = {
     },
     SET_DEPT_DEL: (state, data) => {
       state.departmentDetail = data
+    },
+    SET_TIME: (state, data) => {
+      if (data) {
+        state.time = data
+      } else {
+        state.time--
+      }
+
     }
   },
   actions: {
+    timeHandle({
+      commit
+    }, data) {
+      commit('SET_TIME', data)
+    },
     departmentDetail({
       commit
     }, data) {

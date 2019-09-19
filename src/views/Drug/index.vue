@@ -30,13 +30,12 @@
         <el-button @click="dialog = true" type="primary">高级筛查</el-button>
       </el-col>
       <el-col :span="8">
-        <el-pagination
-          background
-          layout="->, total, prev, next"
-          :total="total"
-          :current-page="currentPage"
+        <page
+          style="float: right"
           @current-change="pageClick"
-        ></el-pagination>
+          :total="total"
+          :currentPage="currentPage"
+        ></page>
       </el-col>
     </el-row>
 
@@ -57,15 +56,16 @@
 </template>
 
 <script>
+import { page } from '@/mixin'
 import AIheader from '@/components/AIheader'
 export default {
   components: { AIheader },
+  mixins: [page],
   data() {
     return {
       tableData: [],
       dialog: false,
-      total: 0,
-      currentPage: 1,
+
       queryId: null
     }
   },

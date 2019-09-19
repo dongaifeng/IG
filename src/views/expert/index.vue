@@ -6,7 +6,7 @@
       </el-col>
     </el-row>
 
-    <el-row class="tabBox" :gutter="50">
+    <el-row class="tabBox">
       <el-col :span="3" v-for="item in tabList" :key="item.ID">
         <el-button
           :autofocus="item.CLASS_CODE == active"
@@ -17,7 +17,7 @@
       </el-col>
     </el-row>
 
-    <el-row class="depBox" :gutter="50">
+    <el-row class="depBox">
       <el-col :span="24" v-for="(item, ind) in expertList" :key="ind">
         <!-- <el-button @click="depClick(item)" class="dep" type="primary">{{item.SHOW_NAME}}</el-button> -->
         <div class="expertBox">
@@ -70,7 +70,6 @@ export default {
   },
   methods: {
     query(id) {
-    
       this.$router.push({ name: 'expertList' })
     },
     detail(id) {

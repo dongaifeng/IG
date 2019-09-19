@@ -31,13 +31,12 @@
         <el-button @click="dialog = true" type="primary">高级筛查</el-button>
       </el-col>
       <el-col :span="8">
-        <el-pagination
-          background
-          layout="->, total, prev, next"
-          :total="total"
-          :current-page="currentPage"
+        <page
+          style="float: right"
           @current-change="pageClick"
-        ></el-pagination>
+          :total="total"
+          :currentPage="currentPage"
+        ></page>
       </el-col>
     </el-row>
 
@@ -59,7 +58,11 @@
 
 <script>
 import AIheader from '@/components/AIheader'
+import { page } from '@/mixin'
+
 export default {
+  mixins: [page],
+
   components: { AIheader },
   data() {
     return {
@@ -94,7 +97,6 @@ export default {
       this.initData(page, this.queryId)
     },
     query(obj) {
-
       this.queryId = obj ? obj.DEPT_CODE : null
       this.initData(this.currentPage, this.queryId)
     },
@@ -114,7 +116,7 @@ export default {
           value: '0'
         }
       ]).then(res => {
-         (res.data)
+        res.data
         cb(res.data || [])
       })
     }

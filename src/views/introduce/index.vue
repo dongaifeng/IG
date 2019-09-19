@@ -2,18 +2,16 @@
   <div>
     <AIheader :h1="'医院介绍'" :home="$route.name != 'index'"></AIheader>
 
-    <keep-alive>
-      <transition name="fade" mode="out-in">
-        <router-view></router-view>
-      </transition>
-    </keep-alive>
+    <transition name="fade" mode="out-in">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
 <script>
 import AIheader from '@/components/AIheader'
-
 export default {
+  name: 'nokeepAlive',
   components: { AIheader },
   data() {
     return {}

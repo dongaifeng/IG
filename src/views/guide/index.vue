@@ -2,11 +2,7 @@
   <div>
     <AIheader :h1="'就医指南'" :home="$route.name != 'guideIndex'"></AIheader>
 
-    <transition>
-      <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
-    </transition>
+    <router-view></router-view>
   </div>
 </template>
 

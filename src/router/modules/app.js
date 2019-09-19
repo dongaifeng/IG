@@ -81,11 +81,8 @@ const app = [{
   component: Introduce,
   name: 'hospitalIntroduction',
   redirect: 'hospitalIntroduction/index',
-  meta: {
-    title: 'aaaa'
-  },
   children: [{
-      name: 'index',
+      name: 'IntroduceIndex',
       path: 'index',
       component: IntroduceIndex
     },
@@ -137,7 +134,7 @@ const app = [{
       name: 'emergency',
       path: 'emergency',
       component: Emergency
-    },
+    }
   ]
 }, {
   path: '/intelligence',

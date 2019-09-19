@@ -9,8 +9,9 @@ import {
 } from '@/api'
 import './icons'
 
+import conf from '../public/conf'
 Vue.prototype.$post = post
-Vue.prototype.$alert = null
+Vue.prototype.$conf = conf
 
 // Vue.use(VueTouchKeyboard);
 
@@ -23,7 +24,7 @@ Vue.use(ElementUI)
 
 router.beforeEach((to, from, next) => {
   // console.log(to, from, '路由')
-  store.dispatch('app/timeHandle', 30)
+  store.dispatch('app/timeHandle', conf.time)
   next()
 })
 
@@ -36,8 +37,8 @@ function setRem() {
   let htmlDom = document.getElementsByTagName('html')[0];
   //设置根元素字体大小
   htmlDom.style.fontSize = htmlWidth / 80 + 'px';
-  // htmlDom.style.width = '1024px';
-  // htmlDom.style.height = '768px';
+  // htmlDom.style.width = conf.width;
+  // htmlDom.style.height = conf.height;
 }
 // 初始化
 setRem();
@@ -45,8 +46,6 @@ setRem();
 window.onresize = function () {
   setRem()
 }
-
-
 
 
 new Vue({

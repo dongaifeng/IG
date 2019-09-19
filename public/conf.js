@@ -1,6 +1,6 @@
 module.exports = {
-  time: 600000,
+  time: 60,
   baseUrl: '',
-  width: '800',
-  height: '600'
+  width: '800px',
+  height: '600px'
 }

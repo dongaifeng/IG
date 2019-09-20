@@ -15,10 +15,15 @@
     <el-row>
       <el-table :data="tableData" border style="width: 100%" size="medium">
         <el-table-column label="序号" type="index" width="50" align="center"></el-table-column>
-        <el-table-column prop="SETTLEMENT_DATE_TIME" label="收费日期" align="center"></el-table-column>
+        <el-table-column
+          prop="SETTLEMENT_DATE_TIME"
+          label="收费日期"
+          align="center"
+          :formatter="dateFormatter"
+        ></el-table-column>
         <el-table-column prop="PATIENT_NAME" label="病人姓名" align="center"></el-table-column>
         <el-table-column prop="CARD_NO" label="就诊卡号" align="center"></el-table-column>
-        <el-table-column prop="TOTAL_FEE" label="费用总额" align="center"></el-table-column>
+        <el-table-column prop="TOTAL_FEE" label="费用总额" align="center" :formatter="caseFormatter"></el-table-column>
         <el-table-column label="费用明细查看" align="center">
           <template slot-scope="scope">
             <el-button type="primary" @click="handleEdit(scope.row, 'outpatientCostDetial')">查看明细</el-button>
@@ -28,13 +33,11 @@
     </el-row>
 
     <el-row style="margin-top: 20px;">
-      <el-col :span="8">
-        <span>合计金额：</span>
-      </el-col>
-      <el-col :span="8" align="center">
+      <!-- <el-col :span="8" align="center">
         <el-button @click="dialog = true" type="primary">高级筛查</el-button>
-      </el-col>
-      <el-col :span="8">
+      </el-col>-->
+      <el-col :span="24">
+        <span>合计金额：{{totalCase}}</span>
         <page
           style="float: right"
           @current-change="pageClick"
@@ -63,6 +66,7 @@
 <script>
 import { mixin, page } from '@/mixin'
 import { mapGetters } from 'vuex'
+import { parseTime } from '@/utils'
 export default {
   name: 'nokeepAlive',
   mixins: [mixin, page],
@@ -78,7 +82,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['userInfo'])
+    ...mapGetters(['userInfo']),
+    totalCase() {
+      let a = this.tableData.reduce((pre, cur) => {
+        return pre + Number(cur['TOTAL_FEE'])
+      }, 0)
+      return a.toFixed(2)
+    }
   },
   mounted() {
     this.initData(this.currentPage)
@@ -87,6 +97,15 @@ export default {
     handleEdit(row, route) {
       this.$router.push({ name: route, params: { row } })
     },
+    caseFormatter(row, column) {
+      let a = Number(row[column.property])
+      return a.toFixed(2)
+    },
+    dateFormatter(row, column) {
+      let a = row[column.property]
+      return parseTime(a)
+    },
+
     initData(page) {
       if (!this.userInfo) return
       this.$post(

@@ -21,13 +21,12 @@
 
     <el-row style="margin-top: 20px;">
       <el-col :span="24">
-        <el-pagination
-          background
-          layout="->, total, prev, next"
-          :total="total"
-          :current-page="currentPage"
+        <page
+          style="float: right"
           @current-change="pageClick"
-        ></el-pagination>
+          :total="total"
+          :currentPage="currentPage"
+        ></page>
       </el-col>
     </el-row>
 
@@ -101,7 +100,7 @@ export default {
           }
         ],
         {
-          size: 10,
+          size: 30,
           current: page
         }
       ).then(res => {
@@ -142,7 +141,7 @@ export default {
           this.IDVisiable = false
           this.$router.push({ name: 'inHospital' })
         } else {
-          alert('没有用户信息')
+          this.$alert('找不到用户信息', '提示')
         }
       })
     }

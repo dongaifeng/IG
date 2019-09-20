@@ -27,13 +27,13 @@
     </el-row>
 
     <el-row style="margin-top: 20px;">
-      <el-col :span="8">
+      <!-- <el-col :span="8">
         <span>合计金额：</span>
       </el-col>
       <el-col :span="8" align="center">
         <el-button @click="dialog = true" type="primary">高级筛查</el-button>
-      </el-col>
-      <el-col :span="8">
+      </el-col>-->
+      <el-col :span="24">
         <page
           style="float: right"
           @current-change="pageClick"

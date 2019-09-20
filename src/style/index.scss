@@ -12,21 +12,15 @@ h5,
 h6,
 hr,
 p,
-blockquote,
 dl,
 dt,
 dd,
 ul,
 ol,
 li,
-pre,
 form,
-fieldset,
-legend,
 button,
 input,
-textarea,
-th,
 td {
   margin: 0;
   padding: 0;
@@ -149,6 +143,17 @@ div:focus {
   // background-color: #f0f2f5;
 }
 
+// 路由跳转动画
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
 // color
 $blue:#66b1ff;
 
@@ -172,7 +177,5 @@ $blue:#66b1ff;
 }
 
 .my-btn {
-
-
   @include colorBtn($blue)
 }

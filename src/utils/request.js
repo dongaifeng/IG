@@ -77,8 +77,6 @@ service.interceptors.response.use(
         return Promise.reject(response.data.data)
       }
     }
-
-
   },
   error => {
     const errMsg = error.toString()

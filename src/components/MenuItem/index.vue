@@ -26,7 +26,7 @@ export default {
   components: {},
   data() {
     return {
-      img: require('@/assets/1565939115.png')
+      img: require('../../../public/images/1565939115.png')
     }
   },
   props: {
@@ -38,7 +38,7 @@ export default {
     imgSrc(icon) {
       // console.log(icon, '<=====icon')
       return {
-        backgroundImage: 'url(' + require(`@/assets/icon/${icon}.png`) + ')',
+        backgroundImage: 'url(' + require(`../../../public/images/icon/${icon}.png`) + ')',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'contain'
       }

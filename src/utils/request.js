@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Vue from 'vue'
 import {
   Message
 } from 'element-ui'
@@ -24,6 +25,39 @@ const errCode = {
   'default': '系统未知错误,请反馈给管理员'
 }
 
+// loading框设置局部刷新，且所有请求完成后关闭loading框
+let loading;
+
+function startLoading() {
+  loading = Vue.prototype.$loading({
+    lock: true,
+    text: "数据加载中...",
+    target: document.querySelector('.loading-area') //设置加载动画区域
+  });
+}
+
+function endLoading() {
+  loading.close();
+}
+
+//声明一个对象用于存储请求个数
+let needLoadingRequestCount = 0;
+
+function showFullScreenLoading() {
+  if (needLoadingRequestCount === 0) {
+    startLoading();
+  }
+  needLoadingRequestCount++;
+}
+
+function tryHideFullScreenLoading() {
+  if (needLoadingRequestCount <= 0) return;
+  needLoadingRequestCount--;
+  if (needLoadingRequestCount === 0) {
+    endLoading();
+  }
+}
+
 console.log(process.env.VUE_APP_BASE_API, '<======request')
 
 // 创建axios实例 
@@ -39,9 +73,11 @@ service.interceptors.request.use(
     // if (store.getters.token) {
     //   config.headers['X-Token'] = getToken()
     // }
+    showFullScreenLoading()
     return config
   },
   error => {
+    tryHideFullScreenLoading()
     Promise.reject(error)
   }
 )
@@ -49,6 +85,7 @@ service.interceptors.request.use(
 // response 拦截器
 service.interceptors.response.use(
   response => {
+    tryHideFullScreenLoading()
     const status = response.status
     if (status !== 200) {
       Message({
@@ -79,6 +116,7 @@ service.interceptors.response.use(
     }
   },
   error => {
+    tryHideFullScreenLoading()
     const errMsg = error.toString()
     const code = errMsg.substr(errMsg.indexOf('code') + 5)
     Message({

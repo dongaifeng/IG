@@ -1,8 +1,8 @@
 <template>
   <div>
-    <AIheader :h1="'住院费用'"></AIheader>
+    <AIheader :h1="'门诊费用'"></AIheader>
 
-    <el-row>
+    <el-row class="form-box">
       <el-form :label-position="'right'" label-width="100px" :model="row">
         <el-col :span="8" v-for="(item, index) in itemList" :key="index">
           <el-form-item :label="item.lab">
@@ -126,5 +126,9 @@ export default {
 .el-pagination {
   margin: 0px 20px;
   text-align: center;
+}
+.form-box {
+  background-color: #eee;
+  margin: 20px 0;
 }
 </style>

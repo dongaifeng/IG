@@ -48,7 +48,7 @@ export default {
       return Base64.decode(url)
     },
     toSrc(id) {
-      return require('@/assets/swiper/' + id + '.png')
+      return require('../../../public/images/swiper/' + id + '.png')
     }
   }
 }

@@ -154,6 +154,20 @@ div:focus {
   opacity: 0;
 }
 
+// header 固定位置
+.header-box {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 2000;
+}
+
+.contant-box {
+  padding-top: 60px;
+  box-sizing: border-box;
+}
+
 // color
 $blue:#66b1ff;
 

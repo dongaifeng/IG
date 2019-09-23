@@ -13,6 +13,7 @@
       @focus="show"
       @change="handleSelect"
       :style="styleObj"
+      popper-class="myautocomplete"
     >
       <template class="my-tab" slot="prepend">{{lab}}</template>
       <el-button slot="append" @click="query">查询</el-button>
@@ -101,6 +102,7 @@ export default {
   .inline-input {
     width: 100%;
   }
+
   .kb {
     position: fixed;
     bottom: 0px;

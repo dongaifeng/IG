@@ -1,5 +1,5 @@
 <template>
-  <div style="margin:20px;">
+  <div style="margin:20px; ">
     <div class="img">
       <img width="70%" :src="src" class="image" />
     </div>
@@ -20,15 +20,16 @@
 export default {
   data() {
     return {
-      src: require('@/assets/traffic/1.jpg'),
-      src2: require('@/assets/traffic/2.jpg')
+      src: require('../../../../public/images/traffic/1.jpg'),
+      src2: require('../../../../public/images/traffic/2.jpg')
     }
   }
 }
 </script>
 <style lang="scss" scoped>
 .img {
-  margin: 20px;
+  margin: 20px auto;
+  text-align: center;
 }
 .txt {
   font-size: 18px;

@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     toSrc(id) {
-      if (id) return require('@/assets/leaderImage/' + id + '.png')
+      if (id) return require('../../../../public/images/leaderImage/' + id + '.png')
     },
     initData() {
       this.$post('1012', [

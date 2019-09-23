@@ -2,7 +2,7 @@
   <div>
     <el-row>
       <el-col>
-        <AIheader @query="query" :h1="'专家浏览'" :lab="'查医生'" search></AIheader>
+        <AIheader @query="query" :h1="'专家浏览'" :lab="'查找医生'" search></AIheader>
       </el-col>
     </el-row>
 
@@ -157,7 +157,7 @@ export default {
         border-bottom: 0px;
       }
       .type {
-        font-size: 18px;
+        font-size: 20px;
         // border-right: 1px solid red;
         float: left;
         width: 10%;

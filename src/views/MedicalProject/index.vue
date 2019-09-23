@@ -11,15 +11,16 @@
 
     <el-row>
       <el-table :data="tableData" border style="width: 100%" size="medium">
+        <el-table-column label="序号" type="index" width="60" align="center"></el-table-column>
         <el-table-column prop="ITEM_NAME" label="项目名称" align="center"></el-table-column>
-        <el-table-column prop="UNIT" label="单位" align="center"></el-table-column>
-        <el-table-column prop="PRICE" label="单价" align="center"></el-table-column>
-        <el-table-column prop="MEDICARE_ITEM_CODE" label="医保代码" align="center"></el-table-column>
+        <el-table-column prop="UNIT" label="单位" align="center" width="60"></el-table-column>
+        <el-table-column prop="PRICE" label="单价" align="center" width="80"></el-table-column>
+        <el-table-column prop="MEDICARE_ITEM_CODE" label="医保代码" align="center" width="100"></el-table-column>
         <el-table-column prop="MEDICARE_ITEM_NAME" label="医保项目名称" align="center"></el-table-column>
-        <el-table-column prop="OUT_FLAG" label="门诊" align="center"></el-table-column>
-        <el-table-column prop="IN_FLAG" label="住院" align="center"></el-table-column>
-        <el-table-column prop="MEDICARE_LEVEL" label="医保等级" align="center"></el-table-column>
-        <el-table-column prop="SELF_PAY" label="自付" align="center"></el-table-column>
+        <el-table-column prop="OUT_FLAG" label="门诊" align="center" width="60"></el-table-column>
+        <el-table-column prop="IN_FLAG" label="住院" align="center" width="60"></el-table-column>
+        <el-table-column prop="MEDICARE_LEVEL" label="医保等级" align="center" width="100"></el-table-column>
+        <el-table-column prop="SELF_PAY" label="自付" align="center" width="60"></el-table-column>
       </el-table>
     </el-row>
 

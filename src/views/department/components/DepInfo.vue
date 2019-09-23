@@ -16,6 +16,6 @@ export default {
 <style lang="scss" scoped>
 .text {
   margin: 20px;
-  font-size: 18px;
+  font-size: 20px;
 }
 </style>

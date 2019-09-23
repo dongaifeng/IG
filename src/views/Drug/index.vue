@@ -11,14 +11,14 @@
 
     <el-row>
       <el-table :data="tableData" border style="width: 100%" size="medium">
-        <el-table-column label="序号" type="index" width="50" align="center"></el-table-column>
-        <el-table-column prop="DRUG_NAME" label="药品名称" align="center"></el-table-column>
+        <el-table-column label="序号" type="index" width="60" align="center"></el-table-column>
+        <el-table-column show-overflow-tooltip prop="DRUG_NAME" label="药品名称" align="center"></el-table-column>
         <el-table-column prop="SPEC" label="规格" align="center"></el-table-column>
         <el-table-column prop="MANUFACTORY_NAME" label="产地" align="center"></el-table-column>
-        <el-table-column prop="RETAIL_PRICE" label="销售价(元)" align="center"></el-table-column>
-        <el-table-column prop="DRUG_COMMON_NAME" label="医保药品名称" align="center"></el-table-column>
-        <el-table-column prop="MEDICARE_LEVEL" label="医保等级" align="center"></el-table-column>
-        <el-table-column prop="SELF_PAY" label="自付" align="center"></el-table-column>
+        <el-table-column prop="RETAIL_PRICE" label="销售价(元)" align="center" width="100"></el-table-column>
+        <el-table-column prop="DRUG_COMMON_NAME" label="医保药品名称" align="center" width="120"></el-table-column>
+        <el-table-column prop="MEDICARE_LEVEL" label="医保等级" align="center" width="100"></el-table-column>
+        <el-table-column prop="SELF_PAY" label="自付" align="center" width="60"></el-table-column>
       </el-table>
     </el-row>
 

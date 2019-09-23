@@ -51,8 +51,8 @@ export default {
   },
   data() {
     return {
-      man: require('@/assets/man.png'),
-      woman: require('@/assets/woman.png'),
+      man: require('../../../../public/images/man.png'),
+      woman: require('../../../../public/images/woman.png'),
       queryId: '1023',
       size: 18,
       recordId: '',
@@ -100,7 +100,7 @@ export default {
           }
         ],
         {
-          size: 30,
+          size: 18,
           current: page
         }
       ).then(res => {
@@ -141,7 +141,7 @@ export default {
           this.IDVisiable = false
           this.$router.push({ name: 'inHospital' })
         } else {
-          this.$alert('找不到用户信息', '提示')
+          this.$alert('找不到患者信息', '提示')
         }
       })
     }
@@ -151,19 +151,24 @@ export default {
 
 <style lang="scss" scoped>
 .colClass {
-  margin-top: 20px;
+  margin-top: 50px;
   .bedBox {
     cursor: pointer;
-    width: 60%;
-    height: 160px;
-    background: blueviolet;
-    padding: 15px 10px;
+    width: 80%;
+    height: 240px;
+
+    background: -webkit-linear-gradient(#4f90e6, #2b69bc);
+    background: -o-linear-gradient(#4f90e6, #2b69bc);
+    background: -moz-linear-gradient(#4f90e6, #2b69bc);
+    background: linear-gradient(#4f90e6, #2b69bc);
+
+    padding: 20px 10px;
     color: #fff;
-    border-radius: 12px;
+    border-radius: 18px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     .bedTop {
       .num {
-        font-size: 22px;
+        font-size: 25px;
         float: left;
       }
       .img {
@@ -175,10 +180,13 @@ export default {
       margin-top: 70%;
       .name {
         font-weight: 600;
+        font-size: 25px;
+        margin-bottom: 15px;
+      }
+      .type {
         font-size: 20px;
-        margin-bottom: 8px;
       }
     }
   }
 }
-</style>>
+</style>

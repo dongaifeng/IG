@@ -2,7 +2,7 @@
   <div>
     <AIheader :h1="'病区浏览'"></AIheader>
     <el-row>
-      <el-col :span="6" v-for="(item, ind) in list" :key="ind" align="center" class="colClass">
+      <el-col :span="8" v-for="(item, ind) in list" :key="ind" align="center" class="colClass">
         <div class="wardBox" @click="toBadList(item.WARD_CODE)">
           <p class="ward">{{item.WARD_NAME}}</p>
         </div>
@@ -29,7 +29,7 @@ export default {
   data() {
     return {
       queryId: '1022',
-      size: 20
+      size: 18
     }
   },
   methods: {
@@ -46,15 +46,15 @@ export default {
   .wardBox {
     cursor: pointer;
     width: 80%;
-    height: 80px;
+    height: 110px;
     background: #4f8fe6;
-    padding: 10px 10px;
+    padding: 0px 10px;
     color: #fff;
-    border-radius: 5px;
+    border-radius: 15px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-    line-height: 60px;
+    line-height: 110px;
     .ward {
-      font-size: 20px;
+      font-size: 28px;
     }
   }
 }

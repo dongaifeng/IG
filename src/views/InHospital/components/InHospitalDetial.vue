@@ -4,7 +4,7 @@
 
     <el-row>
       <el-form :label-position="'right'" label-width="100px" :model="row">
-        <el-col :span="6" v-for="(item, index) in itemList" :key="index">
+        <el-col :span="8" v-for="(item, index) in itemList" :key="index">
           <el-form-item :label="item.lab">
             <span>{{row[item.val]}}</span>
           </el-form-item>
@@ -16,6 +16,7 @@
       <el-table :data="tableData" border style="width: 100%" size="medium">
         <el-table-column label="序号" type="index" width="60" align="center"></el-table-column>
         <el-table-column prop="CLASS_NAME" label="收费类型" align="center"></el-table-column>
+        <el-table-column prop="CHARGE_ITEM_NAME" label="收费项目" align="center"></el-table-column>
         <el-table-column prop="CHARGE_ITEM_SPEC" label="单位" align="center"></el-table-column>
         <el-table-column prop="CHARGE_ITEM_PRICE" label="单价" align="center"></el-table-column>
         <el-table-column prop="QUANTITY" label="数量" align="center"></el-table-column>

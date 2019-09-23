@@ -27,7 +27,7 @@ export default {
   components: { AIinput },
   data() {
     return {
-      src: require('@/assets/1566183199(1).jpg'),
+      src: require('../../../public/images/1566183199(1).jpg'),
       time: 5,
       style: {
         width: '90%'
@@ -50,7 +50,8 @@ export default {
       default: ' '
     },
     home: {
-      type: Boolean
+      type: Boolean,
+      default: true
     },
     search: {
       type: Boolean
@@ -86,13 +87,13 @@ export default {
   padding: 15px;
   .header-h1 {
     color: #fff;
-    font-size: 28px;
+    font-size: 30px;
   }
   .header-btn {
     float: right;
   }
   .my-btn {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     background: transparent;
     color: #fff;

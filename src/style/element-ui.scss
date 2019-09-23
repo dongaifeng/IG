@@ -45,3 +45,37 @@
   height: 60px;
   font-size: 22px;
 }
+
+// auto-complete 下拉框样式修改
+.myautocomplete {
+  li {
+    line-height: normal;
+    font-size: 20px !important;
+    padding: 15px;
+  }
+}
+
+.el-table th {
+  background-color: #eee;
+  font-size: 20px;
+}
+
+.el-form-item {
+  margin-bottom: 0px;
+}
+
+.el-pagination {
+  margin: 0px 20px;
+  text-align: center;
+}
+
+.form-box {
+  background-color: #eee;
+  margin: 20px 0px;
+}
+
+.el-loading-spinner .el-loading-text {
+  color: #409EFF;
+  margin: 0.1875rem 0;
+  font-size: 22px;
+}

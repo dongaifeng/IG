@@ -27,7 +27,7 @@ export default {
   methods: {
     imgSrc(icon) {
       return {
-        backgroundImage: 'url(' + require(`@/assets/subIcon/${icon}.png`) + ')',
+        backgroundImage: 'url(' + require(`../../../../public/images/subIcon/${icon}.png`) + ')',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'contain'
       }

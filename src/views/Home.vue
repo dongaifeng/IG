@@ -85,7 +85,7 @@ export default {
           this.IDVisiable = false
           this.$router.push({ name: this.toPage })
         } else {
-          this.$alert('找不到用户信息', '提示')
+          this.$alert('找不到患者信息', '提示')
         }
       })
     },

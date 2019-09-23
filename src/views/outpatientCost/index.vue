@@ -13,15 +13,21 @@
     </el-row>
 
     <el-row>
-      <el-table :data="tableData" border style="width: 100%" size="medium">
-        <el-table-column label="序号" type="index" width="50" align="center"></el-table-column>
+      <el-table
+        header-row-class-name="myTableHeader"
+        :data="tableData"
+        border
+        style="width: 100%"
+        size="medium"
+      >
+        <el-table-column label="序号" type="index" width="60" align="center"></el-table-column>
         <el-table-column
           prop="SETTLEMENT_DATE_TIME"
           label="收费日期"
           align="center"
           :formatter="dateFormatter"
         ></el-table-column>
-        <el-table-column prop="PATIENT_NAME" label="病人姓名" align="center"></el-table-column>
+        <!-- <el-table-column prop="PATIENT_NAME" label="病人姓名" align="center"></el-table-column> -->
         <el-table-column prop="CARD_NO" label="就诊卡号" align="center"></el-table-column>
         <el-table-column prop="TOTAL_FEE" label="费用总额" align="center" :formatter="caseFormatter"></el-table-column>
         <el-table-column label="费用明细查看" align="center">

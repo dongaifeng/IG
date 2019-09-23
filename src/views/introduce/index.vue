@@ -1,10 +1,11 @@
 <template>
   <div>
-    <AIheader :h1="'医院介绍'" :home="$route.name != 'index'"></AIheader>
-
-    <transition name="fade" mode="out-in">
-      <router-view></router-view>
-    </transition>
+    <AIheader class="header-box" :h1="'医院介绍'" :home="$route.name != 'index'"></AIheader>
+    <div class="contant-box">
+      <transition name="fade" mode="out-in">
+        <router-view></router-view>
+      </transition>
+    </div>
   </div>
 </template>
 

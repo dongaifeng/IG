@@ -29,7 +29,7 @@ export default {
   components: { Page },
   data() {
     return {
-      src: require('@/assets/leaderImage/1.png'),
+      src: require('../../../../public/images/leaderImage/1.png'),
       list: [],
       total: 0,
       currentPage: 1
@@ -57,7 +57,7 @@ export default {
       })
     },
     toSrc(id) {
-      return require('@/assets/leaderImage/' + id + '.png')
+      return require('../../../../public/images/leaderImage/' + id + '.png')
     },
     pageClick(page) {
       this.currentPage = page

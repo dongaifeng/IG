@@ -8,7 +8,7 @@
 export default {
   data() {
     return {
-      src: require('../../../../public/images/structure.png'),
+      src: '/images/structure.png',
       list: [],
       txt: null
     }

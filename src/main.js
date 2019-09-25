@@ -12,6 +12,13 @@ import conf from '../public/conf'
 
 Vue.prototype.$post = post
 Vue.prototype.$conf = conf
+Vue.prototype.$imgSrc = (icon) => {
+  return {
+    backgroundImage: 'url(' + icon + ')',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'contain'
+  }
+}
 
 
 

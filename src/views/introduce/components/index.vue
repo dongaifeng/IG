@@ -4,7 +4,7 @@
       <el-col :span="8" align="center" v-for="item in subMenu" :key="item.SUB_MEMU_CODE">
         <!-- <router-link to="/hospitalIntroduction/detail"> -->
         <router-link :to="{name: item.JUMP_PATH}">
-          <div class="menu-item" :style="imgSrc(item.ICON)">
+          <div class="menu-item" :style="$imgSrc(item.ICON)">
             <div class="bottom clearfix">{{item.SUB_MEMU_NAME}}</div>
           </div>
         </router-link>
@@ -24,13 +24,13 @@ export default {
     this.initData()
   },
   methods: {
-    imgSrc(icon) {
-      return {
-        backgroundImage: 'url(' + require(`../../../../public/images/subIcon/${icon}.png`) + ')',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'contain'
-      }
-    },
+    // imgSrc(icon) {
+    //   return {
+    //     backgroundImage: 'url(' + require(`../../../../public/images/subIcon/${icon}.png`) + ')',
+    //     backgroundRepeat: 'no-repeat',
+    //     backgroundSize: 'contain'
+    //   }
+    // },
     initData() {
       this.$post('1001', [
         {

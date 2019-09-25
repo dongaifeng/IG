@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <div class="img">
-      <el-image style="width:100%;" :src="url" :fit="fit">
+      <el-image style="width:100%;" src="/images/detail.jpg" :fit="fit">
         <div slot="error" class="image-slot">
           <i class="el-icon-picture-outline"></i>
         </div>
@@ -23,9 +23,9 @@ export default {
       医院深化交流与合作。与美国MD安德森癌症中心、美国夏威夷大学癌症中心、杜克大学、新加坡国立大学医学院、德国夏洛特医学中心等国际知名医学院校在学术交流、人才培养、科学研究等方面开展了广泛深入的合作。2014年与美国MD安德森癌症中心签订合作备忘录，与美国夏威夷癌症中心签订“姐妹中心”合作协议。2015年获批省级国际科技合作基地，积极组建肿瘤国际合作研究团队，已开展20余项国际合作科研项目。
       医院弘扬人文精神。通过深化“最多跑一次”改革，践行“两为一担当”服务理念，不断优化流程、改善服务、提升软硬件，建成了流程合理、就医方便、注重人文的花园式现代化肿瘤专科医院，形成了爱岗敬业、团结奋进、开拓创新的医院文化氛围。`
     return {
-      // url: require('../../../../public/images/detail.jpg'),
-      url: require('../../../../public/images/detail.jpg'),
-      fit: 'fill',
+      // url: require('../../../. ./public/images/detail.jpg'),
+      fit: '医院图片',
+      publicPath: process.env.BASE_URL,
       txt: txt
     }
   }

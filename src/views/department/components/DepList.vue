@@ -22,7 +22,8 @@
               @click="doctorDetail(item.code)"
               type="primary"
               :color="bg[item.color][1]"
-            >{{ item.name | toName }}</el-tag>
+            >{{bg[item.color][0][0]}}</el-tag>
+            <span>{{ item.name | toName }}</span>
           </div>
         </template>
       </el-table-column>
@@ -30,7 +31,10 @@
 
     <el-row style="margin-top:20px;">
       <el-col :span="24">
-        <el-tag v-for="(item, ind) in bg" :key="ind" :color="item[1]">{{item[0]}}</el-tag>
+        <span v-for="(item, ind) in bg" :key="ind">
+          <el-tag :color="item[1]">{{item[0][0]}}</el-tag>
+          <span class="job-title">{{item[0]}}</span>
+        </span>
       </el-col>
     </el-row>
   </div>
@@ -99,5 +103,9 @@ export default {
 }
 .el-table {
   font-size: 20px;
+}
+.job-title {
+  font-size: 20px;
+  padding-right: 30px;
 }
 </style>

@@ -19,7 +19,7 @@ export default {
   components: {},
   data() {
     return {
-      src: require('../../../../public/images/floor/0.jpg'),
+      src: '/images/floor/0.jpg',
       list: [],
       txt: null
     }
@@ -35,7 +35,7 @@ export default {
     },
     detail(id) {
       if (id > 2) return
-      this.src = require('../../../../public/images/floor/' + id + '.jpg')
+      this.src = '/images/floor/' + id + '.jpg'
     }
   }
 }

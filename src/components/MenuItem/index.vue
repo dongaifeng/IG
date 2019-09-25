@@ -2,7 +2,7 @@
   <div class="mixin-components-container">
     <el-row>
       <el-col v-for="(item, index) in menu" :key="index" :span="6">
-        <el-card class="box-card" :style="imgSrc(item.ICON)">
+        <el-card class="box-card" :style="$imgSrc(item.ICON)">
           <router-link :to="{name: item.JUMP_PATH}">
             <div style="padding: 10px;">
               <div class="bottom clearfix">{{item.FIRST_PAGE_MEMU_NAME}}</div>
@@ -13,7 +13,7 @@
 
       <el-col :span="6" class="wx">
         <el-card class="box-card" @click="imgClick">
-          <img width="70%" class="image" :src="img" />
+          <img width="70%" class="image" src="/images/1565939115.png" />
         </el-card>
       </el-col>
     </el-row>
@@ -25,9 +25,7 @@ export default {
   name: 'item',
   components: {},
   data() {
-    return {
-      img: require('../../../public/images/1565939115.png')
-    }
+    return {}
   },
   props: {
     menu: {
@@ -35,14 +33,15 @@ export default {
     }
   },
   methods: {
-    imgSrc(icon) {
-      // console.log(icon, '<=====icon')
-      return {
-        backgroundImage: 'url(' + require(`../../../public/images/icon/${icon}.png`) + ')',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'contain'
-      }
-    },
+    // imgSrc(icon) {
+    //   // console.log(icon, '<=====icon')
+    //   return {
+    //     backgroundImage: 'url(' + icon + ')',
+    //     // 'url(' + require(`../../../public/images/icon/${icon}.png`) + ')',
+    //     backgroundRepeat: 'no-repeat',
+    //     backgroundSize: 'contain'
+    //   }
+    // },
     imgClick() {
       this.dialogVisible = true
     }

@@ -20,8 +20,8 @@
 export default {
   data() {
     return {
-      src: require('../../../../public/images/traffic/1.jpg'),
-      src2: require('../../../../public/images/traffic/2.jpg')
+      src: '/images/traffic/1.jpg',
+      src2: '/images/traffic/2.jpg'
     }
   }
 }

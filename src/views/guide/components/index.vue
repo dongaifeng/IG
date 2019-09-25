@@ -5,7 +5,7 @@
         <router-link
           :to="{name: 'guaidList', params: {title: item.SUB_MEMU_NAME, id: item.SUB_MEMU_CODE}}"
         >
-          <div class="menu-item" :style="imgSrc(item.ICON)">
+          <div class="menu-item" :style="$imgSrc(item.ICON)">
             <div class="bottom clearfix">{{item.SUB_MEMU_NAME}}</div>
           </div>
         </router-link>
@@ -25,13 +25,13 @@ export default {
     this.initData()
   },
   methods: {
-    imgSrc(icon) {
-      return {
-        backgroundImage: 'url(' + require(`../../../../public/images/subIcon/${icon}.png`) + ')',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'contain'
-      }
-    },
+    // imgSrc(icon) {
+    //   return {
+    //     backgroundImage: 'url(' + require(`../../../../public/images/subIcon/${icon}.png`) + ')',
+    //     backgroundRepeat: 'no-repeat',
+    //     backgroundSize: 'contain'
+    //   }
+    // },
     initData() {
       this.$post('1001', [
         {

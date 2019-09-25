@@ -19,13 +19,13 @@ module.exports = {
       errors: true
     },
     // proxy: {
-    //   '/api': {
-    //     target: 'http://192.168.1.98:3002/',
+    //   '/images': {
+    //     target: 'http://localhost:8300/images',
     //     ws: false,
     //     changeOrigin: true,
-    //     pathRewrite: {
-    //       ['^' + process.env.VUE_APP_BASE_API]: '/'
-    //     }
+    //     // pathRewrite: {
+    //     //   ['^' + process.env.VUE_APP_BASE_API]: '/'
+    //     // }
     //   },
     // }
   },

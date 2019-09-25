@@ -51,8 +51,8 @@ export default {
   },
   data() {
     return {
-      man: require('../../../../public/images/man.png'),
-      woman: require('../../../../public/images/woman.png'),
+      man: '/images/man.png',
+      woman: '/images/woman.png',
       queryId: '1023',
       size: 18,
       recordId: '',

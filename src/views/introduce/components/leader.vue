@@ -5,7 +5,7 @@
         <el-col v-for="(item, index) in list" :key="index" :span="6">
           <router-link :to="{name: 'leaderDetail', params: {info: item}}">
             <el-card class="box-card" shadow="always">
-              <img :src="toSrc(item.LEADER_PICTURE)" class="image" />
+              <img :src="item.LEADER_PICTURE" class="image" />
               <div>
                 <span class="name">{{item.LEADER_NAME}}</span>
                 <div class="bottom clearfix">
@@ -29,7 +29,7 @@ export default {
   components: { Page },
   data() {
     return {
-      src: require('../../../../public/images/leaderImage/1.png'),
+      // src: require('../../../../public/images/leaderImage/1.png'),
       list: [],
       total: 0,
       currentPage: 1
@@ -56,9 +56,9 @@ export default {
         this.total = res.Total
       })
     },
-    toSrc(id) {
-      return require('../../../../public/images/leaderImage/' + id + '.png')
-    },
+    // toSrc(id) {
+    //   return'../../../../public/images/leaderImage/' + id + '.png')
+    // },
     pageClick(page) {
       this.currentPage = page
       this.initData(page)
@@ -100,6 +100,7 @@ export default {
 
 .image {
   width: 100%;
+  height: 310px;
 }
 
 .clearfix:before,

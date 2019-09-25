@@ -8,7 +8,7 @@
       </div>
 
       <p class="name">
-        <span class="first">马屁精</span>
+        <span class="first">wewe</span>
         <span class="jobtype">大主任</span>
         <el-button style="float:right" type="info">查看</el-button>
       </p>

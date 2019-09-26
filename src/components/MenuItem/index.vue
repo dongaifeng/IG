@@ -11,11 +11,11 @@
         </el-card>
       </el-col>
 
-      <el-col :span="6" class="wx">
+      <!-- <el-col :span="6" class="wx">
         <el-card class="box-card" @click="imgClick">
           <img width="70%" class="image" src="/images/1565939115.png" />
         </el-card>
-      </el-col>
+      </el-col>-->
     </el-row>
   </div>
 </template>

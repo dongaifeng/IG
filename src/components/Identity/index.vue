@@ -3,7 +3,7 @@
     <el-row :gutter="20">
       <el-col :span="12">
         <el-form ref="form" :model="form">
-          <el-radio-group v-show="patientV" v-model="radio">
+          <el-radio-group v-show="patientV" v-model="radio" @change="radioChange">
             <el-radio-button label="1">就诊卡号</el-radio-button>
             <el-radio-button label="2">身份证号</el-radio-button>
           </el-radio-group>
@@ -53,8 +53,8 @@ export default {
         preventClickEvent: false
       },
       form: {
-        patientID: '9876543210',
-        IDcard: '1101211989121085521'
+        patientID: '',
+        IDcard: ''
       },
       radio: '1'
     }
@@ -73,6 +73,10 @@ export default {
     accept(text) {
       // console.log('Input text: ' + text)
       this.hide()
+    },
+    radioChange() {
+      this.form.patientID = ''
+      this.form.IDcard = ''
     },
 
     show(e) {

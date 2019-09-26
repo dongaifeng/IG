@@ -56,24 +56,32 @@ export default {
   },
   methods: {
     getData() {
-      this.$post('1003').then(res => {
+      this.$post('1003', [
+        {
+          LogicalOperatorsCode: '10',
+          key: 'IS_ENABLED',
+          OperationalCharacterCode: '50',
+          value: '1'
+        }
+      ]).then(res => {
         this.menu = res.data
       })
     },
-
+    // 查询前 参数判断
     submitID() {
       if (this.patientV) {
-        this.queryID('CARD_NO', 'ID_NO', '20')
+        this.queryID('CARD_NO', 'ID_NO', '20') // 使用 就诊卡号 或者 身份证号
       } else {
-        this.queryID('MED_RECORD_NO', 'ID_NO_END_X_BIT', '10')
+        this.queryID('MED_RECORD_NO', 'ID_NO_END_X_BIT', '10') // 使用 病案号 并且 身份证号6位
       }
     },
+    // 查询用户信息请求
     queryID(key1, key2, dict) {
       this.$post(
         '1015',
         [
           {
-            LogicalOperatorsCode: dict,
+            LogicalOperatorsCode: '10',
             key: key1,
             OperationalCharacterCode: '50',
             value: this.$refs.IDForm.form.patientID || '0'

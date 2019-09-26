@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AIheader :h1="lab" :lab="'查询科室信息'" search home></AIheader>
+    <AIheader :h1="lab" home></AIheader>
     <el-tabs type="border-card">
       <el-tab-pane label="科室简介">
         <DepInfo :text="DEPT_INTRODUCITON" />

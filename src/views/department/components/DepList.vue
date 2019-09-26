@@ -17,12 +17,13 @@
         align="center"
       >
         <template slot-scope="scope">
-          <div v-for="(item,ind) in scope.row[item.code]" :key="ind" style="margin:10px;">
-            <el-tag
-              @click="doctorDetail(item.code)"
-              type="primary"
-              :color="bg[item.color][1]"
-            >{{bg[item.color][0][0]}}</el-tag>
+          <div
+            v-for="(item,ind) in scope.row[item.code]"
+            :key="ind"
+            style="margin:10px;"
+            @click="doctorDetail(item.code)"
+          >
+            <el-tag type="primary" :color="bg[item.color][1]">{{bg[item.color][0][0]}}</el-tag>
             <span>{{ item.name | toName }}</span>
           </div>
         </template>

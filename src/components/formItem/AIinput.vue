@@ -15,7 +15,18 @@
       :style="styleObj"
       popper-class="myautocomplete"
     >
-      <template class="my-tab" slot="prepend">{{lab}}</template>
+      <template class="my-tab" slot="prepend">
+        <span v-if="typeof(lab)=='string'">{{lab}}</span>
+        <div v-else>
+          <el-radio
+            v-for="item in lab"
+            :key="item.val"
+            v-model="radio"
+            :label="item.val"
+            @change="radioChange"
+          >{{item.name}}</el-radio>
+        </div>
+      </template>
       <el-button slot="append" @click="query">查询</el-button>
     </el-autocomplete>
     <!-- <el-button style="width:100px; margin-left:20px;" @click="query">搜索</el-button> -->
@@ -32,7 +43,8 @@ export default {
     return {
       input: '',
       restaurants: [],
-      select: null
+      select: null,
+      radio: '1027'
     }
   },
   props: {
@@ -40,9 +52,7 @@ export default {
       type: Object,
       default: null
     },
-    lab: {
-      type: String
-    },
+    lab: {},
     searchAsync: {
       type: Function,
       default: function() {
@@ -75,9 +85,13 @@ export default {
     querySearchAsync(queryString, cb) {
       console.log(queryString, 'queryString===')
       this.select = null
-      this.searchAsync(queryString, function(list = []) {
-        cb(list)
-      })
+      this.searchAsync(
+        queryString,
+        function(list = []) {
+          cb(list)
+        },
+        this.radio
+      )
     },
     createStateFilter(queryString) {
       return state => {
@@ -91,6 +105,9 @@ export default {
     },
     handleSelect(item) {
       this.select = item
+    },
+    radioChange() {
+      this.input = ''
     }
   }
 }
@@ -109,8 +126,8 @@ export default {
   }
   .el-autocomplete {
     /deep/ .el-input__inner {
-      font-size: 18px !important;
-      height: 45px;
+      font-size: 20px !important;
+      height: 46px;
     }
     /deep/ .el-input-group__prepend {
       color: #000 !important;
@@ -121,5 +138,12 @@ export default {
       font-size: 18px !important;
     }
   }
+}
+.el-radio /deep/ .el-radio__label {
+  font-size: 20px;
+}
+.el-radio /deep/ .el-radio__input span {
+  width: 18px;
+  height: 18px;
 }
 </style>

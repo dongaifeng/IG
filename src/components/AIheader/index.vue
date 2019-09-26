@@ -42,7 +42,6 @@ export default {
       required: true
     },
     lab: {
-      type: String,
       default: ' '
     },
     selName: {

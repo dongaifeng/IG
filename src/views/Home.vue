@@ -62,20 +62,27 @@ export default {
     },
 
     submitID() {
+      if (this.patientV) {
+        this.queryID('CARD_NO', 'ID_NO', '20')
+      } else {
+        this.queryID('MED_RECORD_NO', 'ID_NO_END_X_BIT', '10')
+      }
+    },
+    queryID(key1, key2, dict) {
       this.$post(
         '1015',
         [
           {
-            LogicalOperatorsCode: '10',
-            key: 'MED_RECORD_NO',
+            LogicalOperatorsCode: dict,
+            key: key1,
             OperationalCharacterCode: '50',
-            value: this.$refs.IDForm.form.patientID
+            value: this.$refs.IDForm.form.patientID || '0'
           },
           {
-            LogicalOperatorsCode: '10',
-            key: 'ID_NO_END_X_BIT',
+            LogicalOperatorsCode: dict,
+            key: key2,
             OperationalCharacterCode: '50',
-            value: this.$refs.IDForm.form.IDcard
+            value: this.$refs.IDForm.form.IDcard || '0'
           }
         ],
         { size: 1, current: 1 }
@@ -89,6 +96,7 @@ export default {
         }
       })
     },
+
     get_bodyHeight() {
       //动态获取浏览器高度
       const that = this
@@ -119,7 +127,7 @@ export default {
   beforeRouteLeave(to, from, next) {
     if (to.name === 'inHospital' || to.name === 'outpatientCost') {
       if (this.userInfo === null || this.userInfo === '') {
-        this.patientV = to.name === 'inHospital'
+        this.patientV = to.name === 'outpatientCost'
         this.toPage = to.name
         this.IDVisiable = true
         next(false)

@@ -16,7 +16,7 @@
     <el-row class="tabBox">
       <el-col :span="3" v-for="item in tabList" :key="item.ID">
         <el-button
-          :autofocus="item.SORT == '1'"
+          :class="{ myactive: item.CLASS_CODE == setbtnID}"
           @click="tabClick(item.CLASS_CODE)"
           class="tab"
           plain
@@ -39,12 +39,19 @@ export default {
   data() {
     return {
       tabList: [],
-      depList: []
+      depList: [],
+      btnID: 'LX01'
     }
   },
   mounted() {
     this.initData()
-    this.tabClick('LX01')
+    this.tabClick(this.btnID)
+  },
+
+  computed: {
+    setbtnID() {
+      return this.btnID
+    }
   },
   methods: {
     searchAsync(id, cb) {
@@ -70,10 +77,11 @@ export default {
       if (obj) {
         this.depClick(obj)
       } else {
-        this.$message('错误')
+        this.$message('输入内容不合法')
       }
     },
     tabClick(id) {
+      this.btnID = id
       this.$post('1009', [
         {
           LogicalOperatorsCode: '10',
@@ -119,14 +127,14 @@ export default {
     padding: 20px 40px;
     border: 2px solid #184b8f;
     color: #184b8f;
-    &:focus {
+  }
+  .myactive {
+    background: #184b8f;
+    color: #fff;
+    &:before,
+    &:after {
       background: #184b8f;
       color: #fff;
-      &:before,
-      &:after {
-        background: #184b8f;
-        color: #fff;
-      }
     }
   }
 }

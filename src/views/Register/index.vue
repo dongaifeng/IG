@@ -1,12 +1,12 @@
 <template>
   <div>
     <AIheader
-      selName="SHOW_NAME"
+      :selName="selName"
       :searchAsync="searchAsync"
       @query="query"
       :h1="'挂号排版'"
       search
-      :lab="'科室名称'"
+      :lab="[{name:'找医生',val:'1027'}, {name:'找科室',val:'1009'}]"
     ></AIheader>
 
     <el-row>
@@ -70,19 +70,23 @@ export default {
       dialog: false,
       total: 0,
       currentPage: 1,
-      queryId: null
+      queryId: null,
+      selName: 'DOCTOR_NAME',
+      radio: '',
+      key: 'DEPT_CODE'
     }
   },
   mounted() {
     this.initData(this.currentPage)
   },
   methods: {
+    // 查询方法
     initData(page, id = null) {
       let arr = id
         ? [
             {
               LogicalOperatorsCode: '10',
-              key: 'DEPT_CODE',
+              key: this.key,
               OperationalCharacterCode: '100',
               value: id
             }
@@ -96,13 +100,29 @@ export default {
     pageClick(page) {
       this.initData(page, this.queryId)
     },
+
+    // 查询表格数据方法，预先判断 参数
     query(obj) {
-      this.queryId = obj ? obj.DEPT_CODE : null
+      console.log(obj)
+      if (obj) {
+        if (this.radio === '1027') {
+          this.queryId = obj.DOCTOR_CODE
+          this.key = 'SPECIALIST_DOCTOR_CODE'
+        } else {
+          this.queryId = obj.DEPT_CODE
+          this.key = 'DEPT_CODE'
+        }
+      } else {
+        this.queryId = null
+        this.key = 'DEPT_CODE'
+      }
       this.initData(this.currentPage, this.queryId)
     },
     // 模糊查询回调 cb传入 list 需设置 selName 下拉显示值
-    searchAsync(id, cb) {
-      this.$post('1009', [
+    searchAsync(id, cb, radio) {
+      this.radio = radio
+      this.selName = radio === '1027' ? 'DOCTOR_NAME' : 'SHOW_NAME'
+      this.$post(radio, [
         {
           LogicalOperatorsCode: '10',
           key: 'PY',

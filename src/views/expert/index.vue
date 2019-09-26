@@ -9,7 +9,7 @@
     <el-row class="tabBox">
       <el-col :span="3" v-for="item in tabList" :key="item.ID">
         <el-button
-          :autofocus="item.CLASS_CODE == active"
+          :class="{ myactive: item.CLASS_CODE == setbtnID}"
           @click="tabClick(item.CLASS_CODE)"
           class="tab"
           plain
@@ -61,12 +61,17 @@ export default {
     return {
       tabList: [],
       expertList: [],
-      active: 'LX01'
+      btnID: 'LX01'
+    }
+  },
+  computed: {
+    setbtnID() {
+      return this.btnID
     }
   },
   mounted() {
     this.initData()
-    this.tabClick(this.active)
+    this.tabClick(this.btnID)
   },
   methods: {
     query(id) {
@@ -76,6 +81,7 @@ export default {
       this.$router.push({ name: 'doctorDetail', params: { id } })
     },
     tabClick(id) {
+      this.btnID = id
       this.$post('1013', [
         {
           LogicalOperatorsCode: '10',
@@ -188,14 +194,14 @@ export default {
     padding: 20px 40px;
     border: 2px solid #184b8f;
     color: #184b8f;
-    &:focus {
+  }
+  .myactive {
+    background: #184b8f;
+    color: #fff;
+    &:before,
+    &:after {
       background: #184b8f;
       color: #fff;
-      &:before,
-      &:after {
-        background: #184b8f;
-        color: #fff;
-      }
     }
   }
 }

@@ -21,11 +21,11 @@
       </el-tab-pane>
       <el-tab-pane label="门诊出诊时间">
         <el-table :data="tableData" border style="width: 100%" size="medium">
-          <el-table-column prop="ITEM_NAME" label="门诊科室" align="center"></el-table-column>
-          <el-table-column prop="ITEM_NAME" label="门诊时间" align="center"></el-table-column>
-          <el-table-column prop="ITEM_NAME" label="出诊地点" align="center"></el-table-column>
-          <el-table-column prop="ITEM_NAME" label="出诊类别" align="center"></el-table-column>
-          <el-table-column prop="ITEM_NAME" label="医师服务费" align="center"></el-table-column>
+          <el-table-column prop="DEPT_NAME" label="门诊科室" align="center"></el-table-column>
+          <el-table-column prop="VISIT_TIME" label="门诊时间" align="center"></el-table-column>
+          <el-table-column prop="VISIT_PLACES" label="出诊地点" align="center"></el-table-column>
+          <el-table-column prop="REGISTER_TYPE_NAME" label="出诊类别" align="center"></el-table-column>
+          <el-table-column prop="MEDICAL_SERVICE_FEE" label="医师服务费" align="center"></el-table-column>
         </el-table>
       </el-tab-pane>
     </el-tabs>
@@ -50,6 +50,7 @@ export default {
   },
   mounted() {
     this.initData()
+    this.initTableData()
   },
   methods: {
     toSrc(id) {
@@ -65,6 +66,18 @@ export default {
         }
       ]).then(res => {
         this.info = res.data[0]
+      })
+    },
+    initTableData() {
+      this.$post('1026', [
+        {
+          LogicalOperatorsCode: '10',
+          key: 'SPECIALIST_DOCTOR_CODE',
+          OperationalCharacterCode: '50',
+          value: this.id
+        }
+      ]).then(res => {
+        this.tableData = res.data || []
       })
     }
   }

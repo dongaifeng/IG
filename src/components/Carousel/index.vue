@@ -8,11 +8,15 @@
     arrow="always"
     trigger="click"
   >
-    <el-carousel-item v-for="item in news" :key="item.NEW_STYLE">
-      <img width="100%" :src="toSrc(item.IMPAGE)" alt />
+    <el-carousel-item v-for="(item, i) in news" :key="i">
+      <img class="img" width="100%" :src="item.IMPAGE" alt />
       <!-- <img width="100%" :src="'data:image/png;base64,'+item.IMPAGE" alt /> -->
       <!-- <span class="textBox" v-html="item.TXT_CONTENT"></span> -->
-      <span class="textBox" v-html="item.TXT_CONTENT.replace(/\n/g, '<br>')"></span>
+      <span
+        class="textBox"
+        v-html="item.TXT_CONTENT.replace(/\n/g, '<br>')"
+        :style="toObj(item.CONTENT_STYLE)"
+      ></span>
     </el-carousel-item>
   </el-carousel>
 </template>
@@ -47,8 +51,16 @@ export default {
       let Base64 = require('js-base64').Base64
       return Base64.decode(url)
     },
-    toSrc(id) {
-      return require('../../../public/images/swiper/' + id + '.png')
+
+    toObj(str) {
+      if (typeof str != 'string') return {}
+      let obj = {}
+      var arr2 = str.split('&')
+      for (var i = 0; i < arr2.length; i++) {
+        var res = arr2[i].split('=')
+        obj[res[0]] = res[1]
+      }
+      return obj
     }
   }
 }
@@ -59,5 +71,8 @@ export default {
   position: absolute;
   top: 40%;
   left: 30%;
+}
+.img {
+  height: 100%;
 }
 </style>

@@ -4,7 +4,7 @@
 
     <div class="box clearfix" v-for="i in 5" :key="i">
       <div class="img">
-        <img :src="toSrc()" class="image" />
+        <img :src="i.PICTURE" class="image" />
       </div>
 
       <p class="name">
@@ -31,10 +31,10 @@ export default {
     }
   },
   methods: {
-    toSrc(id) {
-      // console.log(id)
-      return require('../../../../public/images/leaderImage/1.png')
-    }
+    // toSrc(id) {
+    //   // console.log(id)
+    //   return require('../../../../public/images/leaderImage/1.png')
+    // }
   }
 }
 </script>

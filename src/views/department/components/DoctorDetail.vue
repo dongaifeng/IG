@@ -6,7 +6,7 @@
       <el-tab-pane label="个人简介">
         <div class="box">
           <div class="img">
-            <el-image :src="toSrc(info.PICTURE)" class="image">
+            <el-image :src="info.PICTURE" class="image">
               <div slot="error" class="image-slot">
                 <i class="el-icon-picture-outline"></i>
               </div>
@@ -53,9 +53,9 @@ export default {
     this.initTableData()
   },
   methods: {
-    toSrc(id) {
-      if (id) return '/images/leaderImage/' + id + '.png'
-    },
+    // toSrc(id) {
+    //   if (id) return '/images/leaderImage/' + id + '.png'
+    // },
     initData() {
       this.$post('1012', [
         {

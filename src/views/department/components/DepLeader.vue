@@ -6,7 +6,7 @@
         <el-col v-for="(item, index) in list" :key="index" :span="4">
           <router-link :to="{name: 'doctorDetail', params: {id: item.DOCTOR_CODE}}">
             <el-card class="box-card" shadow="always">
-              <img :src="toSrc(item.PICTURE)" class="image" />
+              <img :src="item.PICTURE" class="image" />
               <div>
                 <span class="name">{{item.DOCTOR_NAME}}</span>
                 <div class="bottom clearfix">
@@ -32,11 +32,7 @@ export default {
       default: () => []
     }
   },
-  methods: {
-    toSrc(id) {
-      if (id) return require('../../../../public/images/leaderImage/' + id + '.png')
-    }
-  }
+  methods: {}
 }
 </script>
 

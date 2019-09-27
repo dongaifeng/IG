@@ -43,7 +43,7 @@ export default {
     margin-bottom: 20px;
   }
   .article {
-    font-size: 20px;
+    font-size: 25px;
     margin: 10px;
     text-indent: 36px;
   }

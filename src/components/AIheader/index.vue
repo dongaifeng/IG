@@ -27,7 +27,7 @@ export default {
   components: { AIinput },
   data() {
     return {
-      src: require('../../../public/images/1566183199(1).jpg'),
+      src: '/images/1566183199(1).jpg',
       time: 5,
       style: {
         width: '90%'

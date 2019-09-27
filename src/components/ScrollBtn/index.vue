@@ -11,12 +11,26 @@
 
 <script>
 export default {
+  name: 'nokeepAlive',
+  data() {
+    return {
+      a: null
+    }
+  },
+  mounted() {
+    console.log(
+      document.body.scrollHeight,
+      document.documentElement.clientHeight,
+      window.document.getElementById('app').firstChild.clientHeight
+    )
+  },
   methods: {
     handleScroll(e) {
       let scrolltop = e.target.scrollTop
       scrolltop > 30 ? (this.gotop = true) : (this.gotop = false)
     },
     InTop() {
+      console.log(this.hasScrollbar)
       document.body.scrollTop = document.documentElement.scrollBy({
         top: -50,
         left: 0,
@@ -24,32 +38,28 @@ export default {
       })
     },
     InBottom() {
-      // let top = document.documentElement.scrollTop || document.body.scrollTop
-      // console.log(top, '<======')
-
-      document.body.scrollTop = document.documentElement.scrollBy({
-        top: 50,
-        left: 0,
-        behavior: 'smooth'
-      })
-    },
-    ScrollTop(number = 0, time) {
-      if (!time) {
-        document.body.scrollTop = document.documentElement.scrollTop = number
-        return number
+      let top = document.documentElement.scrollTop || document.body.scrollTop
+      let dd =
+        (document.documentElement.scrollHeight || document.body.scrollHeight) -
+        (document.documentElement.offsetHeight || document.body.offsetHeight)
+      // console.log(top, dd, '<======')
+      if (top === dd) {
+        this.$message('已经到底了')
+      } else {
+        document.body.scrollTop = document.documentElement.scrollBy({
+          top: 50,
+          left: 0,
+          behavior: 'smooth'
+        })
       }
-      const spacingTime = 20 // 设置循环的间隔时间  值越小消耗性能越高
-      let spacingInex = time / spacingTime // 计算循环的次数
-      let nowTop = document.body.scrollTop + document.documentElement.scrollTop // 获取当前滚动条位置
-      let everTop = (number - nowTop) / spacingInex // 计算每次滑动的距离
-      let scrollTimer = setInterval(() => {
-        if (spacingInex > 0) {
-          spacingInex--
-          this.ScrollTop((nowTop += everTop))
-        } else {
-          clearInterval(scrollTimer) // 清除计时器
-        }
-      }, spacingTime)
+    }
+  },
+  computed: {
+    hasScrollbar() {
+      return (
+        document.body.scrollHeight >
+        (window.innerHeight || document.documentElement.clientHeight)
+      )
     }
   }
 }
@@ -59,7 +69,7 @@ export default {
 .gotop-box {
   position: fixed;
   right: 50px;
-  bottom: 30px;
+  bottom: 100px;
 
   .gotop {
     text-align: center;

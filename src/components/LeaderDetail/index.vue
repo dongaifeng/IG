@@ -5,7 +5,7 @@
       <div class="img">
         <!-- <img :src="toSrc(info.LEADER_PICTURE)" class="image" /> -->
 
-        <el-image :src="toSrc(info.PICTURE)" class="image">
+        <el-image :src="info.PICTURE" class="image">
           <div slot="error" class="image-slot">
             <i class="el-icon-picture-outline"></i>
           </div>
@@ -34,11 +34,7 @@ export default {
       type: Object
     }
   },
-  methods: {
-    toSrc(id) {
-      if (id) return require('../../../public/images/leaderImage/' + id + '.png')
-    }
-  }
+  methods: {}
 }
 </script>
 

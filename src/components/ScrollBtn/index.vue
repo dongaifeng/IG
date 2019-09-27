@@ -76,10 +76,10 @@ export default {
     cursor: pointer;
     padding: 10px;
     margin: 10px;
-    border-radius: 50%;
+    border-radius: 10%;
     background: rgba(0, 0, 0, 0.2);
     color: #666;
-    font-size: 60px;
+    font-size: 50px;
   }
 }
 </style>

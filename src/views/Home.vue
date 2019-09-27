@@ -26,7 +26,8 @@ export default {
       info: null,
       toPage: 'home',
       patientV: true,
-      timer: null
+      timer: null,
+      timeArr: []
     }
   },
   components: {
@@ -36,12 +37,19 @@ export default {
   },
   mounted() {
     this.getData()
-    window.clearInterval(this.timer)
+
+    this.timeArr.forEach(ele => {
+      window.clearInterval(ele)
+    })
+    this.timeArr = []
     // this.get_bodyHeight()
   },
   activated() {
     if (this.userInfo != null) this.$store.dispatch('app/setUserInfo', null)
-    window.clearInterval(this.timer)
+    this.timeArr.forEach(ele => {
+      window.clearInterval(ele)
+    })
+    this.timeArr = []
   },
   computed: {
     ...mapGetters(['userInfo']),
@@ -96,6 +104,8 @@ export default {
         { size: 1, current: 1 }
       ).then(res => {
         if (res.data) {
+          this.$refs.IDForm.form.patientID = ''
+          this.$refs.IDForm.form.IDcard = ''
           this.$store.dispatch('app/setUserInfo', res.data[0])
           this.IDVisiable = false
           this.$router.push({ name: this.toPage })
@@ -122,13 +132,15 @@ export default {
     sub() {
       let vue = this
       return function() {
-        vue.timer = setInterval(function() {
+        let timer = setInterval(function() {
           vue.$store.dispatch('app/timeHandle')
           if (vue.$store.getters.time <= 1) {
             window.clearInterval(vue.timer)
             window.location.href = ''
           }
         }, 1000)
+        vue.timer = timer
+        vue.timeArr.push(timer)
       }
     }
   },

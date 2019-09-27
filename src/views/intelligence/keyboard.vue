@@ -531,7 +531,7 @@ input[type='button'] {
   margin: 0;
   right: 40px;
   top: 155px;
-  padding: 10px;
+  /* padding: 10px; */
   z-index: 2018;
   background: rgb(66, 119, 216);
 

@@ -16,13 +16,16 @@
         style="position:absolute;top:80px;left: 0px;"
       ></iframe>
     </div>
+    <ScrollBtn></ScrollBtn>
   </div>
 </template>
 <script>
 import AIheader from '@/components/AIheader'
+import ScrollBtn from '@/components/ScrollBtn'
+
 export default {
   name: 'guaidDetial',
-  components: { AIheader },
+  components: { AIheader, ScrollBtn },
   data() {
     return {}
   },

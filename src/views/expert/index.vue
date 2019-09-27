@@ -2,7 +2,7 @@
   <div>
     <el-row>
       <el-col>
-        <AIheader @query="query" :h1="'专家浏览'" :lab="'查找医生'" search></AIheader>
+        <AIheader class="header-box" @query="query" :h1="'专家浏览'" :lab="'查找医生'" search></AIheader>
       </el-col>
     </el-row>
 
@@ -50,13 +50,16 @@
         </div>
       </el-col>
     </el-row>
+    <ScrollBtn></ScrollBtn>
   </div>
 </template>
 
 <script>
 import { mixin } from '@/mixin'
+import ScrollBtn from '@/components/ScrollBtn'
 export default {
   mixins: [mixin],
+  components: { ScrollBtn },
   data() {
     return {
       tabList: [],
@@ -148,9 +151,11 @@ export default {
 <style lang="scss" scoped>
 .expertBox {
   // border: 1px solid red;
+
   .title {
     background-color: #ccc;
-
+    font-size: 25px;
+    font-weight: 600;
     color: rgb(92, 56, 56);
     padding: 5px 10px;
   }
@@ -189,6 +194,7 @@ export default {
 
 .tabBox {
   padding: 30px;
+  padding-top: 100px;
   .tab {
     font-size: 22px;
     padding: 20px 40px;
@@ -207,7 +213,7 @@ export default {
 }
 
 .depBox {
-  padding: 0px 30px;
+  padding: 0px 30px 40px;
   .dep {
     font-size: 22px;
     padding: 20px 40px;

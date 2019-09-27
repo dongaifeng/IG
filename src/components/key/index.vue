@@ -298,7 +298,7 @@ $radius: 0.35em;
   .keyboard {
     width: 100%;
     margin: 0;
-
+    padding: 10px;
     .line {
       display: flex;
       justify-content: space-around;

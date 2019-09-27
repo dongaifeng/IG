@@ -53,7 +53,7 @@ export default {
   left: 0;
   // width: calc(100% - 16px);
   width: 100%;
-  padding: 8px;
+  // padding: 8px;
   z-index: 9999999;
   background-color: rgba(0, 0, 0, 0.4);
 }

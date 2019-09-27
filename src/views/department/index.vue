@@ -145,6 +145,7 @@ export default {
     font-size: 22px;
     padding: 20px 40px;
     margin-bottom: 30px;
+    width: 90%;
   }
 }
 </style>

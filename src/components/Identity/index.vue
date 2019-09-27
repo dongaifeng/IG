@@ -42,6 +42,7 @@
 <script>
 import key from '@/components/key'
 export default {
+  name: 'noKeepAlive',
   components: { key },
   data() {
     return {

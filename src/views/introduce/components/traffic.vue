@@ -13,11 +13,14 @@
     <div class="img">
       <img width="50%" :src="src2" class="image" />
     </div>
+    <ScrollBtn></ScrollBtn>
   </div>
 </template>
 
 <script>
+import ScrollBtn from '@/components/ScrollBtn'
 export default {
+  components: { ScrollBtn },
   data() {
     return {
       src: '/images/traffic/1.jpg',

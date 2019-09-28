@@ -1,7 +1,7 @@
 <template>
   <keep-alive>
     <div class="mixin-components-container">
-      <el-row :gutter="50">
+      <el-row>
         <el-col v-for="(item, index) in list" :key="index" :span="6">
           <router-link :to="{name: 'leaderDetail', params: {info: item}}">
             <el-card class="box-card" shadow="always">
@@ -48,6 +48,18 @@ export default {
             key: 'DELETE_FLAG',
             OperationalCharacterCode: '50',
             value: '0'
+          },
+          {
+            LogicalOperatorsCode: '10',
+            key: 'DELETE_FLAG',
+            OperationalCharacterCode: '50',
+            value: '0'
+          },
+          {
+            LogicalOperatorsCode: '10',
+            key: 'IS_ENABLED',
+            OperationalCharacterCode: '50',
+            value: '1'
           }
         ],
         { size: 8, current: page }
@@ -82,11 +94,14 @@ export default {
   min-height: calc(100vh - 84px);
   .box-card {
     // box-shadow: 0 0px 0px 0;
+    margin: 0 20px 0;
   }
 }
 .job {
   font-size: 13px;
   color: #999;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .name {
   font-size: 18px;

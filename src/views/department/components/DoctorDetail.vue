@@ -6,16 +6,16 @@
       <el-tab-pane label="个人简介">
         <div class="box">
           <div class="img">
-            <el-image :src="info.PICTURE" class="image">
-              <div slot="error" class="image-slot">
+            <img :src="info.PICTURE" class="image" />
+            <!-- <div slot="error" class="image-slot">
                 <i class="el-icon-picture-outline"></i>
-              </div>
-            </el-image>
+            </div>-->
+
             <p class="name">{{info.DOCTOR_NAME}}</p>
           </div>
-          <span class="title">专长：</span>
+          <span class="title">擅长：</span>
           <p class="text">{{ info.SKILLED }}</p>
-          <span class="title">阅历：</span>
+          <span class="title">个人简介：</span>
           <p class="text">{{info.INTRODUCITON}}</p>
         </div>
       </el-tab-pane>
@@ -88,7 +88,7 @@ export default {
 .box {
   margin: 30px;
   .img {
-    width: 15%;
+    width: 25%;
     float: left;
     text-align: center;
     padding-right: 20px;
@@ -107,17 +107,18 @@ export default {
       font-size: 16px;
     }
     .name {
-      font-size: 20px;
+      font-size: 30px;
     }
   }
   .text {
-    font-size: 20px;
+    font-size: 25px;
     text-indent: 2em;
+    line-height: 45px;
   }
   .title {
     font-size: 25px;
     display: block;
-    color: blueviolet;
+
     margin: 20px;
   }
 }
@@ -126,7 +127,7 @@ export default {
   box-shadow: none;
   border-bottom: none;
   /deep/ .el-tabs__item {
-    font-size: 20px;
+    font-size: 25px;
     height: 60px;
     line-height: 60px;
   }

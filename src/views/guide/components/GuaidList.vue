@@ -50,6 +50,18 @@ export default {
           key: 'DYNAMIC_MEMU_CODE',
           OperationalCharacterCode: '50',
           value: id
+        },
+        {
+          LogicalOperatorsCode: '10',
+          key: 'DELETE_FLAG',
+          OperationalCharacterCode: '50',
+          value: '0'
+        },
+        {
+          LogicalOperatorsCode: '10',
+          key: 'IS_ENABLED',
+          OperationalCharacterCode: '50',
+          value: '1'
         }
       ]).then(res => {
         this.list = res.data

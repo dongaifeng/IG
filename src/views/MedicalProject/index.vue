@@ -11,16 +11,23 @@
 
     <el-row>
       <el-table :data="tableData" border style="width: 100%" size="medium">
-        <el-table-column label="序号" type="index" width="60" align="center"></el-table-column>
-        <el-table-column prop="ITEM_NAME" label="项目名称" align="center"></el-table-column>
-        <el-table-column prop="UNIT" label="单位" align="center" width="60"></el-table-column>
-        <el-table-column prop="PRICE" label="单价" align="center" width="80"></el-table-column>
-        <el-table-column prop="MEDICARE_ITEM_CODE" label="医保代码" align="center" width="100"></el-table-column>
-        <el-table-column prop="MEDICARE_ITEM_NAME" label="医保项目名称" align="center"></el-table-column>
-        <el-table-column prop="OUT_FLAG" label="门诊" align="center" width="60"></el-table-column>
-        <el-table-column prop="IN_FLAG" label="住院" align="center" width="60"></el-table-column>
-        <el-table-column prop="MEDICARE_LEVEL" label="医保等级" align="center" width="100"></el-table-column>
-        <el-table-column prop="SELF_PAY" label="自付" align="center" width="60"></el-table-column>
+        <el-table-column show-overflow-tooltip label="序号" type="index" width="60" align="center"></el-table-column>
+        <el-table-column show-overflow-tooltip prop="ITEM_NAME" label="项目名称" align="center"></el-table-column>
+        <el-table-column show-overflow-tooltip prop="UNIT" label="单位" align="center" width="130"></el-table-column>
+        <el-table-column show-overflow-tooltip prop="PRICE" label="单价" align="center" width="130"></el-table-column>
+        <!-- <el-table-column show-overflow-tooltip prop="MEDICARE_ITEM_CODE" label="医保代码" align="center" width="100"></el-table-column> -->
+        <!-- <el-table-column show-overflow-tooltip prop="MEDICARE_ITEM_NAME" label="医保项目名称" align="center"></el-table-column> -->
+        <!-- <el-table-column show-overflow-tooltip prop="OUT_FLAG" label="门诊" align="center" width="60"></el-table-column>
+        <el-table-column show-overflow-tooltip prop="IN_FLAG" label="住院" align="center" width="60"></el-table-column>-->
+        <el-table-column
+          show-overflow-tooltip
+          prop="MEDICARE_LEVEL"
+          label="医保等级"
+          align="center"
+          width="100"
+        ></el-table-column>
+        <!-- <el-table-column show-overflow-tooltip prop="SELF_PAY" label="自付" align="center" width="60"></!-->
+        -->
       </el-table>
     </el-row>
 
@@ -37,6 +44,7 @@
           @current-change="pageClick"
           :total="total"
           :currentPage="currentPage"
+          :size="18"
         ></page>
       </el-col>
     </el-row>
@@ -62,6 +70,7 @@ import { page } from '@/mixin'
 import AIheader from '@/components/AIheader'
 export default {
   components: { AIheader },
+  name: 'nokeepAlive',
   mixins: [page],
   data() {
     return {
@@ -84,8 +93,8 @@ export default {
             }
           ]
         : []
-      this.$post('1014', arr, { size: 10, current: page }).then(res => {
-        this.tableData = res.data
+      this.$post('1014', arr, { size: 18, current: page }).then(res => {
+        this.tableData = res.data || []
         this.total = res.Total
       })
     },
@@ -106,7 +115,7 @@ export default {
             value: id
           }
         ],
-        { size: 10, current: 1 }
+        { size: 18, current: 1 }
       ).then(res => {
         cb(res.data || [])
       })

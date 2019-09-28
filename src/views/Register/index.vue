@@ -11,15 +11,54 @@
 
     <el-row>
       <el-table :data="tableData" border style="width: 100%" size="medium">
-        <el-table-column prop="WEEK_NAME" label="门诊时间" align="center" width="80"></el-table-column>
-        <el-table-column prop="DEPT_NAME" label="科室名称" align="center" width="230"></el-table-column>
-        <el-table-column prop="TIME_FRAME_NAME" label="时段" align="center" width="60"></el-table-column>
-        <el-table-column prop="REGISTER_TYPE_NAME" label="挂号类型" align="center"></el-table-column>
-        <el-table-column prop="SPECIALIST_DOCTOR_NAME" label="医师" align="center" width="80"></el-table-column>
-        <el-table-column prop="LIMIT_NOM" label="限号" align="center"></el-table-column>
-        <el-table-column prop="MAX_LIMIT_NOM" label="最高限号" align="center"></el-table-column>
-        <el-table-column prop="APPOINTMENT_LIMIT_NOM" label="预约限号" align="center"></el-table-column>
-        <el-table-column prop="MEDICAL_SERVICE_FEE" label="医事服务" align="center"></el-table-column>
+        <el-table-column
+          show-overflow-tooltip
+          prop="WEEK_NAME"
+          label="门诊时间"
+          align="center"
+          width="110"
+        ></el-table-column>
+        <el-table-column
+          show-overflow-tooltip
+          prop="DEPT_NAME"
+          label="科室名称"
+          align="center"
+          width="230"
+        ></el-table-column>
+        <el-table-column
+          show-overflow-tooltip
+          prop="TIME_FRAME_NAME"
+          label="时段"
+          align="center"
+          width="60"
+        ></el-table-column>
+        <el-table-column
+          show-overflow-tooltip
+          prop="REGISTER_TYPE_NAME"
+          label="挂号类型"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          show-overflow-tooltip
+          prop="SPECIALIST_DOCTOR_NAME"
+          label="医师"
+          align="center"
+          width="80"
+        ></el-table-column>
+        <el-table-column show-overflow-tooltip prop="LIMIT_NOM" label="限号" align="center"></el-table-column>
+        <el-table-column show-overflow-tooltip prop="MAX_LIMIT_NOM" label="最高限号" align="center"></el-table-column>
+        <el-table-column
+          show-overflow-tooltip
+          prop="APPOINTMENT_LIMIT_NOM"
+          label="预约限号"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          show-overflow-tooltip
+          prop="MEDICAL_SERVICE_FEE"
+          label="医事服务"
+          align="center"
+        ></el-table-column>
       </el-table>
     </el-row>
 
@@ -91,7 +130,7 @@ export default {
             }
           ]
         : []
-      this.$post('1021', arr, { size: 20, current: page }).then(res => {
+      this.$post('1021', arr, { size: 18, current: page }).then(res => {
         this.tableData = res.data
         this.total = res.Total
       })

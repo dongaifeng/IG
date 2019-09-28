@@ -20,6 +20,29 @@ Vue.prototype.$imgSrc = (icon) => {
   }
 }
 
+Vue.prototype.$where = (str) => {
+  let del = {
+    LogicalOperatorsCode: '10',
+    key: 'DELETE_FLAG',
+    OperationalCharacterCode: '50',
+    value: '0'
+  }
+  let ab = {
+    LogicalOperatorsCode: '10',
+    key: 'IS_ENABLED',
+    OperationalCharacterCode: '50',
+    value: '1'
+  }
+  if (str === 'del') {
+    return [del]
+  } else if (str === 'ab') {
+    return [ab]
+  } else if (str === 'all') {
+    return [ab, del]
+  }
+}
+
+
 
 
 // import VueTouchKeyboard from "vue-touch-keyboard";

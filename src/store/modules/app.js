@@ -67,11 +67,23 @@ const app = {
       commit
     }) {
       post('1005', [{
-        LogicalOperatorsCode: "10",
-        key: "DELETE_FLAG",
-        OperationalCharacterCode: "50",
-        value: "0"
-      }]).then(res => {
+          LogicalOperatorsCode: "10",
+          key: "DELETE_FLAG",
+          OperationalCharacterCode: "50",
+          value: "0"
+        }, {
+          LogicalOperatorsCode: '10',
+          key: 'DELETE_FLAG',
+          OperationalCharacterCode: '50',
+          value: '0'
+        },
+        {
+          LogicalOperatorsCode: '10',
+          key: 'IS_ENABLED',
+          OperationalCharacterCode: '50',
+          value: '1'
+        },
+      ]).then(res => {
         commit('SET_LEADERLIST', res.data)
       })
     },

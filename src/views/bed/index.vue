@@ -16,6 +16,7 @@
           @current-change="pageClick"
           :total="total"
           :currentPage="currentPage"
+          :size="18"
         ></page>
       </el-col>
     </el-row>

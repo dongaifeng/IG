@@ -13,7 +13,9 @@ export function search(key) {
   return request({
     url: '/search',
     method: 'get',
-    params: { key }
+    params: {
+      key
+    }
   })
 }
 
@@ -47,7 +49,7 @@ export let post = (name, where = [], page) => {
     CurrentPage: page && page.current || 1,
     PageSize: page && page.size || 10,
     QueryInfoArray: JSON.stringify(where)
-   }
+  }
   return request({
     url: '/Data/GetData',
     method: 'post',
@@ -78,7 +80,3 @@ export let post = (name, where = [], page) => {
 //     "value": "部"
 //   }
 // ]
-
-
-
-

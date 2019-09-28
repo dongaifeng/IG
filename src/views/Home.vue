@@ -64,14 +64,7 @@ export default {
   },
   methods: {
     getData() {
-      this.$post('1003', [
-        {
-          LogicalOperatorsCode: '10',
-          key: 'IS_ENABLED',
-          OperationalCharacterCode: '50',
-          value: '1'
-        }
-      ]).then(res => {
+      this.$post('1003', this.$where('ab')).then(res => {
         this.menu = res.data
       })
     },

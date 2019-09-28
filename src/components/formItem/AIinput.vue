@@ -15,6 +15,7 @@
       :style="styleObj"
       popper-class="myautocomplete"
     >
+      <i class="el-icon-circle-close el-input__icon" slot="suffix" @click="handleIconClick"></i>
       <template class="my-tab" slot="prepend">
         <span v-if="typeof(lab)=='string'">{{lab}}</span>
         <div v-else>
@@ -69,6 +70,9 @@ export default {
     // this.restaurants = this.loadAll()
   },
   methods: {
+    handleIconClick() {
+      this.input = ''
+    },
     query() {
       if (this.select) {
         this.hide()
@@ -130,11 +134,14 @@ export default {
       height: 46px;
     }
     /deep/ .el-input-group__prepend {
-      color: #000 !important;
+      color: #606266 !important;
       font-size: 18px !important;
     }
     /deep/ .el-input-group__append {
       color: #5590df !important;
+      font-size: 18px !important;
+    }
+    /deep/ .el-input__suffix {
       font-size: 18px !important;
     }
   }
@@ -145,5 +152,9 @@ export default {
 .el-radio /deep/ .el-radio__input span {
   width: 18px;
   height: 18px;
+}
+.box .el-autocomplete /deep/ .el-input__suffix {
+  font-size: 30px !important;
+  margin: 2px 15px;
 }
 </style>

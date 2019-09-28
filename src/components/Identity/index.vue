@@ -16,7 +16,7 @@
             <el-input @focus="show" v-model="form.IDcard"></el-input>
           </el-form-item>
 
-          <el-form-item v-show="!patientV" label="病案号">
+          <el-form-item v-show="!patientV && bed" label="病案号">
             <el-input @focus="show" v-model="form.patientID"></el-input>
           </el-form-item>
 
@@ -63,6 +63,9 @@ export default {
   props: {
     patientV: {
       type: Boolean
+    },
+    bed: {
+      default: true
     }
     // obj: {
     //   type: Object,

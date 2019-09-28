@@ -198,7 +198,7 @@ const app = [{
   props: true
 }, {
   path: '*',
-  redirect: '/inHospitalDetial'
+  redirect: '/'
 }]
 
 export default app

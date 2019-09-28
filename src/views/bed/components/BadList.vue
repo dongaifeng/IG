@@ -31,7 +31,7 @@
     </el-row>
 
     <el-dialog title="提示" :visible.sync="IDVisiable" width="60%">
-      <Identity ref="IDForm"></Identity>
+      <Identity :bed="false" ref="IDForm"></Identity>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitID">确 定</el-button>
       </span>
@@ -123,12 +123,6 @@ export default {
         [
           {
             LogicalOperatorsCode: '10',
-            key: 'MED_RECORD_NO',
-            OperationalCharacterCode: '50',
-            value: this.recordId
-          },
-          {
-            LogicalOperatorsCode: '10',
             key: 'ID_NO_END_X_BIT',
             OperationalCharacterCode: '50',
             value: this.$refs.IDForm.form.IDcard
@@ -151,11 +145,11 @@ export default {
 
 <style lang="scss" scoped>
 .colClass {
-  margin-top: 50px;
+  margin-top: 20px;
   .bedBox {
     cursor: pointer;
     width: 80%;
-    height: 240px;
+    height: 220px;
 
     background: -webkit-linear-gradient(#4f90e6, #2b69bc);
     background: -o-linear-gradient(#4f90e6, #2b69bc);

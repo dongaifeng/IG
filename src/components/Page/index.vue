@@ -9,7 +9,7 @@
       :current-page="currentPage"
       @current-change="pageClick"
     >
-      <span class="my-total">{{currentPage}} / {{Math.ceil(total / 8)}} 页</span>
+      <span class="my-total">{{currentPage}} / {{Math.ceil(total / size)}} 页</span>
     </el-pagination>
   </div>
 </template>
@@ -24,6 +24,10 @@ export default {
     currentPage: {
       type: Number,
       default: 1
+    },
+    size: {
+      type: Number,
+      default: 8
     }
   },
   methods: {

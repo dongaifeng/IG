@@ -2,7 +2,15 @@
   <div>
     <el-row>
       <el-col>
-        <AIheader class="header-box" @query="query" :h1="'专家浏览'" :lab="'查找医生'" search></AIheader>
+        <AIheader
+          class="header-box"
+          @query="query"
+          :searchAsync="searchAsync"
+          selName="DOCTOR_NAME"
+          :h1="'专家浏览'"
+          :lab="'查找医生'"
+          search
+        ></AIheader>
       </el-col>
     </el-row>
 
@@ -77,8 +85,35 @@ export default {
     this.tabClick(this.btnID)
   },
   methods: {
-    query(id) {
-      this.$router.push({ name: 'expertList' })
+    // query(id) {
+    //   this.$router.push({ name: 'expertList' })
+    // },
+    query(obj) {
+      if (obj) {
+        console.log(obj, '<====dkfjd')
+        this.detail(obj.DOCTOR_CODE)
+      } else {
+        this.$message('输入内容不合法')
+      }
+    },
+    searchAsync(id, cb) {
+      this.$post('1027', [
+        {
+          LogicalOperatorsCode: '10',
+          key: 'PY',
+          OperationalCharacterCode: '100',
+          value: id
+        },
+        {
+          LogicalOperatorsCode: '10',
+          key: 'DELETE_FLAG',
+          OperationalCharacterCode: '50',
+          value: '0'
+        }
+      ]).then(res => {
+        // console.log(res.data)
+        cb(res.data || [])
+      })
     },
     detail(id) {
       this.$router.push({ name: 'doctorDetail', params: { id } })
@@ -96,9 +131,9 @@ export default {
         this.expertList = !Array.isArray(res.data) ? [] : this.toData(res.data)
       })
     },
-    depClick(obj) {
-      this.$router.push({ name: 'departmentDetail', params: obj })
-    },
+    // depClick(obj) {
+    //   this.$router.push({ name: 'departmentDetail', params: obj })
+    // },
     initData() {
       this.$post('1008', [
         {
@@ -106,6 +141,18 @@ export default {
           key: 'DICT_CODE',
           OperationalCharacterCode: '50',
           value: 'DeptType'
+        },
+        {
+          LogicalOperatorsCode: '10',
+          key: 'DELETE_FLAG',
+          OperationalCharacterCode: '50',
+          value: '0'
+        },
+        {
+          LogicalOperatorsCode: '10',
+          key: 'IS_ENABLED',
+          OperationalCharacterCode: '50',
+          value: '1'
         }
       ]).then(res => {
         this.tabList = res.data
@@ -113,16 +160,21 @@ export default {
     },
     toData(data = []) {
       let arr = this.unique(data)
+      console.log(arr, '<====data')
+      console.log(data, '<====hash')
 
       data.forEach(ele => {
         arr.forEach(b => {
           if (ele.DEPT_CODE === b.code) {
-            b[ele.TITLE_CODE].push(ele)
+            if (b[ele.TITLE_CODE]) {
+              b[ele.TITLE_CODE].push(ele)
+            }
           }
         })
       })
       return arr
     },
+
     unique(arr) {
       if (!Array.isArray(arr)) {
         // console.log('type error!')
@@ -142,6 +194,7 @@ export default {
           ZC02: []
         })
       }
+
       return hash
     }
   }

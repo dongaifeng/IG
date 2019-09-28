@@ -46,13 +46,13 @@ export default {
   data() {
     return {
       col: [
-        { code: 'W01', name: '星期一' },
-        { code: 'W02', name: '星期二' },
-        { code: 'W03', name: '星期三' },
-        { code: 'W04', name: '星期四' },
-        { code: 'W05', name: '星期五' },
-        { code: 'W06', name: '星期六' },
-        { code: 'W07', name: '星期日' }
+        { code: '1', name: '星期一' },
+        { code: '2', name: '星期二' },
+        { code: '3', name: '星期三' },
+        { code: '4', name: '星期四' },
+        { code: '5', name: '星期五' },
+        { code: '6', name: '星期六' },
+        { code: '7', name: '星期日' }
       ],
       bg: {
         GHLB01: ['普通', '#FF9F40'],

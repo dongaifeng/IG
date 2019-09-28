@@ -5,7 +5,7 @@
       <div class="img">
         <!-- <img :src="toSrc(info.LEADER_PICTURE)" class="image" /> -->
 
-        <el-image :src="info.PICTURE" class="image">
+        <el-image :src="info.LEADER_PICTURE" class="image">
           <div slot="error" class="image-slot">
             <i class="el-icon-picture-outline"></i>
           </div>
@@ -42,7 +42,7 @@ export default {
 .box {
   margin: 30px;
   .img {
-    width: 15%;
+    width: 25%;
     float: left;
     text-align: center;
     padding-right: 20px;
@@ -57,15 +57,16 @@ export default {
       }
     }
     .job {
-      font-size: 16px;
+      font-size: 20px;
     }
     .name {
-      font-size: 20px;
+      font-size: 30px;
     }
   }
   .text {
-    font-size: 20px;
+    font-size: 25px;
     text-indent: 2em;
+    line-height: 45px;
   }
 }
 </style>

@@ -11,14 +11,26 @@
 
     <el-row>
       <el-table :data="tableData" border style="width: 100%" size="medium">
-        <el-table-column label="序号" type="index" width="60" align="center"></el-table-column>
+        <el-table-column show-overflow-tooltip label="序号" type="index" width="60" align="center"></el-table-column>
         <el-table-column show-overflow-tooltip prop="DRUG_NAME" label="药品名称" align="center"></el-table-column>
-        <el-table-column prop="SPEC" label="规格" align="center"></el-table-column>
-        <el-table-column prop="MANUFACTORY_NAME" label="产地" align="center"></el-table-column>
-        <el-table-column prop="RETAIL_PRICE" label="销售价(元)" align="center" width="100"></el-table-column>
-        <el-table-column prop="DRUG_COMMON_NAME" label="医保药品名称" align="center" width="120"></el-table-column>
-        <el-table-column prop="MEDICARE_LEVEL" label="医保等级" align="center" width="100"></el-table-column>
-        <el-table-column prop="SELF_PAY" label="自付" align="center" width="60"></el-table-column>
+        <el-table-column show-overflow-tooltip prop="SPEC" label="规格" align="center"></el-table-column>
+        <el-table-column show-overflow-tooltip prop="MANUFACTORY_NAME" label="产地" align="center"></el-table-column>
+        <el-table-column
+          show-overflow-tooltip
+          prop="RETAIL_PRICE"
+          label="销售价(元)"
+          align="center"
+          width="100"
+        ></el-table-column>
+        <!-- <el-table-column show-overflow-tooltip prop="DRUG_COMMON_NAME" label="医保药品名称" align="center" width="120"></el-table-column> -->
+        <el-table-column
+          show-overflow-tooltip
+          prop="MEDICARE_LEVEL"
+          label="医保等级"
+          align="center"
+          width="100"
+        ></el-table-column>
+        <!-- <el-table-column show-overflow-tooltip prop="SELF_PAY" label="自付" align="center" width="60"></el-table-column> -->
       </el-table>
     </el-row>
 
@@ -35,6 +47,7 @@
           @current-change="pageClick"
           :total="total"
           :currentPage="currentPage"
+          :size="18"
         ></page>
       </el-col>
     </el-row>
@@ -59,6 +72,7 @@
 import { page } from '@/mixin'
 import AIheader from '@/components/AIheader'
 export default {
+  name: 'nokeepAlive',
   components: { AIheader },
   mixins: [page],
   data() {
@@ -84,16 +98,13 @@ export default {
             }
           ]
         : []
-      this.$post('1024', arr, { size: 10, current: page }).then(res => {
+      this.$post('1024', arr, { size: 18, current: page }).then(res => {
         // console.log(res)
-        this.tableData = res.data
+        this.tableData = res.data || []
         this.total = res.Total
       })
     },
-    pageClick(page) {
-      // console.log(page)
-      this.initData(page, this.queryId)
-    },
+
     query(obj) {
       // console.log(obj, '-----obj')
 

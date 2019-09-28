@@ -31,11 +31,7 @@ export default {
     },
     InTop() {
       console.log(this.hasScrollbar)
-      document.body.scrollTop = document.documentElement.scrollBy({
-        top: -50,
-        left: 0,
-        behavior: 'smooth'
-      })
+      window.scrollBy(0, -50)
     },
     InBottom() {
       let top = document.documentElement.scrollTop || document.body.scrollTop
@@ -46,11 +42,12 @@ export default {
       if (top === dd) {
         this.$message('已经到底了')
       } else {
-        document.body.scrollTop = document.documentElement.scrollBy({
-          top: 50,
-          left: 0,
-          behavior: 'smooth'
-        })
+        window.scrollBy(0, 50)
+        // window.scrollBy({
+        //   top: 50,
+        //   left: 0,
+        //   behavior: 'smooth'
+        // })
       }
     }
   },

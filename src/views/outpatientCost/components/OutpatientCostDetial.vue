@@ -17,10 +17,10 @@
         <el-table-column prop="CLASS_NAME" label="类型" align="center"></el-table-column>
         <el-table-column prop="PRES_NO" label="处方号" align="center"></el-table-column>
         <el-table-column prop="CHARGE_ITEM_NAME" label="名称" align="center"></el-table-column>
-        <el-table-column prop="DOSE_UNIT_NAME" label="单位" align="center"></el-table-column>
+        <el-table-column prop="CHARGE_ITEM_UNIT" label="单位" align="center"></el-table-column>
         <el-table-column prop="CHARGE_ITEM_PRICE" label="单价" align="center"></el-table-column>
         <el-table-column prop="QUANTITY" label="数量" align="center"></el-table-column>
-        <el-table-column prop="HERBAL_QUANTITY" label="金额" align="center"></el-table-column>
+        <el-table-column prop="CHARGE_FEE" label="金额" align="center"></el-table-column>
       </el-table>
     </el-row>
 

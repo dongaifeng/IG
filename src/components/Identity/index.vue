@@ -25,7 +25,7 @@
           </el-form-item>
         </el-form>
       </el-col>
-      <el-col :span="12">
+      <el-col v-show="keyVisiable" :span="12">
         <key
           :options="options"
           v-if="visible"
@@ -35,6 +35,16 @@
           :input="input"
         ></key>
       </el-col>
+    </el-row>
+    <el-row v-show="!keyVisiable">
+      <key
+        :options="options"
+        v-if="visible"
+        :layout="layout2"
+        :cancel="hide"
+        :accept="accept"
+        :input="input"
+      ></key>
     </el-row>
   </div>
 </template>
@@ -46,8 +56,10 @@ export default {
   components: { key },
   data() {
     return {
+      keyVisiable: false,
       visible: true,
       layout: 'numeric',
+      layout2: 'compact',
       input: null,
       options: {
         useKbEvents: false,
@@ -72,7 +84,10 @@ export default {
     //   default: () => ({ la: '就诊卡号', lb: '身份证号' })
     // }
   },
-
+  mounted() {
+    this.form.patientID = ''
+    this.form.IDcard = ''
+  },
   methods: {
     accept(text) {
       // console.log('Input text: ' + text)

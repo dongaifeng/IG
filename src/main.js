@@ -63,10 +63,26 @@ window.onresize = function () {
 }
 
 router.beforeEach((to, from, next) => {
-  // console.log(to, from, '路由')
+
+
   store.dispatch('app/timeHandle', conf.time)
   next()
 })
+
+
+
+let hash = location.hash.slice(2)
+
+if (hash !== '' && hash !== null) {
+  let arr = hash.split('_')
+  console.log(arr)
+  if (arr[0] === 'hash') {
+
+    localStorage.setItem("hash", arr[1]);
+  }
+}
+
+
 
 
 function setRem() {

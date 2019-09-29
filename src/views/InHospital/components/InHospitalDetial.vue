@@ -17,7 +17,7 @@
         <el-table-column label="序号" type="index" width="60" align="center"></el-table-column>
         <el-table-column prop="CLASS_NAME" label="收费类型" align="center"></el-table-column>
         <el-table-column prop="CHARGE_ITEM_NAME" label="收费项目" align="center"></el-table-column>
-        <el-table-column prop="CHARGE_ITEM_SPEC" label="单位" align="center"></el-table-column>
+        <el-table-column prop="CHARGE_ITEM_UNIT" label="单位" align="center"></el-table-column>
         <el-table-column prop="CHARGE_ITEM_PRICE" label="单价" align="center"></el-table-column>
         <el-table-column prop="QUANTITY" label="数量" align="center"></el-table-column>
         <el-table-column prop="CHARGE_FEE" label="金额" align="center"></el-table-column>
@@ -40,6 +40,7 @@
           @current-change="pageClick"
           :total="total"
           :currentPage="currentPage"
+          :size="10"
         ></page>
       </el-col>
     </el-row>
@@ -69,16 +70,15 @@ export default {
   data() {
     return {
       itemList: [
+        { lab: '姓名', val: 'PATIENT_NAME_DESC' },
         { lab: '病案号', val: 'MED_RECORD_NO' },
-        { lab: '入住科室', val: 'DEPT_NAME' },
-        { lab: '床位', val: 'BED_NO' },
+        { lab: '住院时段', val: 'VISIT_DATE' },
         { lab: '预缴金额', val: 'PREPAY_FEE' },
-        { lab: '余额', val: 'BALANCE' },
-        { lab: '入院日期', val: 'VISIT_DATE_TIME' },
-        { lab: '出院日期', val: 'DISCHARGE_DATE_TIME' },
-        { lab: '住院天数', val: 'IN_DAYS' },
         { lab: '总费用', val: 'TOTAL_FEE' },
-        { lab: '自付', val: 'TOTAL_SELF_PAYMENT_FEE' }
+        { lab: '住院天数', val: 'IN_DAYS' },
+        { lab: '余额', val: 'BALANCE' },
+        { lab: '自付', val: 'TOTAL_SELF_PAYMENT_FEE' },
+        { lab: '入住科室', val: 'DEPT_NAME' }
       ],
       tableData: [],
       formLabelWidth: '80px',

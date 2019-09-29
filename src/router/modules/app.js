@@ -59,6 +59,9 @@ import MedicalProject from '@/views/MedicalProject'
 // 床位浏览
 import Bed from '@/views/bed'
 import BadList from '@/views/bed/components/BadList'
+import Cost from '@/views/bed/components/cost'
+import BedDetail from '@/views/bed/components/detail'
+import CostList from '@/views/bed/components/list'
 
 const app = [{
   path: '/register',
@@ -145,6 +148,11 @@ const app = [{
   component: OutpatientCost,
   name: 'outpatientCost'
 }, {
+  path: '/bedDetail',
+  component: BedDetail,
+  name: 'bedDetail',
+  props: true
+}, {
   path: '/outpatientCostDetial',
   component: OutpatientCostDetial,
   name: 'outpatientCostDetial',
@@ -157,6 +165,16 @@ const app = [{
   component: BadList,
   path: '/bedList',
   name: 'badList',
+  props: true
+}, {
+  component: CostList,
+  path: '/costList',
+  name: 'costList',
+  props: true
+}, {
+  component: Cost,
+  path: '/cost',
+  name: 'cost',
   props: true
 }, {
   path: '/leaderDetail',
@@ -196,9 +214,6 @@ const app = [{
   path: '/inHospitalSettlement',
   component: InHospitalSettlement,
   props: true
-}, {
-  path: '*',
-  redirect: '/'
 }]
 
 export default app

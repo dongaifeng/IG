@@ -4,7 +4,7 @@
 
     <el-row>
       <el-form :label-position="'right'" label-width="100px" :model="row">
-        <el-col :span="6" v-for="(item, index) in itemList" :key="index">
+        <el-col :span="8" v-for="(item, index) in itemList" :key="index">
           <el-form-item :label="item.lab">
             <span>{{row[item.val]}}</span>
           </el-form-item>
@@ -41,6 +41,7 @@
           @current-change="pageClick"
           :total="total"
           :currentPage="currentPage"
+          :size="14"
         ></page>
       </el-col>
     </el-row>
@@ -70,16 +71,15 @@ export default {
   data() {
     return {
       itemList: [
+        { lab: '姓名', val: 'PATIENT_NAME_DESC' },
         { lab: '病案号', val: 'MED_RECORD_NO' },
-        { lab: '入住科室', val: 'DEPT_NAME' },
-        { lab: '床位', val: 'BED_NO' },
+        { lab: '住院时段', val: 'VISIT_DATE' },
         { lab: '预缴金额', val: 'PREPAY_FEE' },
-        { lab: '余额', val: 'BALANCE' },
-        { lab: '入院日期', val: 'VISIT_DATE_TIME' },
-        { lab: '出院日期', val: 'DISCHARGE_DATE_TIME' },
-        { lab: '住院天数', val: 'IN_DAYS' },
         { lab: '总费用', val: 'TOTAL_FEE' },
-        { lab: '自付', val: 'TOTAL_SELF_PAYMENT_FEE' }
+        { lab: '住院天数', val: 'IN_DAYS' },
+        { lab: '余额', val: 'BALANCE' },
+        { lab: '自付', val: 'TOTAL_SELF_PAYMENT_FEE' },
+        { lab: '入住科室', val: 'DEPT_NAME' }
       ],
       tableData: [],
       formLabelWidth: '80px',
@@ -114,7 +114,7 @@ export default {
             value: this.row.ENCOUNTER_ID
           }
         ],
-        { size: 10, current: page }
+        { size: 14, current: page }
       ).then(res => {
         // this.form.name = `${this.userInfo.PATIENT_NAME} (${res.data[0].GENDER_NAME})`
         this.tableData = res.data || []

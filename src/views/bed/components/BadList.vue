@@ -3,7 +3,7 @@
     <AIheader :h1="'床位浏览'" home></AIheader>
     <el-row>
       <el-col :span="4" v-for="(item, ind) in list" :key="ind" align="center" class="colClass">
-        <div class="bedBox" @click="toBadList(item.MED_RECORD_NO)">
+        <div class="bedBox" @click="toBadList(item, item.ENCOUNTER_ID)">
           <div class="bedTop">
             <p class="num">{{item.BED_NO}}</p>
             <div class="img">
@@ -26,11 +26,12 @@
           @current-change="pageClick"
           :total="total"
           :currentPage="currentPage"
+          :size="18"
         ></page>
       </el-col>
     </el-row>
 
-    <el-dialog title="提示" :visible.sync="IDVisiable" width="60%">
+    <el-dialog v-if="IDVisiable" title="提示" :visible.sync="IDVisiable" width="60%">
       <Identity :bed="false" ref="IDForm"></Identity>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitID">确 定</el-button>
@@ -56,7 +57,9 @@ export default {
       queryId: '1023',
       size: 18,
       recordId: '',
-      IDVisiable: false
+      IDVisiable: false,
+      encounterID: null,
+      row: {}
     }
   },
   props: {
@@ -109,35 +112,22 @@ export default {
         this.total = res.Total
       })
     },
-    toBadList(id) {
-      // console.log(id)
-      this.recordId = id
-      if (this.userInfo === null || this.userInfo === '') {
-        // this.$store.dispatch('app/changeIDVisiable', true)
-        this.IDVisiable = true
-      }
+    toBadList(row, encounterID) {
+      this.row = row
+      this.recordId = row.ID_NO_END_X_BIT
+      this.encounterID = encounterID
+      this.IDVisiable = true
     },
     submitID() {
-      this.$post(
-        '1015',
-        [
-          {
-            LogicalOperatorsCode: '10',
-            key: 'ID_NO_END_X_BIT',
-            OperationalCharacterCode: '50',
-            value: this.$refs.IDForm.form.IDcard
-          }
-        ],
-        { size: 1, current: 1 }
-      ).then(res => {
-        if (res.data) {
-          this.$store.dispatch('app/setUserInfo', res.data[0])
-          this.IDVisiable = false
-          this.$router.push({ name: 'inHospital' })
-        } else {
-          this.$alert('找不到患者信息', '提示')
-        }
-      })
+      if (this.recordId !== this.$refs.IDForm.form.IDcard) {
+        this.$alert('输入有误', '提示')
+      } else {
+        this.$router.push({
+          name: 'cost',
+          params: { encounterID: this.encounterID, row: this.row }
+        })
+        this.IDVisiable = false
+      }
     }
   }
 }
@@ -145,11 +135,11 @@ export default {
 
 <style lang="scss" scoped>
 .colClass {
-  margin-top: 20px;
+  margin-top: 18px;
   .bedBox {
     cursor: pointer;
     width: 80%;
-    height: 220px;
+    height: 210px;
 
     background: -webkit-linear-gradient(#4f90e6, #2b69bc);
     background: -o-linear-gradient(#4f90e6, #2b69bc);

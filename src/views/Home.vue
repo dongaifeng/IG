@@ -3,9 +3,10 @@
     <Carousel @click="dialogVisible = true" />
     <Item :menu="menu"></Item>
 
-    <el-dialog title="请输入验证信息" :visible.sync="IDVisiable" width="60%">
+    <el-dialog v-if="IDVisiable" title="请输入验证信息" :visible.sync="IDVisiable" width="70%">
       <Identity ref="IDForm" :patientV="patientV"></Identity>
       <span slot="footer" class="dialog-footer">
+        <el-button style="float:left" type="text" @click="changeKey">切换全键盘</el-button>
         <el-button type="primary" @click="submitID">确 定</el-button>
       </span>
     </el-dialog>
@@ -68,6 +69,9 @@ export default {
         this.menu = res.data
       })
     },
+    changeKey() {
+      this.$refs.IDForm.keyVisiable = !this.$refs.IDForm.keyVisiable
+    },
     // 查询前 参数判断
     submitID() {
       if (this.patientV) {
@@ -85,13 +89,15 @@ export default {
             LogicalOperatorsCode: '10',
             key: key1,
             OperationalCharacterCode: '50',
-            value: this.$refs.IDForm.form.patientID || '0'
+            value:
+              this.$refs.IDForm.form.patientID || 'hfihflksjdflkjfdhkjdhfkj'
           },
           {
             LogicalOperatorsCode: dict,
             key: key2,
             OperationalCharacterCode: '50',
-            value: this.$refs.IDForm.form.IDcard || '0'
+            value:
+              this.$refs.IDForm.form.IDcard || 'dvdhfsduhrgiudshlgdsifilsidr'
           }
         ],
         { size: 1, current: 1 }

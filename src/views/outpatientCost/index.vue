@@ -2,7 +2,7 @@
   <div>
     <AIheader :h1="'门诊费用'"></AIheader>
 
-    <el-row>
+    <!-- <el-row>
       <el-form :label-position="'right'" label-width="100px" :model="form">
         <el-col :span="8" v-for="(item, index) in itemList" :key="index">
           <el-form-item :label="item.lab">
@@ -10,7 +10,7 @@
           </el-form-item>
         </el-col>
       </el-form>
-    </el-row>
+    </el-row>-->
 
     <el-row>
       <el-table
@@ -21,13 +21,9 @@
         size="medium"
       >
         <el-table-column label="序号" type="index" width="60" align="center"></el-table-column>
-        <el-table-column
-          prop="SETTLEMENT_DATE_TIME"
-          label="收费日期"
-          align="center"
-          :formatter="dateFormatter"
-        ></el-table-column>
-        <!-- <el-table-column prop="PATIENT_NAME" label="病人姓名" align="center"></el-table-column> -->
+        <el-table-column prop="PATIENT_NAME" label="病人姓名" align="center"></el-table-column>
+        <el-table-column prop="SETTLEMENT_DATE_TIME" label="收费日期" align="center"></el-table-column>
+
         <el-table-column prop="CARD_NO" label="就诊卡号" align="center"></el-table-column>
         <el-table-column prop="TOTAL_FEE" label="费用总额" align="center" :formatter="caseFormatter"></el-table-column>
         <el-table-column label="费用明细查看" align="center">
@@ -49,6 +45,7 @@
           @current-change="pageClick"
           :total="total"
           :currentPage="currentPage"
+          :size="10"
         ></page>
       </el-col>
     </el-row>
@@ -120,13 +117,14 @@ export default {
           {
             LogicalOperatorsCode: '10',
             key: 'PERSON_ID',
-            OperationalCharacterCode: '100',
+            OperationalCharacterCode: '50',
             value: (this.userInfo && this.userInfo.PERSON_ID) || ''
           }
         ],
         { size: 10, current: page }
       ).then(res => {
-        this.form.name = `${this.userInfo.PATIENT_NAME} (${res.data[0].GENDER_NAME})`
+        this.form.name = `${this.userInfo.PATIENT_NAME} (${res.data[0]
+          .GENDER_NAME || ''})`
         this.tableData = res.data || []
         this.total = res.Total
       })

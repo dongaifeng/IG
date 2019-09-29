@@ -9,19 +9,19 @@
           </el-radio-group>
 
           <el-form-item v-show=" patientV && radio=='1'" label="就诊卡号">
-            <el-input @focus="show" v-model="form.patientID"></el-input>
+            <el-input ref="a" @focus="show" v-model="form.patientID"></el-input>
           </el-form-item>
 
           <el-form-item v-show="patientV&& radio=='2'" label="身份证号">
-            <el-input @focus="show" v-model="form.IDcard"></el-input>
+            <el-input ref="b" @focus="show" v-model="form.IDcard"></el-input>
           </el-form-item>
 
           <el-form-item v-show="!patientV && bed" label="病案号">
-            <el-input @focus="show" v-model="form.patientID"></el-input>
+            <el-input ref="c" @focus="show" v-model="form.patientID"></el-input>
           </el-form-item>
 
           <el-form-item v-show="!patientV" label="身份证号末6位">
-            <el-input @focus="show" v-model="form.IDcard"></el-input>
+            <el-input ref="d" @focus="show" v-model="form.IDcard"></el-input>
           </el-form-item>
         </el-form>
       </el-col>
@@ -36,7 +36,7 @@
         ></key>
       </el-col>
     </el-row>
-    <el-row v-show="!keyVisiable">
+    <el-row style="margin-top: 10px;" v-show="!keyVisiable">
       <key
         :options="options"
         v-if="visible"
@@ -56,7 +56,7 @@ export default {
   components: { key },
   data() {
     return {
-      keyVisiable: false,
+      keyVisiable: true,
       visible: true,
       layout: 'numeric',
       layout2: 'compact',
@@ -78,6 +78,9 @@ export default {
     },
     bed: {
       default: true
+    },
+    focus: {
+      default: 'a'
     }
     // obj: {
     //   type: Object,
@@ -87,13 +90,50 @@ export default {
   mounted() {
     this.form.patientID = ''
     this.form.IDcard = ''
+
+    switch (this.focus) {
+      case 'a':
+        this.$refs.a.focus()
+        break
+      case 'c':
+        this.$refs.c.focus()
+        break
+      case 'b':
+        this.$refs.b.focus()
+        break
+      case 'd':
+        this.$refs.d.focus()
+        break
+      default:
+        this.$refs.a.focus()
+    }
   },
+  // watch: {
+  //   focus: function(val, oldVal) {
+  //     switch (val) {
+  //       case 'a':
+  //         this.$refs.a.focus()
+  //         break
+  //       case 'c':
+  //         alert()
+  //         this.$refs.c.focus()
+  //         break
+  //       default:
+  //         this.$refs.a.focus()
+  //     }
+  //   }
+  // },
   methods: {
     accept(text) {
       // console.log('Input text: ' + text)
       this.hide()
     },
-    radioChange() {
+    radioChange(id) {
+      if (id === '2') {
+        this.$refs.b.focus()
+      } else {
+        this.$refs.a.focus()
+      }
       this.form.patientID = ''
       this.form.IDcard = ''
     },

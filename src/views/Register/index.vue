@@ -37,6 +37,7 @@
           prop="REGISTER_TYPE_NAME"
           label="挂号类型"
           align="center"
+          width="110"
         ></el-table-column>
         <el-table-column
           show-overflow-tooltip
@@ -45,18 +46,31 @@
           align="center"
           width="80"
         ></el-table-column>
-        <el-table-column show-overflow-tooltip prop="LIMIT_NOM" label="限号" align="center"></el-table-column>
-        <el-table-column show-overflow-tooltip prop="MAX_LIMIT_NOM" label="最高限号" align="center"></el-table-column>
+        <el-table-column
+          show-overflow-tooltip
+          prop="LIMIT_NOM"
+          label="限号"
+          align="center"
+          width="80"
+        ></el-table-column>
+        <el-table-column
+          show-overflow-tooltip
+          prop="MAX_LIMIT_NOM"
+          label="最高限号"
+          align="center"
+          width="100"
+        ></el-table-column>
         <el-table-column
           show-overflow-tooltip
           prop="APPOINTMENT_LIMIT_NOM"
           label="预约限号"
           align="center"
+          width="100"
         ></el-table-column>
         <el-table-column
           show-overflow-tooltip
           prop="MEDICAL_SERVICE_FEE"
-          label="医事服务"
+          label="医事服务费(元)"
           align="center"
         ></el-table-column>
       </el-table>
@@ -75,6 +89,7 @@
           @current-change="pageClick"
           :total="total"
           :currentPage="currentPage"
+          :size="18"
         ></page>
       </el-col>
     </el-row>
@@ -174,6 +189,10 @@ export default {
         res.data
         cb(res.data || [])
       })
+    },
+    pageClick(page) {
+      this.currentPage = page
+      this.initData(this.currentPage, this.queryId)
     }
   }
 }

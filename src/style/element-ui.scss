@@ -79,3 +79,7 @@
   margin: 0.1875rem 0;
   font-size: 22px;
 }
+
+.el-dialog /deep/ .el-dialog__close {
+  font-size: 30px !important;
+}

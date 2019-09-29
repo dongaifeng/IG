@@ -15,10 +15,18 @@
         <el-table-column show-overflow-tooltip prop="ITEM_NAME" label="项目名称" align="center"></el-table-column>
         <el-table-column show-overflow-tooltip prop="UNIT" label="单位" align="center" width="130"></el-table-column>
         <el-table-column show-overflow-tooltip prop="PRICE" label="单价" align="center" width="130"></el-table-column>
+
         <!-- <el-table-column show-overflow-tooltip prop="MEDICARE_ITEM_CODE" label="医保代码" align="center" width="100"></el-table-column> -->
         <!-- <el-table-column show-overflow-tooltip prop="MEDICARE_ITEM_NAME" label="医保项目名称" align="center"></el-table-column> -->
         <!-- <el-table-column show-overflow-tooltip prop="OUT_FLAG" label="门诊" align="center" width="60"></el-table-column>
         <el-table-column show-overflow-tooltip prop="IN_FLAG" label="住院" align="center" width="60"></el-table-column>-->
+        <el-table-column
+          show-overflow-tooltip
+          prop="MEDICARE_CLASS"
+          label="费用类型"
+          align="center"
+          width="100"
+        ></el-table-column>
         <el-table-column
           show-overflow-tooltip
           prop="MEDICARE_LEVEL"
@@ -98,9 +106,14 @@ export default {
         this.total = res.Total
       })
     },
+    pageClick(page) {
+      this.currentPage = page
+      this.initData(this.currentPage, this.queryId)
+    },
 
     query(obj) {
       this.tableData = [obj]
+      this.total = 1
       // this.initData(this.currentPage, id)
     },
     // 模糊查询回调 cb传入 list 需设置 selName 下拉显示值

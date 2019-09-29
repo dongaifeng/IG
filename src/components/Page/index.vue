@@ -7,6 +7,7 @@
       prev-text="上一页"
       next-text="下一页"
       :current-page="currentPage"
+      :page-size="size"
       @current-change="pageClick"
     >
       <span class="my-total">{{currentPage}} / {{Math.ceil(total / size)}} 页</span>

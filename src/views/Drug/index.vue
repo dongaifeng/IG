@@ -22,7 +22,13 @@
           align="center"
           width="100"
         ></el-table-column>
-        <!-- <el-table-column show-overflow-tooltip prop="DRUG_COMMON_NAME" label="医保药品名称" align="center" width="120"></el-table-column> -->
+        <el-table-column
+          show-overflow-tooltip
+          prop="DRUG_TYPE"
+          label="药品类型"
+          align="center"
+          width="120"
+        ></el-table-column>
         <el-table-column
           show-overflow-tooltip
           prop="MEDICARE_LEVEL"

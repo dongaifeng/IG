@@ -32,7 +32,7 @@
     </el-row>
 
     <el-dialog v-if="IDVisiable" title="提示" :visible.sync="IDVisiable" width="60%">
-      <Identity :bed="false" ref="IDForm"></Identity>
+      <Identity focus="d" :bed="false" ref="IDForm"></Identity>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitID">确 定</el-button>
       </span>

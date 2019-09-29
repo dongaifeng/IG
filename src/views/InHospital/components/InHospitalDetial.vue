@@ -14,16 +14,46 @@
 
     <el-row>
       <el-table :data="tableData" border style="width: 100%" size="medium">
-        <el-table-column label="序号" type="index" width="60" align="center"></el-table-column>
-        <el-table-column prop="CLASS_NAME" label="收费类型" align="center"></el-table-column>
-        <el-table-column prop="CHARGE_ITEM_NAME" label="收费项目" align="center"></el-table-column>
-        <el-table-column prop="CHARGE_ITEM_UNIT" label="单位" align="center"></el-table-column>
-        <el-table-column prop="CHARGE_ITEM_PRICE" label="单价" align="center"></el-table-column>
-        <el-table-column prop="QUANTITY" label="数量" align="center"></el-table-column>
-        <el-table-column prop="CHARGE_FEE" label="金额" align="center"></el-table-column>
-        <el-table-column prop="SETTLEMENT_DATE_TIME" label="结算日期" align="center"></el-table-column>
-        <el-table-column prop="CHARGE_DATE" label="发生日期" align="center"></el-table-column>
-        <el-table-column prop="CHARGE_STATUS" label="状态" align="center"></el-table-column>
+        <el-table-column show-overflow-tooltip label="序号" type="index" width="60" align="center"></el-table-column>
+        <el-table-column
+          show-overflow-tooltip
+          prop="CLASS_NAME"
+          label="收费类型"
+          align="center"
+          width="100"
+        ></el-table-column>
+        <el-table-column show-overflow-tooltip prop="CHARGE_ITEM_NAME" label="收费项目" align="center"></el-table-column>
+        <el-table-column
+          show-overflow-tooltip
+          prop="CHARGE_ITEM_UNIT"
+          label="单位"
+          align="center"
+          width="80"
+        ></el-table-column>
+        <el-table-column
+          show-overflow-tooltip
+          prop="CHARGE_ITEM_PRICE"
+          label="单价"
+          align="center"
+          width="80"
+        ></el-table-column>
+        <el-table-column show-overflow-tooltip prop="QUANTITY" label="数量" align="center" width="80"></el-table-column>
+        <el-table-column
+          show-overflow-tooltip
+          prop="CHARGE_FEE"
+          label="金额"
+          align="center"
+          width="80"
+        ></el-table-column>
+        <!-- <el-table-column show-overflow-tooltip prop="SETTLEMENT_DATE_TIME" label="结算日期" align="center"></el-table-column> -->
+        <el-table-column
+          show-overflow-tooltip
+          prop="CHARGE_DATE"
+          width="120"
+          label="发生日期"
+          align="center"
+        ></el-table-column>
+        <!-- <el-table-column show-overflow-tooltip prop="CHARGE_STATUS" label="状态" align="center"></el-table-column> -->
       </el-table>
     </el-row>
 
@@ -40,7 +70,7 @@
           @current-change="pageClick"
           :total="total"
           :currentPage="currentPage"
-          :size="10"
+          :size="14"
         ></page>
       </el-col>
     </el-row>
@@ -113,7 +143,7 @@ export default {
             value: this.row.ENCOUNTER_ID
           }
         ],
-        { size: 10, current: page }
+        { size: 14, current: page }
       ).then(res => {
         // this.form.name = `${this.userInfo.PATIENT_NAME} (${res.data[0].GENDER_NAME})`
         this.tableData = res.data || []

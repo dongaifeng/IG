@@ -15,14 +15,14 @@
     <el-row>
       <el-table :data="tableData" border style="width: 100%" size="medium">
         <el-table-column label="序号" type="index" width="60" align="center"></el-table-column>
-        <el-table-column prop="CLASS_NAME" label="收费类型" align="center"></el-table-column>
+        <el-table-column prop="CLASS_NAME" label="收费类型" align="center" width="100"></el-table-column>
         <el-table-column prop="CHARGE_ITEM_NAME" label="收费项目" align="center"></el-table-column>
-        <el-table-column prop="CHARGE_ITEM_UNIT" label="单位" align="center"></el-table-column>
-        <el-table-column prop="CHARGE_ITEM_PRICE" label="单价" align="center"></el-table-column>
-        <el-table-column prop="QUANTITY" label="数量" align="center"></el-table-column>
-        <el-table-column prop="CHARGE_FEE" label="金额" align="center"></el-table-column>
+        <el-table-column prop="CHARGE_ITEM_UNIT" label="单位" align="center" width="80"></el-table-column>
+        <el-table-column prop="CHARGE_ITEM_PRICE" label="单价" align="center" width="80"></el-table-column>
+        <el-table-column prop="QUANTITY" label="数量" align="center" width="80"></el-table-column>
+        <el-table-column prop="CHARGE_FEE" label="金额" align="center" width="80"></el-table-column>
         <!-- <el-table-column prop="SETTLEMENT_DATE_TIME" label="结算日期" align="center"></el-table-column> -->
-        <el-table-column prop="CHARGE_DATE" label="发生日期" align="center"></el-table-column>
+        <el-table-column prop="CHARGE_DATE" label="发生日期" align="center" width="100"></el-table-column>
         <!-- <el-table-column prop="CHARGE_STATUS" label="状态" align="center"></el-table-column> -->
       </el-table>
     </el-row>
@@ -34,7 +34,7 @@
           @current-change="pageClick"
           :total="total"
           :currentPage="currentPage"
-          :size="10"
+          :size="18"
         ></page>
       </el-col>
     </el-row>
@@ -85,7 +85,7 @@ export default {
             value: this.encounterID || ''
           }
         ],
-        { size: 10, current: 1 }
+        { size: 18, current: 1 }
       ).then(res => {
         this.tableData = res.data || []
         this.total = res.Total

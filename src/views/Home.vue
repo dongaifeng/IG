@@ -4,7 +4,7 @@
     <Item :menu="menu"></Item>
 
     <el-dialog v-if="IDVisiable" title="请输入验证信息" :visible.sync="IDVisiable" width="70%">
-      <Identity ref="IDForm" :patientV="patientV"></Identity>
+      <Identity :focus="focus" ref="IDForm" :patientV="patientV"></Identity>
       <span slot="footer" class="dialog-footer">
         <el-button style="float:left" type="text" @click="changeKey">切换全键盘</el-button>
         <el-button type="primary" @click="submitID">确 定</el-button>
@@ -28,7 +28,8 @@ export default {
       toPage: 'home',
       patientV: true,
       timer: null,
-      timeArr: []
+      timeArr: [],
+      focus: 'a'
     }
   },
   components: {
@@ -38,7 +39,6 @@ export default {
   },
   mounted() {
     this.getData()
-
     this.timeArr.forEach(ele => {
       window.clearInterval(ele)
     })
@@ -148,6 +148,7 @@ export default {
       if (this.userInfo === null || this.userInfo === '') {
         this.patientV = to.name === 'outpatientCost'
         this.toPage = to.name
+        this.focus = to.name === 'outpatientCost' ? 'a' : 'c'
         this.IDVisiable = true
         next(false)
       } else {

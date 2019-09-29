@@ -3,10 +3,10 @@
     <AIheader :h1="'费用清单'"></AIheader>
 
     <el-row>
-      <el-form :label-position="'right'" label-width="100px" :model="row">
+      <el-form :label-position="'right'" label-width="100px" :model="form">
         <el-col :span="8" v-for="(item, index) in itemList" :key="index">
           <el-form-item :label="item.lab">
-            <span>{{row[item.val]}}</span>
+            <span>{{form[item.val]}}</span>
           </el-form-item>
         </el-col>
       </el-form>
@@ -71,9 +71,8 @@ export default {
         { lab: '入住科室', val: 'DEPT_NAME' }
       ],
       tableData: [],
-      form: {
-        name: ''
-      },
+      form: {},
+      ddd: null,
       formLabelWidth: '80px',
       dialog: false
     }
@@ -81,6 +80,7 @@ export default {
   props: ['encounterID', 'row'],
   mounted() {
     this.ddd = this.encounterID
+    this.form = this.row
   },
   activated() {
     this.initData(this.currentPage)

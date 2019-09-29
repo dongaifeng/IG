@@ -2,7 +2,7 @@
   <div>
     <AIheader :h1="'住院费用'"></AIheader>
 
-    <el-row>
+    <!-- <el-row>
       <el-form :label-position="'right'" label-width="100px" :model="form">
         <el-col :span="8" v-for="(item, index) in itemList" :key="index">
           <el-form-item :label="item.lab">
@@ -10,23 +10,41 @@
           </el-form-item>
         </el-col>
       </el-form>
-    </el-row>
+    </el-row>-->
 
     <el-row>
       <el-table :data="tableData" border style="width: 100%" size="medium">
-        <el-table-column label="序号" type="index" width="60" align="center"></el-table-column>
-        <el-table-column prop="PATIENT_ID" label="病案号" align="center"></el-table-column>
-        <el-table-column prop="VISIT_DATE_TIME" label="入院时间" align="center"></el-table-column>
-        <el-table-column prop="DISCHARGE_DATE_TIME" label="出院时间" align="center"></el-table-column>
-        <el-table-column prop="WARD_NAME" label="病区" align="center"></el-table-column>
-        <el-table-column prop="BED_NO" label="床位" align="center"></el-table-column>
-        <el-table-column prop="TOTAL_FEE" label="总费用" align="center"></el-table-column>
-        <el-table-column label="查看结算" align="center">
+        <el-table-column show-overflow-tooltip label="序号" type="index" width="60" align="center"></el-table-column>
+        <el-table-column
+          show-overflow-tooltip
+          prop="PATIENT_NAME_DESC"
+          width="120"
+          label="患者姓名"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          show-overflow-tooltip
+          prop="MED_RECORD_NO"
+          label="病案号"
+          width="120"
+          align="center"
+        ></el-table-column>
+        <el-table-column show-overflow-tooltip prop="VISIT_DATE_TIME" label="入院时间" align="center"></el-table-column>
+        <el-table-column
+          show-overflow-tooltip
+          prop="DISCHARGE_DATE_TIME"
+          label="出院时间"
+          align="center"
+        ></el-table-column>
+        <el-table-column show-overflow-tooltip prop="WARD_NAME" label="病区" align="center"></el-table-column>
+        <el-table-column show-overflow-tooltip prop="BED_NO" label="床位" width="60" align="center"></el-table-column>
+        <el-table-column show-overflow-tooltip prop="TOTAL_FEE" label="总费用" align="center"></el-table-column>
+        <!-- <el-table-column show-overflow-tooltip label="查看结算" align="center">
           <template slot-scope="scope">
             <el-button type="primary" @click="handleEdit(scope.row, 'inHospitalSettlement')">查看结算</el-button>
           </template>
-        </el-table-column>
-        <el-table-column label="查看明细" align="center">
+        </el-table-column>-->
+        <el-table-column show-overflow-tooltip label="查看明细" align="center">
           <template slot-scope="scope">
             <el-button type="primary" @click="handleEdit(scope.row, 'inHospitalDetial')">查看明细</el-button>
           </template>

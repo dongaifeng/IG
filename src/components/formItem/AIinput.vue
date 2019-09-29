@@ -72,6 +72,7 @@ export default {
   methods: {
     handleIconClick() {
       this.input = ''
+      this.select = null
     },
     query() {
       if (this.select) {

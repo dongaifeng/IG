@@ -14,13 +14,23 @@
 
     <el-row>
       <el-table :data="tableData" border style="width: 100%" size="medium">
-        <el-table-column prop="SETTLEMENT_DATE_TIME" label="结算日期" align="center"></el-table-column>
-        <el-table-column prop="BABY_SELF_FEE" label="婴儿计费" align="center"></el-table-column>
-        <el-table-column prop="TOTAL_FEE" label="总费用" align="center"></el-table-column>
-        <el-table-column prop="SELF_PAYMENT_FEE" label="自费费用" align="center"></el-table-column>
-        <el-table-column prop="MI_SELF_FEE" label="其中自理" align="center"></el-table-column>
-        <el-table-column prop="SETTLEMENT_DATE_TIME" label="结算日期" align="center"></el-table-column>
-        <!-- <el-table-column label="查看明细" align="center">
+        <el-table-column
+          show-overflow-tooltip
+          prop="SETTLEMENT_DATE_TIME"
+          label="结算日期"
+          align="center"
+        ></el-table-column>
+        <el-table-column show-overflow-tooltip prop="BABY_SELF_FEE" label="婴儿计费" align="center"></el-table-column>
+        <el-table-column show-overflow-tooltip prop="TOTAL_FEE" label="总费用" align="center"></el-table-column>
+        <el-table-column show-overflow-tooltip prop="SELF_PAYMENT_FEE" label="自费费用" align="center"></el-table-column>
+        <el-table-column show-overflow-tooltip prop="MI_SELF_FEE" label="其中自理" align="center"></el-table-column>
+        <el-table-column
+          show-overflow-tooltip
+          prop="SETTLEMENT_DATE_TIME"
+          label="结算日期"
+          align="center"
+        ></el-table-column>
+        <!-- <el-table-column show-overflow-tooltip label="查看明细" align="center">
           <template slot-scope="scope">
             <el-button type="primary" @click="handleEdit(scope.row)">查看明细</el-button>
           </template>

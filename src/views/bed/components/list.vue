@@ -37,7 +37,7 @@
           @current-change="pageClick"
           :total="total"
           :currentPage="currentPage"
-          :size="10"
+          :size="18"
         ></page>
       </el-col>
     </el-row>
@@ -88,7 +88,7 @@ export default {
             value: this.encounterID || ''
           }
         ],
-        { size: 10, current: 1 }
+        { size: 18, current: 1 }
       ).then(res => {
         this.tableData = res.data || []
         this.total = res.Total

@@ -25,10 +25,28 @@
         <el-table-column prop="SETTLEMENT_DATE_TIME" label="收费日期" align="center"></el-table-column>
 
         <el-table-column prop="CARD_NO" label="就诊卡号" align="center"></el-table-column>
-        <el-table-column prop="TOTAL_FEE" label="费用总额" align="center" :formatter="caseFormatter"></el-table-column>
-        <el-table-column label="费用明细查看" align="center">
+        <el-table-column
+          prop="TOTAL_FEE"
+          label="费用总额"
+          align="center"
+          width="80"
+          :formatter="caseFormatter"
+        ></el-table-column>
+        <el-table-column label="药品明细" align="center" width="100">
           <template slot-scope="scope">
-            <el-button type="primary" @click="handleEdit(scope.row, 'outpatientCostDetial')">查看明细</el-button>
+            <el-button
+              type="primary"
+              @click="handleEdit(scope.row, 'outpatientCostDetial' , '1020')"
+            >药品明细</el-button>
+          </template>
+        </el-table-column>
+
+        <el-table-column label="非药品明细" align="center" width="120">
+          <template slot-scope="scope">
+            <el-button
+              type="primary"
+              @click="handleEdit(scope.row, 'outpatientCostDetial', '1032')"
+            >非药品明细</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -97,8 +115,8 @@ export default {
     this.initData(this.currentPage)
   },
   methods: {
-    handleEdit(row, route) {
-      this.$router.push({ name: route, params: { row } })
+    handleEdit(row, route, selId) {
+      this.$router.push({ name: route, params: { row, selId } })
     },
     caseFormatter(row, column) {
       let a = Number(row[column.property])

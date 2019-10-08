@@ -135,7 +135,7 @@ export default {
 
 <style lang="scss" scoped>
 .colClass {
-  margin-top: 18px;
+  margin-top: 15px;
   .bedBox {
     cursor: pointer;
     width: 80%;
@@ -152,7 +152,7 @@ export default {
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     .bedTop {
       .num {
-        font-size: 25px;
+        font-size: 20px;
         float: left;
       }
       .img {

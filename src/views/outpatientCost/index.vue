@@ -32,23 +32,23 @@
           width="80"
           :formatter="caseFormatter"
         ></el-table-column>
-        <el-table-column label="药品明细" align="center" width="100">
+        <el-table-column label="查看明细" align="center" width="100">
           <template slot-scope="scope">
             <el-button
               type="primary"
               @click="handleEdit(scope.row, 'outpatientCostDetial' , '1020')"
-            >药品明细</el-button>
+            >费用明细</el-button>
           </template>
         </el-table-column>
 
-        <el-table-column label="非药品明细" align="center" width="120">
+        <!-- <el-table-column label="非药品明细" align="center" width="120">
           <template slot-scope="scope">
             <el-button
               type="primary"
               @click="handleEdit(scope.row, 'outpatientCostDetial', '1032')"
             >非药品明细</el-button>
           </template>
-        </el-table-column>
+        </el-table-column>-->
       </el-table>
     </el-row>
 

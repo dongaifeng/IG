@@ -106,7 +106,7 @@ export default {
           {
             LogicalOperatorsCode: '10',
             key: 'SETTLEMENT_NO',
-            OperationalCharacterCode: '100',
+            OperationalCharacterCode: '50',
             value: this.row.SETTLEMENT_NO
           }
         ],

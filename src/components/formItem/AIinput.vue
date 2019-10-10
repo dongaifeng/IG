@@ -88,7 +88,7 @@ export default {
       this.$refs.keyboard.hide()
     },
     querySearchAsync(queryString, cb) {
-      console.log(queryString, 'queryString===')
+      // console.log(queryString, 'queryString===')
       this.select = null
       this.searchAsync(
         queryString,

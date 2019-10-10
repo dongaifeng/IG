@@ -175,9 +175,7 @@ export default {
     }
   },
   watch: {
-    value(n) {
-      console.log(n)
-    }
+    value(n) {}
   },
 
   methods: {
@@ -207,8 +205,7 @@ export default {
       }
       arrowDown.onclick = function(e) {
         e.stopPropagation()
-        console.log(top)
-        console.log(height)
+
         if (Math.abs(top) >= height - 40) {
           return false
         } else {
@@ -333,7 +330,7 @@ export default {
       path.onclick = function(e) {
         var strArr = _getInputContent().split('')
         strArr.push(e.target.innerText.slice(-1))
-        console.log(strArr.join(''))
+
         cStr = ''
         _inputNewContent(strArr.join(''))
         dataInit()
@@ -416,7 +413,6 @@ export default {
         e
       ) {
         e.stopPropagation()
-        console.log(123)
       }
       document.addEventListener('click', function(e) {
         _hideKeyboard()

@@ -62,9 +62,17 @@ window.onresize = function () {
   setRem()
 }
 
+function setRem() {
+  let htmlWidth = document.documentElement.clientWidth || document.body.clientWidth;
+  // let htmlWidth = 1024;
+  let htmlDom = document.getElementsByTagName('html')[0];
+  // 根据html宽度 设置根元素字体大小 约等于16px
+  htmlDom.style.fontSize = htmlWidth / 83 + 'px';
+  // htmlDom.style.width = conf.width;
+  // htmlDom.style.height = conf.height;
+}
+
 router.beforeEach((to, from, next) => {
-
-
   store.dispatch('app/timeHandle', conf.time)
   next()
 })
@@ -75,7 +83,7 @@ let hash = location.hash.slice(2)
 
 if (hash !== '' && hash !== null) {
   let arr = hash.split('_')
-  console.log(arr)
+  // console.log(arr)
   if (arr[0] === 'hash') {
 
     localStorage.setItem("hash", arr[1]);
@@ -85,15 +93,7 @@ if (hash !== '' && hash !== null) {
 
 
 
-function setRem() {
-  let htmlWidth = document.documentElement.clientWidth || document.body.clientWidth;
-  // let htmlWidth = 1024;
-  let htmlDom = document.getElementsByTagName('html')[0];
-  // 根据html宽度 设置根元素字体大小 约等于16px
-  htmlDom.style.fontSize = htmlWidth / 83 + 'px';
-  // htmlDom.style.width = conf.width;
-  // htmlDom.style.height = conf.height;
-}
+
 
 
 

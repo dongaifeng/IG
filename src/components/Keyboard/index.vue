@@ -30,7 +30,7 @@ export default {
 
   methods: {
     accept(text) {
-      console.log('Input text: ' + text)
+      // console.log('Input text: ' + text)
       this.hide()
     },
 

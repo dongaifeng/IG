@@ -1,7 +1,8 @@
 <template>
   <div>
-    <AIheader :h1="lab" home></AIheader>
-    <el-tabs type="border-card">
+    <AIheader class="header-box" :h1="lab" home></AIheader>
+
+    <el-tabs class="contant-box" type="border-card">
       <el-tab-pane label="科室简介">
         <DepInfo :text="DEPT_INTRODUCITON" />
       </el-tab-pane>
@@ -140,5 +141,8 @@ export default {
     height: 60px;
     line-height: 60px;
   }
+}
+.contant-box {
+  padding-top: 80px;
 }
 </style>

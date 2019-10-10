@@ -112,9 +112,13 @@ export default {
     },
 
     query(obj) {
-      this.tableData = [obj]
-      this.total = 1
-      // this.initData(this.currentPage, id)
+      if (obj) {
+        this.tableData = [obj]
+        this.total = 1
+        this.currentPage = 1
+      } else {
+        this.initData(1)
+      }
     },
     // 模糊查询回调 cb传入 list 需设置 selName 下拉显示值
     searchAsync(id, cb) {

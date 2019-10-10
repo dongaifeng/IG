@@ -30,7 +30,7 @@ export default {
       scrolltop > 30 ? (this.gotop = true) : (this.gotop = false)
     },
     InTop() {
-      console.log(this.hasScrollbar)
+      // console.log(this.hasScrollbar)
       window.scrollBy(0, -50)
     },
     InBottom() {

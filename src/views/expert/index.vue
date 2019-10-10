@@ -90,7 +90,7 @@ export default {
     // },
     query(obj) {
       if (obj) {
-        console.log(obj, '<====dkfjd')
+        // console.log(obj, '<====dkfjd')
         this.detail(obj.DOCTOR_CODE)
       } else {
         this.$message('输入内容不合法')
@@ -160,8 +160,6 @@ export default {
     },
     toData(data = []) {
       let arr = this.unique(data)
-      console.log(arr, '<====data')
-      console.log(data, '<====hash')
 
       data.forEach(ele => {
         arr.forEach(b => {

@@ -153,7 +153,6 @@ export default {
 
     // 查询表格数据方法，预先判断 参数
     query(obj) {
-      console.log(obj)
       if (obj) {
         if (this.radio === '1027') {
           this.queryId = obj.DOCTOR_CODE
@@ -166,6 +165,7 @@ export default {
         this.queryId = null
         this.key = 'DEPT_CODE'
       }
+      this.currentPage = 1
       this.initData(this.currentPage, this.queryId)
     },
     // 模糊查询回调 cb传入 list 需设置 selName 下拉显示值
@@ -192,7 +192,7 @@ export default {
     },
     pageClick(page) {
       this.currentPage = page
-      this.initData(this.currentPage, this.queryId)
+      this.initData(1, this.queryId)
     }
   }
 }

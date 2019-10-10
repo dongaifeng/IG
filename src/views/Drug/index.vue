@@ -85,7 +85,6 @@ export default {
     return {
       tableData: [],
       dialog: false,
-
       queryId: null
     }
   },
@@ -105,21 +104,18 @@ export default {
           ]
         : []
       this.$post('1024', arr, { size: 18, current: page }).then(res => {
-        // console.log(res)
         this.tableData = res.data || []
         this.total = res.Total
       })
     },
 
     query(obj) {
-      // console.log(obj, '-----obj')
-
       this.queryId = obj ? obj.DRUG_NAME : null
+      this.currentPage = 1
       this.initData(this.currentPage, this.queryId)
     },
     // 模糊查询回调 cb传入 list 需设置 selName 下拉显示值
     searchAsync(id, cb) {
-      // console.log(id, 'searchasync=====')
       this.$post('1024', [
         {
           LogicalOperatorsCode: '10',

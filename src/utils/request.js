@@ -58,7 +58,7 @@ function tryHideFullScreenLoading() {
   }
 }
 
-console.log(process.env.VUE_APP_BASE_API, '<======request')
+// console.log(process.env.VUE_APP_BASE_API, '<======request')
 
 // 创建axios实例 
 const service = axios.create({

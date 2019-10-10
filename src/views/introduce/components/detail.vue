@@ -14,7 +14,6 @@
 </template>
 
 <script>
-ScrollBtn
 import ScrollBtn from '@/components/ScrollBtn'
 export default {
   name: 'detail',

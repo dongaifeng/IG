@@ -1,7 +1,7 @@
 <template>
   <div>
     <AIheader class="header-box" :h1="title" home></AIheader>
-    <div class="contant-box">
+    <div ref="scrollBox" class="contant-box">
       <p v-if="type==='HTML'" class="text" v-html="text"></p>
 
       <iframe

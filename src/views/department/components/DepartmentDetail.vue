@@ -1,18 +1,19 @@
 <template>
   <div>
     <AIheader class="header-box" :h1="lab" home></AIheader>
-
-    <el-tabs class="contant-box" type="border-card">
-      <el-tab-pane label="科室简介">
-        <DepInfo :text="DEPT_INTRODUCITON" />
-      </el-tab-pane>
-      <el-tab-pane label="主要领导">
-        <DepLeader :list="list" />
-      </el-tab-pane>
-      <el-tab-pane label="专家出诊列表">
-        <dep-list :tableData="expertList" />
-      </el-tab-pane>
-    </el-tabs>
+    <div ref="scrollBox" class="contant-box">
+      <el-tabs type="border-card">
+        <el-tab-pane label="科室简介">
+          <DepInfo :text="DEPT_INTRODUCITON" />
+        </el-tab-pane>
+        <el-tab-pane label="主要领导">
+          <DepLeader :list="list" />
+        </el-tab-pane>
+        <el-tab-pane label="专家出诊列表">
+          <dep-list :tableData="expertList" />
+        </el-tab-pane>
+      </el-tabs>
+    </div>
   </div>
 </template>
 

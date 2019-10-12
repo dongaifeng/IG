@@ -115,8 +115,8 @@ import AIheader from '@/components/AIheader'
 import { page } from '@/mixin'
 
 export default {
+  name: 'nokeepAlive',
   mixins: [page],
-
   components: { AIheader },
   data() {
     return {
@@ -140,7 +140,7 @@ export default {
             {
               LogicalOperatorsCode: '10',
               key: this.key,
-              OperationalCharacterCode: '100',
+              OperationalCharacterCode: '50',
               value: id
             }
           ]
@@ -192,7 +192,7 @@ export default {
     },
     pageClick(page) {
       this.currentPage = page
-      this.initData(1, this.queryId)
+      this.initData(page, this.queryId)
     }
   }
 }

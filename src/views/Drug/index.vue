@@ -98,7 +98,7 @@ export default {
             {
               LogicalOperatorsCode: '10',
               key: 'DRUG_NAME',
-              OperationalCharacterCode: '100',
+              OperationalCharacterCode: '50',
               value: id
             }
           ]

@@ -189,6 +189,11 @@ div:focus {
   box-sizing: border-box;
 }
 
+.contant-box {
+  overflow: auto;
+  height: 100vh;
+}
+
 // color
 $blue:#66b1ff;
 

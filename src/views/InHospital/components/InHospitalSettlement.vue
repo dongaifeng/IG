@@ -120,7 +120,7 @@ export default {
           {
             LogicalOperatorsCode: '10',
             key: 'ENCOUNTER_ID',
-            OperationalCharacterCode: '100',
+            OperationalCharacterCode: '50',
             value: this.row.ENCOUNTER_ID
           }
         ],

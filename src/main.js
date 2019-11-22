@@ -2,6 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import '@/style/index.scss' // global css
+import router from './router'
+import store from './store/index'
 
 import {
   post
@@ -42,17 +45,6 @@ Vue.prototype.$where = (str) => {
   }
 }
 
-
-
-
-// import VueTouchKeyboard from "vue-touch-keyboard";
-// import "vue-touch-keyboard/dist/vue-touch-keyboard.css"; // load default style
-// Vue.use(VueTouchKeyboard);
-
-import '@/style/index.scss' // global css
-import router from './router'
-import store from './store/index'
-
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 
@@ -77,25 +69,15 @@ router.beforeEach((to, from, next) => {
   next()
 })
 
-
-
 let hash = location.hash.slice(2)
 
 if (hash !== '' && hash !== null) {
   let arr = hash.split('_')
   // console.log(arr)
   if (arr[0] === 'hash') {
-
     localStorage.setItem("hash", arr[1]);
   }
 }
-
-
-
-
-
-
-
 
 new Vue({
   router,

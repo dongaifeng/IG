@@ -1,7 +1,7 @@
 <template>
   <div>
     <AIheader class="header-box" :h1="'医院介绍'" :home="$route.name != 'index'"></AIheader>
-    <div class="contant-box">
+    <div ref="scrollBox" class="contant-box">
       <transition name="fade" mode="out-in">
         <router-view></router-view>
       </transition>

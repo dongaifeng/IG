@@ -96,7 +96,7 @@ export default {
             {
               LogicalOperatorsCode: '10',
               key: 'PY_CODE',
-              OperationalCharacterCode: '100',
+              OperationalCharacterCode: '50',
               value: id
             }
           ]

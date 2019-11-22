@@ -121,7 +121,7 @@ export default {
           {
             LogicalOperatorsCode: '10',
             key: 'PERSON_ID',
-            OperationalCharacterCode: '100',
+            OperationalCharacterCode: '50',
             value: (this.userInfo && this.userInfo.PERSON_ID) || ''
           }
         ],

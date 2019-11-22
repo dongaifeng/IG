@@ -13,51 +13,53 @@
         ></AIheader>
       </el-col>
     </el-row>
+    <div ref="scrollBox" class="contant-box">
+      <el-row class="tabBox">
+        <el-col :span="3" v-for="item in tabList" :key="item.ID">
+          <el-button
+            :class="{ myactive: item.CLASS_CODE == setbtnID}"
+            @click="tabClick(item.CLASS_CODE)"
+            class="tab"
+            plain
+          >{{item.CLASS_NAME}}</el-button>
+        </el-col>
+      </el-row>
 
-    <el-row class="tabBox">
-      <el-col :span="3" v-for="item in tabList" :key="item.ID">
-        <el-button
-          :class="{ myactive: item.CLASS_CODE == setbtnID}"
-          @click="tabClick(item.CLASS_CODE)"
-          class="tab"
-          plain
-        >{{item.CLASS_NAME}}</el-button>
-      </el-col>
-    </el-row>
+      <el-row class="depBox">
+        <el-col :span="24" v-for="(item, ind) in expertList" :key="ind">
+          <!-- <el-button @click="depClick(item)" class="dep" type="primary">{{item.SHOW_NAME}}</el-button> -->
+          <div class="expertBox">
+            <div class="title">{{item.name}}</div>
+            <ul class="nameBox clearfix">
+              <li class="nameLi clearfix">
+                <p class="type">主任医师</p>
+                <div class="name">
+                  <span
+                    @click="detail(ele.SPECIALIST_DOCTOR_CODE)"
+                    class="nameItem"
+                    v-for="(ele, ind) in item.ZC01"
+                    :key="ind"
+                  >{{ele.SPECIALIST_DOCTOR_NAME}}</span>
+                </div>
+              </li>
 
-    <el-row class="depBox">
-      <el-col :span="24" v-for="(item, ind) in expertList" :key="ind">
-        <!-- <el-button @click="depClick(item)" class="dep" type="primary">{{item.SHOW_NAME}}</el-button> -->
-        <div class="expertBox">
-          <div class="title">{{item.name}}</div>
-          <ul class="nameBox clearfix">
-            <li class="nameLi clearfix">
-              <p class="type">主任医师</p>
-              <div class="name">
-                <span
-                  @click="detail(ele.SPECIALIST_DOCTOR_CODE)"
-                  class="nameItem"
-                  v-for="(ele, ind) in item.ZC01"
-                  :key="ind"
-                >{{ele.SPECIALIST_DOCTOR_NAME}}</span>
-              </div>
-            </li>
+              <li class="nameLi clearfix">
+                <p class="type">副主任医师</p>
+                <div class="name">
+                  <span
+                    @click="detail(ele.SPECIALIST_DOCTOR_CODE)"
+                    class="nameItem"
+                    v-for="(ele, ind) in item.ZC02"
+                    :key="ind"
+                  >{{ele.SPECIALIST_DOCTOR_NAME}}</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </el-col>
+      </el-row>
+    </div>
 
-            <li class="nameLi clearfix">
-              <p class="type">副主任医师</p>
-              <div class="name">
-                <span
-                  @click="detail(ele.SPECIALIST_DOCTOR_CODE)"
-                  class="nameItem"
-                  v-for="(ele, ind) in item.ZC02"
-                  :key="ind"
-                >{{ele.SPECIALIST_DOCTOR_NAME}}</span>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </el-col>
-    </el-row>
     <ScrollBtn></ScrollBtn>
   </div>
 </template>
@@ -245,7 +247,7 @@ export default {
 
 .tabBox {
   padding: 30px;
-  padding-top: 100px;
+  // padding-top: 100px;
   .tab {
     font-size: 22px;
     padding: 20px 40px;

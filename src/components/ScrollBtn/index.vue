@@ -18,11 +18,11 @@ export default {
     }
   },
   mounted() {
-    console.log(
-      document.body.scrollHeight,
-      document.documentElement.clientHeight,
-      window.document.getElementById('app').firstChild.clientHeight
-    )
+    // console.log(
+    //   document.body.scrollHeight,
+    //   document.documentElement.clientHeight,
+    //   window.document.getElementById('app').firstChild.clientHeight
+    // )
   },
   methods: {
     handleScroll(e) {
@@ -30,19 +30,35 @@ export default {
       scrolltop > 30 ? (this.gotop = true) : (this.gotop = false)
     },
     InTop() {
-      // console.log(this.hasScrollbar)
-      window.scrollBy(0, -50)
+      // console.log(this.$parent.$parent.$refs.ddd)
+      let dom =
+        this.$refs.scrollBox ||
+        this.$parent.$refs.scrollBox ||
+        this.$parent.$parent.$refs.scrollBox ||
+        this.$parent.$parent.$parent.$parent.$refs.scrollBox ||
+        document.getElementsByClassName('contant-box')[0]
+      dom.scrollTop = dom.scrollTop - 50
+      // window.scrollBy(0, -50)
     },
     InBottom() {
-      let top = document.documentElement.scrollTop || document.body.scrollTop
-      let dd =
-        (document.documentElement.scrollHeight || document.body.scrollHeight) -
-        (document.documentElement.offsetHeight || document.body.offsetHeight)
-      // console.log(top, dd, '<======')
-      if (top === dd) {
+      // let top = document.documentElement.scrollTop || document.body.scrollTop
+      // let dd =
+      //   (document.documentElement.scrollHeight || document.body.scrollHeight) -
+      //   (document.documentElement.offsetHeight || document.body.offsetHeight)
+      // // console.log(top, dd, '<======')
+      let dom =
+        this.$refs.scrollBox ||
+        this.$parent.$refs.scrollBox ||
+        this.$parent.$parent.$refs.scrollBox ||
+        this.$parent.$parent.$parent.$parent.$refs.scrollBox ||
+        document.getElementsByClassName('contant-box')[0]
+
+      // console.log(this.$parent.$parent.$parent.$parent)
+
+      if (dom.scrollTop >= dom.scrollHeight) {
         this.$message('已经到底了')
       } else {
-        window.scrollBy(0, 50)
+        dom.scrollTop = dom.scrollTop + 50
         // window.scrollBy({
         //   top: 50,
         //   left: 0,

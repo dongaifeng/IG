@@ -9,7 +9,7 @@
 .el-dialog {
 
   .el-dialog__header {
-
+    font-size: 20px;
     .el-dialog__title,
     .el-dialog__headerbtn .el-icon-close {
       font-size: 20px;
@@ -20,6 +20,10 @@
     padding: 10px 15px;
   }
 
+}
+
+.el-dialog /deep/ .el-dialog__close {
+  font-size: 30px !important;
 }
 
 .el-button {
@@ -80,6 +84,8 @@
   font-size: 22px;
 }
 
-.el-dialog /deep/ .el-dialog__close {
-  font-size: 30px !important;
+
+
+.el-radio-button /deep/ .el-radio-button__inner {
+  font-size: 25px;
 }

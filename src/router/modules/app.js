@@ -37,6 +37,9 @@ import ExpertList from '@/views/expert/components/expertList'
 
 // 智能导诊
 import Intelligence from '@/views/intelligence'
+import DeptList from '@/views/intelligence/component/DeptList'
+import Symptom from '@/views/intelligence/component/Symptom'
+import Question from '@/views/intelligence/component/Question'
 
 // 门诊费用
 import OutpatientCost from '@/views/outpatientCost'
@@ -143,7 +146,27 @@ const app = [{
   path: '/intelligence',
   component: Intelligence,
   name: 'intelligence'
-}, {
+},
+{
+  path: '/symptom',
+  component: Symptom,
+  name: 'symptom',
+  props: true
+},
+{
+  path: '/deptList',
+  component: DeptList,
+  name: 'deptList',
+  props: true
+},
+{
+  path: '/question',
+  component: Question,
+  name: 'question',
+  props: true
+},
+
+{
   path: '/outpatientCost',
   component: OutpatientCost,
   name: 'outpatientCost'

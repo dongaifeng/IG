@@ -13,7 +13,7 @@
       <el-col :span="12">
         
 <!-- 人体图 -->
-        <div v-show="radio1 == '人体'" class="body-img" :style="$imgSrc(src)" @click="getPosition($event)">
+        <div v-show="radio1 == '人体'" class="body-img" :style="$imgSrc(src)" >
           <div 
            v-for="item in arr"
            :key="item.name" 
@@ -33,45 +33,12 @@
       </el-col>
 
       <el-col :span="12">
-       
-<!-- 症状列表 -->
-        <div>
-        <h1 class="part-title">症状列表</h1>
-          <div class="part" v-for="item in symptomList " :key="item.ID" @click="getQuestion(item.DIRECT_RECOMMEND_FLAG, item.KNOWLEDGE_BASE_ID)">{{item.DESC}}</div>
-        </div>
 
-        <div>
-          <h1 class="part-title">推荐科室</h1>
-          <div type="info" class="" v-for="item in deptList " :key="item.ID">{{item.DEPT_NAME}}---{{item.WEIGHTED_SCORE}}</div>
-        </div>
       </el-col>
     </el-row>
 
 
-    <el-dialog
-      top="40vh"
-      
-      :visible.sync="dialogVisible"
-      custom-class="my-dialog"
-      center
-      width="60%">
-      <h2 slot="title" class="dialog-footer">
-         {{questionList[questionIndex] && questionList[questionIndex].DESC}}
-      </h2>
-      <!-- 选项列表 -->
-      <div
-        class="part"
-        v-for="i in optionList" 
-        :key="i.KNOWLEDGE_BASE_ID" 
-        @click="nextQuestion(i.DIRECT_RECOMMEND_FLAG, i.KNOWLEDGE_BASE_ID)">
-
-          <span >{{i.DESC}}</span>
-      </div>
-      <div class="part" @click="nextQuestion()">跳过此问题</div>
-
-
-     
-    </el-dialog>
+   
   </div>
 </template>
 
@@ -86,7 +53,6 @@ export default {
       showPart: '',
       dialogVisible: false,
       radio1: '人体',
-      questionIndex: 0,
       questionTitle: '',
       deptList: [],
       symptomList: [],
@@ -150,7 +116,7 @@ export default {
         },
         
          {
-            code: 'B2',
+          code: 'B2',
           top: '724px',
           left: '93PX',
           width: '148PX',
@@ -185,9 +151,9 @@ export default {
   },
   methods: {
     bodyClick (id, code){
-      console.log(id)
       this.showPart = id
       this.getData(code)
+      
     },
     // 点击部位
     getData (code) {
@@ -207,8 +173,7 @@ export default {
       ]).then(res => {
        let { DIRECT_RECOMMEND_FLAG, KNOWLEDGE_BASE_ID } = res.data[0]
        this.query(DIRECT_RECOMMEND_FLAG, KNOWLEDGE_BASE_ID, 'SYMPTOM').then(res => {
-          console.log(res, '症状列表=======')
-          this.symptomList = res
+          this.$router.push({name: 'symptom', params: {list: res}})
         })
       })
     },
@@ -221,8 +186,7 @@ export default {
         return false
       }
       this.questionIndex++
-    //  this.questionTitle = this.questionList[this.questionIndex].DESC
-    //  let _question_id = this.questionList[this.questionIndex].KNOWLEDGE_BASE_ID
+    
       // 获取选项
       this.query(flag || '0', this.getQuestionId(this.questionIndex), 'OPTION').then(res => {
         this.optionList = res
@@ -254,7 +218,7 @@ export default {
     // 判断flag 并获取 问题列表
     query(flag, knowId, type){
       let that = this
-      if(flag === '1') return this.getDept(knowId, flag)
+      if(flag === '1') return this.toDept(knowId, flag)
       return new Promise((resolve, reject) => {
           that.$post('1026', [
             {
@@ -276,25 +240,11 @@ export default {
     },
 
 
-
-
-    getDept(id, flag){
-      return this.$post('1027', [
-        {
-          LogicalOperatorsCode: '10',
-          key: 'KNOWLEDGE_BASE_ID',
-          OperationalCharacterCode: '50',
-          value: id || ''
-        }
-      ]).then(res => {
-        console.log('res', res.data)
-        if (flag === '1'){
-          this.deptList = res.data
-        } else {
-          this.handleDept(res.data)
-        }
-      })
+ toDept(id, flag) {
+      this.$router.push({name: 'deptList', params: {id, flag}})
     },
+
+ 
 
     handleDept(res = []){
       res.forEach(ele => {
@@ -322,25 +272,7 @@ export default {
       
       })
     },
-     getPosition(event) {
-      let { offsetX, offsetY } = event
-
-      let obj = {
-        header_start_x: 20,
-        header_start_y: 20,
-        header_end_x: 200,
-        header_end_y: 200
-      }
-      if (
-        offsetX > obj.header_start_x &&
-        offsetX < obj.header_end_x &&
-        offsetY > obj.header_start_y &&
-        offsetY < obj.header_end_y
-      ) {
-        // console.log('你点击了头部')
-      }
-      // console.log(offsetX, offsetY)
-    },
+    
   }
 }
 </script>

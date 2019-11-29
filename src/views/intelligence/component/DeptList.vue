@@ -2,51 +2,59 @@
   <div>
     <div>
       <AIheader :h1="'智能导诊'"></AIheader>
-      <h1 class="part-title">症状列表</h1>
-      <div
-        class="part"
-        v-for="item in symptomList "
-        :key="item.ID"
-        @click="getQuestion(item.DIRECT_RECOMMEND_FLAG, item.KNOWLEDGE_BASE_ID)"
-      >{{item.DESC}}</div>
+      <div>
+        <h1 class="part-title">推荐科室</h1>
+        <div type="info" class v-for="item in list" :key="item.ID">
+          {{ item.DEPT_NAME }}---{{ item.WEIGHTED_SCORE }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { mixin } from '@/mixin'
-
 export default {
- 
   mixins: [mixin],
-
+  name: 'nokeepAlive',
   data() {
     return {
-      symptomList: [],
-      deptList: [],
-      questionList: []
+      deptList: []
     }
   },
   props: {
-    list: {
+    id: {
       default: ''
+    },
+    flag: {
+      default: ''
+    },
+    list: {
+     
     }
   },
-  activated() {
-    console.log('list',this.list)
-    this.symptomList = this.list ? this.list : this.symptomList
+  mounted() {
+    // this.deptList = this.list
+   // this.getDept(this.id, this.flag)
   },
   methods: {
-    // 点击症状
-    getQuestion(flag, id) {
-      if (flag === '1') {
-        this.getDept(id, flag)
-        
-      } else {
-        this.$router.push({ name: 'question', params: { flag, id } })
-      }
+    getDept(id, flag) {
+      return this.$post('1027', [
+        {
+          LogicalOperatorsCode: '10',
+          key: 'KNOWLEDGE_BASE_ID',
+          OperationalCharacterCode: '50',
+          value: id || ''
+        }
+      ]).then(res => {
+        console.log('res', res.data)
+        if (flag === '1') {
+          this.deptList = res.data
+        } else {
+          this.handleDept(res.data)
+        }
+      })
     },
-  
 
     // 判断flag 并获取 问题列表
     query(flag, knowId, type) {
@@ -74,24 +82,12 @@ export default {
       })
     },
 
-    getDept(id, flag) {
-      return this.$post('1027', [
-        {
-          LogicalOperatorsCode: '10',
-          key: 'KNOWLEDGE_BASE_ID',
-          OperationalCharacterCode: '50',
-          value: id || ''
-        }
-      ]).then(res => {
-        
-          this.$router.push({ name: 'deptList', params: { flag, id, list: res.data} })
-       
-      })
-    }
+     
+
+
   }
 }
 </script>
-
 
 <style lang="scss" scoped>
 .body-img {

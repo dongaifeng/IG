@@ -1,13 +1,48 @@
 <template>
-  <div>
+  <div  class="black-color">
     <div>
       <AIheader :h1="'智能导诊'"></AIheader>
-      <div>
-        <h1 class="part-title">推荐科室</h1>
-        <div type="info" class v-for="item in list" :key="item.ID">
-          {{ item.DEPT_NAME }}---{{ item.WEIGHTED_SCORE }}
+        <div class="cont-box">
+        <div class="part-title"><p class="title-in">推荐科室</p><p style="float:right;">{{ new Date().toLocaleString()}}</p></div>
+        <div class="cont dept" v-for="(item, ind) in list" :key="item.ID">
+            
+             <div v-if="ind<3">
+                 {{ item.DEPT_NAME }}
+             </div>
+
+          <!-- --{{ item.WEIGHTED_SCORE }} -->
         </div>
       </div>
+      <el-row >
+        <el-col :span="12">
+          <div>
+            <div class="part-title"><p class="title-in">部位</p></div>
+            <div class="cont">
+              {{ $store.state.intelligence.part.DESC }}
+            </div>
+          </div>
+        </el-col>
+        <el-col :span="12">
+          <div>
+        <div class="part-title"><p class="title-in">症状</p></div>
+        <div class="cont">
+          {{ $store.state.intelligence.symptom }}
+        </div>
+      </div>
+        </el-col>
+      </el-row>
+
+      <div>
+        <div class="part-title"><p class="title-in">问答情况</p></div>
+        <div class v-for="(item, ind) in $store.state.intelligence.question" :key="item.question">
+         <div class="cont">
+            {{ind + 1}}. {{ item.question }}?
+         </div>
+         <p class="text"><i class="el-icon-check"></i> {{ item.option }}</p>
+        </div>
+      </div>
+
+    
     </div>
   </div>
 </template>
@@ -30,16 +65,18 @@ export default {
       default: ''
     },
     list: {
-     
+      default: () => []
     }
   },
   mounted() {
     // this.deptList = this.list
    // this.getDept(this.id, this.flag)
   },
+ 
   methods: {
+   
     getDept(id, flag) {
-      return this.$post('1027', [
+      return this.$post('2002', [
         {
           LogicalOperatorsCode: '10',
           key: 'KNOWLEDGE_BASE_ID',
@@ -47,7 +84,6 @@ export default {
           value: id || ''
         }
       ]).then(res => {
-        console.log('res', res.data)
         if (flag === '1') {
           this.deptList = res.data
         } else {
@@ -62,7 +98,7 @@ export default {
       if (flag === '1') return this.getDept(knowId, flag)
       return new Promise((resolve, reject) => {
         that
-          .$post('1026', [
+          .$post('2001', [
             {
               LogicalOperatorsCode: '10',
               key: 'HIERARCHY',
@@ -90,27 +126,36 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.body-img {
-  width: 342px;
-  height: 800px;
-  border: 1px solid red;
-  margin: 10px auto 0px;
-  position: relative;
-  .body-part {
-    // border: 1px solid red;
-    position: absolute;
-  }
+.cont-box{
+  margin-bottom:20px;
+  padding: 10px 0px 20px;
+  box-sizing: border-box;
+  border-bottom: 2px solid #eee;
 }
-.box-redio {
-  margin: 10px auto;
-  text-align: center;
-  .el-radio-button /deep/ .el-radio-button__inner {
-    padding: 10px 20px;
-  }
+.box{
+  color: #606266;
+}
+.cont{
+  font-size: 30px;
+  padding-left: 20px;
+}
+.text{
+  font-size: 30px;
+  padding-left: 40px;
+  margin-bottom:20px;
+  font-family: cursive;
 }
 .part-title {
-  text-align: center;
-  margin: 20px;
+  padding-left: 0px;
+  margin: 20px 10px;
+ 
+  font-size: 28px;
+  .title-in{
+    background: #2461b3;
+    display: inline-block;
+    padding: 5px 18px;
+    color: #fff;
+  }
 }
 .part {
   background: #ccc;
@@ -119,7 +164,10 @@ export default {
   font-size: 25px;
   padding: 20px;
 }
-.my-dialog .el-dialog__header .el-dialog__title {
-  font-size: 30px !important;
+.dept{
+ font-size: 30px;
+ font-weight: 700;
+ margin: 20px 30px;
 }
+
 </style>

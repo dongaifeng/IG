@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="black-color">
     <AIheader :h1="'智能导诊'"></AIheader>
     <el-row>
           <div class="box-redio">
-          <el-radio-group  v-model="radio1" size="medium">
+          <el-radio-group @change="symptomList=[];showPart=''"  v-model="radio1" size="medium">
             <el-radio-button label="人体"></el-radio-button>
             <el-radio-button label="列表"></el-radio-button>
           </el-radio-group>
@@ -27,13 +27,23 @@
         <div v-show="radio1 == '列表'">
           <h1 class="part-title">人体部位列表</h1>
           <div v-for="item in bodyList" :key="item.code">
-              <div class="part" @click="bodyClick(item.KNOWLEDGE_BASE_ID, item.CODE)">{{item.DESC}}</div>
+              <div class="part"
+               @click="bodyClick(item.KNOWLEDGE_BASE_ID, item.CODE)"
+               :class="{ myactive: item.KNOWLEDGE_BASE_ID == showPart}"
+               >{{item.DESC}}</div>
           </div>
         </div>
       </el-col>
 
+<!-- 症状列表 -->
       <el-col :span="12">
-
+        <div>
+        <h1 class="part-title">症状列表</h1>
+          <div class="part" v-for="item in symptomList " :key="item.ID" @click="getQuestion(item.DIRECT_RECOMMEND_FLAG, item.KNOWLEDGE_BASE_ID, item.DESC)">{{item.DESC}}</div>
+        </div>
+        <div v-if="!symptomList.length && radio1=='人体'" class="warn">
+          从人体图像中选中部位进行选择症状
+        </div>
       </el-col>
     </el-row>
 
@@ -51,7 +61,6 @@ export default {
     return {
       src: '/images/body/body.png',
       showPart: '',
-      dialogVisible: false,
       radio1: '人体',
       questionTitle: '',
       deptList: [],
@@ -79,7 +88,7 @@ export default {
           src: '/images/body/arm.png'
         },
          {
-            code: 'B2',
+          code: 'B2',
           top: '380px',
           left: '-5PX',
           width: '344PX',
@@ -148,6 +157,7 @@ export default {
   },
   mounted() {
     this.getBodyList()
+    this.$store.dispatch('setQuestion', 'clear')
   },
   methods: {
     bodyClick (id, code){
@@ -157,7 +167,8 @@ export default {
     },
     // 点击部位
     getData (code) {
-       this.$post('1026', [
+      this.$store.dispatch('setPart', this.bodyList.find(val => val = code))
+       this.$post('2001', [
         {
           LogicalOperatorsCode: '10',
           key: 'HIERARCHY',
@@ -173,46 +184,37 @@ export default {
       ]).then(res => {
        let { DIRECT_RECOMMEND_FLAG, KNOWLEDGE_BASE_ID } = res.data[0]
        this.query(DIRECT_RECOMMEND_FLAG, KNOWLEDGE_BASE_ID, 'SYMPTOM').then(res => {
-          this.$router.push({name: 'symptom', params: {list: res}})
+          // this.$router.push({name: 'symptom', params: {list: res}})
+          this.symptomList = res
         })
       })
     },
-    // 点击选项
-    nextQuestion(flag, id){
-      id  && this.getDept(id, flag)
-      if(flag === '1' || this.questionIndex >= this.questionList.length-1) {
-        this.dialogVisible = false
-        this.questionIndex = 0 
-        return false
-      }
-      this.questionIndex++
-    
-      // 获取选项
-      this.query(flag || '0', this.getQuestionId(this.questionIndex), 'OPTION').then(res => {
-        this.optionList = res
+  
+    getDept(id, flag) {
+      return this.$post('2002', [
+        {
+          LogicalOperatorsCode: '10',
+          key: 'KNOWLEDGE_BASE_ID',
+          OperationalCharacterCode: '50',
+          value: id || ''
+        }
+      ]).then(res => {
+          this.$router.push({ name: 'deptList', params: { flag, id, list: res.data} })
       })
-      
     },
     getQuestionId(ind){
       ind = ind ? ind : this.questionIndex
       return this.questionList[ind].KNOWLEDGE_BASE_ID
     },
 // 点击症状
-    getQuestion(flag, id){
-      this.dialogVisible = false
-      this.query(flag, id, 'QUESTION').then(res => {
-        if(res){
-          this.questionList = res || []
-         // this.questionTitle = this.questionList[this.questionIndex].DESC
-         // let _question_id = this.questionList[this.questionIndex].KNOWLEDGE_BASE_ID
-          this.dialogVisible = true
-          // 获取选项
-          this.query(flag, this.getQuestionId(), 'OPTION').then(res => {
-            this.optionList = res
-          })
-        }
-        
-      })
+    // 点击症状
+    getQuestion(flag, id, desc) {
+       this.$store.dispatch('setSymptom', desc)
+      if (flag === '1') {
+        this.getDept(id, flag)
+      } else {
+        this.$router.push({ name: 'question', params: { flag, id } })
+      }
     },
 
     // 判断flag 并获取 问题列表
@@ -220,7 +222,7 @@ export default {
       let that = this
       if(flag === '1') return this.toDept(knowId, flag)
       return new Promise((resolve, reject) => {
-          that.$post('1026', [
+          that.$post('2001', [
             {
               LogicalOperatorsCode: '10',
               key: 'HIERARCHY',
@@ -243,9 +245,6 @@ export default {
  toDept(id, flag) {
       this.$router.push({name: 'deptList', params: {id, flag}})
     },
-
- 
-
     handleDept(res = []){
       res.forEach(ele => {
           let ind = this.deptList.findIndex((value) => value.DEPT_NAME == ele.DEPT_NAME)
@@ -259,7 +258,7 @@ export default {
     },
     // 获取部位列表
     getBodyList(){
-      this.$post('1026', [
+      this.$post('2001', [
         {
           LogicalOperatorsCode: '10',
           key: 'HIERARCHY',
@@ -267,7 +266,6 @@ export default {
           value: 'BODYPART'
         }
       ]).then(res => {
-       console.log(res);
        this.bodyList = res.data
       
       })
@@ -281,7 +279,7 @@ export default {
 .body-img {
   width: 342PX;
   height: 800PX;
-  border: 1px solid red;
+  // border: 1px solid red;
   margin: 10px auto 0px;
   position: relative;
   .body-part {
@@ -301,14 +299,33 @@ export default {
   margin: 20px;
 }
 .part{
-  background: #ccc;
+  background: #eee;
   text-align: center;
   margin: 40px 30px;
   font-size: 25px;
   padding: 20px;
+  color: #184b8f;
 }
 .my-dialog .el-dialog__header .el-dialog__title {
   font-size: 30px !important;
 }
 
+ .myactive {
+    background: #184b8f;
+    color: #fff;
+    &:before,
+    &:after {
+      background: #184b8f;
+      color: #fff;
+    }
+  }
+  .warn{
+    margin: 20vh auto;
+    width: 500px;
+    height: 240px;
+    background: #eee;
+    font-size: 25px;
+    line-height: 240px; 
+    text-align: center
+  }
 </style>

@@ -219,3 +219,7 @@ $blue:#66b1ff;
 .my-btn {
   @include colorBtn($blue)
 }
+
+.black-color{
+  color: #606266;
+}

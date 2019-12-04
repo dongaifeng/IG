@@ -7,7 +7,7 @@
         class="part"
         v-for="item in symptomList "
         :key="item.ID"
-        @click="getQuestion(item.DIRECT_RECOMMEND_FLAG, item.KNOWLEDGE_BASE_ID)"
+        @click="getQuestion(item.DIRECT_RECOMMEND_FLAG, item.KNOWLEDGE_BASE_ID, item.DESC)"
       >{{item.DESC}}</div>
     </div>
   </div>
@@ -33,12 +33,12 @@ export default {
     }
   },
   activated() {
-    console.log('list',this.list)
     this.symptomList = this.list ? this.list : this.symptomList
   },
   methods: {
     // 点击症状
-    getQuestion(flag, id) {
+    getQuestion(flag, id, desc) {
+      this.$store.dispatch('setSymptom', desc)
       if (flag === '1') {
         this.getDept(id, flag)
         
@@ -54,7 +54,7 @@ export default {
       if (flag === '1') return this.getDept(knowId, flag)
       return new Promise((resolve, reject) => {
         that
-          .$post('1026', [
+          .$post('2001', [
             {
               LogicalOperatorsCode: '10',
               key: 'HIERARCHY',
@@ -75,7 +75,7 @@ export default {
     },
 
     getDept(id, flag) {
-      return this.$post('1027', [
+      return this.$post('2002', [
         {
           LogicalOperatorsCode: '10',
           key: 'KNOWLEDGE_BASE_ID',

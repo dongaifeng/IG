@@ -1,14 +1,13 @@
 <template>
-  <div>
+  <div class="black-color">
     <AIheader :h1="'智能导诊'"></AIheader>
-
-    <h2 class="part-title">{{questionList[questionIndex] && questionList[questionIndex].DESC}}</h2>
+    <h1 class="part-title">{{questionList[questionIndex] && questionList[questionIndex].DESC}} ?</h1>
     <!-- 选项列表 -->
     <div
       class="part"
       v-for="i in optionList"
       :key="i.KNOWLEDGE_BASE_ID"
-      @click="nextQuestion(i.DIRECT_RECOMMEND_FLAG, i.KNOWLEDGE_BASE_ID)"
+      @click="nextQuestion(i.DIRECT_RECOMMEND_FLAG, i.KNOWLEDGE_BASE_ID, i.DESC)"
     >
       <span>{{i.DESC}}</span>
     </div>
@@ -41,9 +40,7 @@ export default {
     }
   },
   mounted() {
-    console.log('init', this.flag,this.id)
     if(this.id){
-
       this.init(this.flag, this.id)
     } else {
       this.$router.push({name: 'intelligence'})
@@ -62,11 +59,18 @@ export default {
     },
 
      // 点击选项
-    nextQuestion(flag, id){
+    nextQuestion(flag, id, desc){
       id  && this.getDept(id, flag)
-      if(flag === '1' || this.questionIndex >= this.questionList.length-1) {
-        this.toDept(flag, id, this.deptList)
+      if(desc) {
+        this.$store.dispatch('setQuestion',{
+          option: desc,
+          question: this.questionList[this.questionIndex].DESC
+        })
+      }
+      if( this.questionIndex >= this.questionList.length-1) {
+        
         this.questionIndex = 0 
+         this.toDept(flag, id, this.deptList)
         return false
       }
       this.questionIndex++
@@ -86,7 +90,7 @@ export default {
       if (flag === '1') return this.getDept(knowId, flag)
       return new Promise((resolve, reject) => {
         that
-          .$post('1026', [
+          .$post('2001', [
             {
               LogicalOperatorsCode: '10',
               key: 'HIERARCHY',
@@ -109,7 +113,7 @@ export default {
       this.$router.push({name: 'deptList', params: {list}})
     },
     getDept(id, flag) {
-      return this.$post('1027', [
+      return this.$post('2002', [
         {
           LogicalOperatorsCode: '10',
           key: 'KNOWLEDGE_BASE_ID',
@@ -118,6 +122,7 @@ export default {
         }
       ]).then(res => {
         if (flag === '1') {
+          this.questionIndex = 0 
           this.deptList = res.data
           this.toDept(flag, id, this.deptList)
         } else {
@@ -165,13 +170,15 @@ export default {
 .part-title {
   text-align: center;
   margin: 20px;
+  margin-top: 80px;
 }
-.part {
-  background: #ccc;
+.part{
+  background: #eee;
   text-align: center;
   margin: 40px 30px;
   font-size: 25px;
   padding: 20px;
+  color: #184b8f;
 }
 .my-dialog .el-dialog__header .el-dialog__title {
   font-size: 30px !important;
